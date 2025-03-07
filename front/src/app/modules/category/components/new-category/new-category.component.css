@@ -1,0 +1,88 @@
+.category-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Dos columnas iguales */
+    gap: 16px; /* Espaciado entre filas y columnas */
+    padding: 5px; /* Espaciado interno */
+    width: 100%;
+  }
+  
+  .category-container .grid-item {
+    width: 100%; /* Asegura que cada campo ocupe el ancho de su celda */
+  }
+  
+  .category-container .full-width {
+    grid-column: span 2; /* Ocupa las dos columnas */
+  }
+  
+  .form-row {
+    display: flex;
+    gap: 16px; /* Espaciado entre columnas */
+  }
+  
+  .form-field {
+    flex: 1; /* Permite que los campos se ajusten proporcionalmente */
+  }
+  
+  mat-form-field {
+    width: 90%; /* Asegura que los campos llenen su celda */
+    height: 80px; /* Reduce la altura general del mat-form-field */
+  }
+  
+  mat-form-field .mat-form-field-infix {
+    padding: 0 8px; /* Reduce el padding interno horizontal */
+    min-height: 36px; /* Altura mínima del input */
+  }
+  
+  mat-input-element {
+    font-size: 14px; /* Ajusta el tamaño de fuente para inputs */
+    padding: 4px; /* Reduce el espacio interno vertical */
+  }
+  
+  mat-error {
+    color: red;  
+  }
+  
+  mat-form-field.ng-invalid .mat-form-field-wrapper {
+    border: 1px solid red;
+  }
+  
+  /* Ajusta específicamente los campos de texto */
+  textarea.mat-input-element {
+    line-height: 1.2; /* Reduce el interlineado dentro del textarea */
+    min-height: 36px; /* Ajusta la altura mínima */
+    resize: none; /* Evita que el usuario redimensione */
+  }
+  
+  mat-form-field .mat-form-field-label {
+    font-size: 12px; /* Reduce el tamaño de las etiquetas */
+  }
+  
+  mat-dialog-actions {
+    display: flex;
+    justify-content: flex-end; /* Botones alineados a la derecha */
+    gap: 8px; /* Espaciado entre botones */
+  }
+  
+  button {
+    font-weight: bold;
+  }
+  
+  /* Responsivo para pantallas pequeñas */
+  @media (max-width: 768px) {
+    .client-container {
+      grid-template-columns: 1fr; /* Una sola columna */
+    }
+  
+    .client-container .full-width {
+      grid-column: span 1; /* Ocupa toda la fila en pantallas pequeñas */
+    }
+  
+    mat-form-field {
+        height: auto; /* Ajusta dinámicamente la altura en pantallas pequeñas */
+      }
+    
+      textarea.mat-input-element {
+        min-height: 32px; /* Menor altura en pantallas pequeñas */
+      }
+  }
+  

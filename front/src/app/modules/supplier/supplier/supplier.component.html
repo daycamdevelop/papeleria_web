@@ -1,0 +1,117 @@
+<mat-card>
+
+    <h2 class="alinear">Listado de Proveedor</h2>
+    <mat-card-header>
+
+        <div>
+            <mat-form-field hintLabel="Busque Proveedor" appearance="fill">
+
+                <mat-label>Buscar Proveedor</mat-label>
+                <input matInput #input >
+            </mat-form-field>
+        </div>
+    </mat-card-header>
+
+    <mat-card-header>
+
+        <div class="right">
+            <ul>
+                <li>
+                    <button mat-raised-button color="primary" (click)="openSupplierDialog()">Agregar Proveedor</button>
+                </li>
+            </ul>
+        </div>
+        <div class="left">
+            <ul>
+                <li>
+                    <button mat-raised-button color="primary" (click)="goToHome()">Regresar</button>
+                </li>
+            </ul>
+        </div>
+
+    </mat-card-header>
+
+    <div mat-card-image></div>
+
+    <mat-card-content>
+
+        <table mat-table [dataSource]="dataSource" class="mat-cell">
+
+            <!-- id column-->
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef> Nº</th>
+                <td mat-cell *matCellDef="let element"> {{ element.id}}</td>
+            </ng-container>
+          
+
+            <!-- name column -->
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Nombre</th>
+                <td mat-cell *matCellDef="let element"> {{ element.name}}</td>
+            </ng-container>
+
+            <!-- document column -->
+            <ng-container matColumnDef="document">
+                <th mat-header-cell *matHeaderCellDef> Documento </th>
+                <td mat-cell *matCellDef="let element"> {{ element.document}}</td>
+            </ng-container>
+
+            <!-- t_document column -->
+            <ng-container matColumnDef="t_document">
+                <th mat-header-cell *matHeaderCellDef> T_Documento </th>
+                <td mat-cell *matCellDef="let element"> {{ element.t_document}}</td>
+            </ng-container>
+
+            <!-- phone column -->
+            <ng-container matColumnDef="phone">
+                <th mat-header-cell *matHeaderCellDef> Telefono </th>
+                <td mat-cell *matCellDef="let element"> {{ element.phone}}</td>
+            </ng-container>
+
+            <!-- address column -->
+            <ng-container matColumnDef="address">
+                <th mat-header-cell *matHeaderCellDef> Dirección </th>
+                <td mat-cell *matCellDef="let element"> {{ element.address}}</td>
+            </ng-container>
+
+            <!-- email column -->
+            <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef> Email </th>
+                <td mat-cell *matCellDef="let element"> {{ element.email}}</td>
+            </ng-container>
+
+            <!-- estado column -->
+            <ng-container matColumnDef="estado">
+                <th mat-header-cell *matHeaderCellDef> Estado </th>
+                <td mat-cell *matCellDef="let element"> {{ element.estado}}</td>
+            </ng-container>
+
+            
+            <!-- actions-->
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                <td mat-cell *matCellDef="let element; let i=index;">
+
+                    <button mat-icon-button color="accent" (click)="edit(element.id, element.name, element.document, element.t_document, element.phone, element.address, element.email, element.estado, element.departamento, element.ciudad)">
+                        <mat-icon aria-label="Edit">edit</mat-icon>
+                    </button>
+
+                    <button mat-icon-button color="accent" (click)="delete(element.id)">
+                        <mat-icon aria-label="Delete">delete</mat-icon>
+                    </button>
+                </td>
+
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+    </mat-card-content>
+
+
+</mat-card>

@@ -1,0 +1,159 @@
+import { Component, Inject, inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { SupplierService } from 'src/app/modules/shared/services/supplier.service';
+
+@Component({
+  selector: 'app-new-supplier',
+  templateUrl: './new-supplier.component.html',
+  styleUrls: ['./new-supplier.component.css']
+})
+export class NewSupplierComponent implements OnInit {
+
+  public supplierForm!: FormGroup;
+  private fb = inject(FormBuilder);
+  private supplierService = inject(SupplierService);
+  private dialogRef = inject(MatDialogRef);
+  public data = inject(MAT_DIALOG_DATA);
+  estadoFormulario: string = "";
+  ciudadesFiltradas: string[] = [];
+
+  // Lista de tipos de documento
+  tiposIdentificacion: string[] = [
+    'Registro civil de nacimiento',
+    'Tarjeta de identidad',
+    'Cédula de ciudadanía',
+    'Tarjeta de extranjería',
+    'Cédula de extranjería',
+    'Número de identificación tributaria (NIT)',
+    'Pasaporte',
+    'Permiso especial de permanencia (PEP)',
+    'Documento de identificación extranjero (DIE)'
+  ];
+
+  // Lista de departamentos y ciudades
+  departamentos = [
+    { nombre: 'BOGOTÁ D.C.', ciudades: ['BOGOTÁ D.C.'] },
+    { nombre: 'AMAZONAS', ciudades: ['EL ENCANTO','LA CHORRERA','LA PEDRERA','LA VICTORIA','LETICIA','MIRITI - PARANÁ','PUERTO ALEGRIA','PUERTO ARICA','PUERTO NARIÑO','PUERTO SANTANDER','TARAPACÁ'] },
+    { nombre: 'ANTIOQUIA', ciudades: ['ABEJORRAL','ABRIAQUÍ','ALEJANDRÍA','AMAGa','AMALFI','ANDES','ANGELOPOLIS','ANGOSTURA','ANORÍ','ANZA','APARTADÓ','ARBOLETES','ARGLIA','ARMENIA','BARBOSA','BELLO','BELMIRA','BETANIA','BETULIA','BRICEÑO','BURITICÁ','CÁCERES','CAICEDO','CALDAS','CAMPAMENTO','CAASGORDAS','CARACOLÍ','CARAMANTA','CAREPA','CARMEN DE VIBORAL','CAROLINA','CAUCASIA','CHIGORODÓ','CISNEROS','CIUDAD BOLÍVAR','COCORNÁ','CONCEPCIÓN','CONCORDIA','COPACABANA','DABEIBA','DON MATiAS','EBÉJICO','EL BAGRE','ENTRERRIOS','ENVIGADO','FREDONIA','FRONTINO','GIRALDO','GIRARDOTA','GÓMEZ PLATA','GRANADA','GUADALUPE','GUARNE','GUATAPE','HELICONIA','HISPANIA','ITAGUI','ITUANGO','JARDÍN','JERICÓ','LA CEJA','LA STRELLA','LA PINTADA','LA UNIÓN','LIBORINA','MACEO','MARINILLA','MEDELLÍN','MONTEBELLO','MURINDÓ','MUTATA','NARIÑO','NECHÍ','NECOCLÍ','OLAYA','PEÑOL','PEQUE','PUEBLORRICO','PUERTO BERRiO','PUERTO NARE','PUERTO TRIUNFO','REMEDIOS','RETIRO','RIONEGRO','SABANALARGA','SABANETA','SALGAR','SAN ANDRÉS','SAN CARLOS','SAN FRANCISCO','SAN JERÓNIMO','SAN JOSÉ DE LA MONTAÑA','SAN JUAN DE URABA','SAN LUIS','SAN PEDRO DE URABA','SAN PEDRO','SAN RAFAEL','SAN ROQUE','SAN VICENTE','SANTA BaRBARA','SANTA ROSA de osos','SANTAFÉ DE ANTIOQUIA','SANTO DOMINGO','SANTUARIO','SEGOVIA','SONSON','SOPETRaN','TÁMESIS','TARAZÁ','TARSO','TITIRIBÍ','TOLEDO','TURBO','URAMITA','URRAO','VALDIVIA','VALPARAISO','VEGACHÍ','VENECIA','VIGÍA DEL FUERTE','YALÍ','YARUMAL','YOLOMBÓ','YONDÓ','ZARAGOZA'] },
+    { nombre: 'ARAUCA', ciudades: ['ARAUCA','ARAUQUITA','CRAVO NORTE','FORTUL','PUERTO RONDÓN','SARAVENA','TAME'] },
+    { nombre: 'ARCHIPIELAGO DE SAN ANDRES', ciudades: ['PROVIDENCIA Y SANTA CATALINA','SAN ANDReS'] },
+    { nombre: 'ATLÁNTICO', ciudades: ['BARRANQUILLA','GALAPA','MALAMBO','PUERTO COLOMBIA','SOLEDAD','CAMPO DE LA CRUZ','CANDELARIA','LURUACO','MANATi','REPELON','SANTA LUCiA','SUAN','BARANOA','PALMAR DE VARELA','POLONUEVO','PONEDERA','Sabanagrande','SABANALARGA','Santo Tomas','JUAN DE ACOSTA','PIOJÓ','TUBARA','USIACURi'] },
+    { nombre: 'BOLIVAR', ciudades: ['CICUCO','HATILLO DE LOBA','MARGARITA','MOMPÓS','SAN FERNANDO','TALAIGUA NUEVO','ARJONA','ARROYOHONDO','CALAMAR','CARTAGENA','CLEMENCIA','MAHATES','SAN CRISTOBAL','SAN ESTANISLAO','SANTA CATALINA','SANTA ROSA DE LIMA','SOPLAVIENTO','TURBACO','TURBANA','VILLANUEVA','ALTOS DEL ROSARIO','BARRANCO DE LOBA','EL PEÑON','REGIDOR','RÍO VIEJO','SAN MARTIN DE LOBA','ARENAL','CANTAGALLO','MORALES','SAN PABLO','SANTA ROSA DEL SUR','SIMITÍ','ACHÍ','MAGANGUÉ','MONTECRISTO','PINILLOS','SAN JACINTO DEL CAUCA','TIQUISIO','CARMEN DE BOLÍVAR','CÓRDOBA','EL GUAMO','MARÍA LA BAJA','SAN JACINTO','SAN JUAN NEPOMUCENO','ZAMBRANO'] },
+    { nombre: 'BOYACÁ', ciudades: ['ALMEIDA','AQUITANIA','ARCABUCO','BELÉN','BERBEO','BETÉITIVA','BOAVITA','BOYACÁ','BRICEÑO','BUENAVISTA','BUSBANZÁ','CALDAS','CAMPOHERMOSO','CERINZA','CHINAVITA','CHIQUINQUIRÁ','CHÍQUIZA','CHISCAS','CHITA','CHITARAQUE','CHIVATÁ','CHIVOR','CIÉNEGA','CÓMBITA','COPER','CORRALES','COVARACHÍA','CUBARÁ','CUCAITA','CUÍTIVA','DUITAMA','EL COCUY','EL ESPINO','FIRAVITOBA','FLORESTA','GACHANTIVÁ','GAMEZA','GARAGOA','GUACAMAYAS','GUATEQUE','GUAYATÁ','GÜICÁN','IZA','JENESANO','JERICÓ','LA CAPILLA','LA UVITA','LA VICTORIA','LABRANZAGRANDE','MACANAL','MARIPÍ','MIRAFLORES','MONGUA','MONGUÍ','MONIQUIRÁ','MOTAVITA','MUZO','NOBSA','NUEVO COLÓN','OICATÁ','OTANCHE','PACHAVITA','PÁEZ','PAIPA','PAJARITO','PANQUEBA','PAUNA','PAYA','PAZ DE RÍO','PESCA','PISBA','PUERTO BOYACa','QUÍPAMA','RAMIRIQUÍ','RÁQUIRA','RONDÓN','SABOYÁ','SÁCHICA','SAMACÁ','SAN EDUARDO','SAN JOSÉ DE PARE','SAN LUIS DE GACENO','SAN MATEO','SAN MIGUEL DE SEMA','SAN PABLO BORBUR','SAN ROSA VITERBO','SANTA MARÍA','SANTA SOFÍA','SANTANA','SATIVANORTE','SATIVASUR','SIACHOQUE','SOATÁ','SOCHA','SOCOTÁ','SOGAMOSO','SOMONDOCO','SORA','SORACÁ','SOTAQUIRÁ','SUSACÓN','SUTAMARCHÁN','SUTATENZA','TASCO','TENZA','TIBANÁ','TIBASOSA','TINJACÁ','TIPACOQUE','TOCA','TOGÜI','TÓPAGA','TOTA','TUNJA','TUNUNGUÁ','TURMEQUÉ','TUTA','TUTAZÁ','UMBITA','VENTAQUEMADA','VILLA DE LEYVA','VIRACACHÁ','ZETAQUIRA'] },
+    { nombre: 'CALDAS', ciudades: ['AGUADAS','ANSERMA','ARANZAZU','BELALCÁZAR','CHINCHINa','FILADELFIA','LA DORADA','LA MERCED','MANIZALES','MANZANARES','MARMATO','MARQUETALIA','MARULANDA','NEIRA','NORCASIA','PÁCORA','PALESTINA','PENSILVANIA','RIOSUCIO','RISARALDA','SALAMINA','SAMANÁ','SAN JOSÉ','SUPÍA','VICTORIA','VILLAMARiA','VITERBO'] },
+    { nombre: 'CAQUETA', ciudades: ['ALBANIA','BELÉN DE LOS ANDAQUIES','CARTAGENA DEL CHAIRÁ','CURRILLO','EL DONCELLO','EL PAUJIL','FLORENCIA','LA MONTAÑITA','MILaN','MORELIA','PUERTO RICO','SAN JOSE DEL FRAGUA','SAN VICENTE DEL CAGUÁN','SOLANO','SOLITA','VALPARAISO'] },
+    { nombre: 'CASANARE', ciudades: ['AGUAZUL','CHAMEZA','HATO COROZAL','LA SALINA','MANÍ','MONTERREY','NUNCHÍA','OROCUÉ','PAZ DE ARIPORO','PORE','RECETOR','SABANALARGA','SÁCAMA','SAN LUIS DE PALENQUE','TÁMARA','TAURAMENA','TRINIDAD','VILLANUEVA','YOPAL'] },
+    { nombre: 'CAUCA', ciudades: ['ALMAGUER','ARGELIA','BALBOA','BOLÍVAR','BUENOS AIRES','CAJIBÍO','CALDONO','CALOTO','CORINTO','EL TAMBO','FLORENCIA','GUAPI','INZÁ','JAMBALO','LA SIERRA','LA VEGA','LOPEZ','MERCADERES','MIRANDA','MORALES','PADILLA','PAEZ','PATIA','PIAMONTE','PIENDAMO','POPAYÁN','PUERTO TEJADA','PURACE','ROSAS','SAN SEBASTIAN','SANTA ROSA','SANTANDER DE QUILICHAO','Silvia','SOTARA','SUAREZ','SUCRE','TIMBIO','TIMBIQUI','TORIBIO','TOTORO','VILLA RICA'] },
+    { nombre: 'CESAR', ciudades: ['AGUACHICA','AGUSTÍN CODAZZI','ASTREA','BECERRIL','BOSCONIA','CHIMICHAGUA','CHIRIGUANA','CURUMANÍ','EL COPEY','EL PASO','GAMARRA','GONZÁLEZ','LA GLORIA','LA JAGUA DE IBIRICO','LA PAZ','MANAURE','PAILITAS','PELAYA','PUEBLO BELLO','RÍO DE RO','SAN ALBERTO','SAN DIEGO','SAN MARTÍN','TAMALAMEQUE','VALLEDUPAR'] },
+    { nombre: 'CHOCO', ciudades: ['ACANDÍ','ALTO BAUDÓ','ATRATO','BAGADÓ','BAHÍA SOLANO','BAJO BAUDÓ','BELÉN DE BAJIRA','BOJAYA','CANTON DE SAN PABLO','CARMÉN DEL DARIÉN','CERTEGUI','CONDOTO','EL CARMEN DE ATRATO','El Litoral del San Juan','ITSMINA','JURADÓ','LLORÓ','MEDIO ATRATO','MEDIO BAUDÓ','MEDIO SAN JUAN','NÓVITA','NUQUÍ','QUIBDÓ','RÍO FRÍO','RIO QUITO','RIOSUCIO','SAN JOSÉ DEL PALMAR','SIPÍ','TADÓ','UNGUÍA','UNION PANAMERICANA'] },
+    { nombre: 'CORDOBA', ciudades: ['AYAPEL','BUENAVISTA','CANALETE','CERETÉ','CHIMÁ','CHINÚ','CIÉNAGA DE ORO','COTORRA','LA APARTADA','LORICA','LOS CÓRDOBAS','MOMIL','MONTELÍBANO','MONTERÍA','MOÑITOS','PLANETA RICA','PUEBLO NUEVO','PUERTO ESCONDIDO','PUERTO LIBERTADOR','PURÍSIMA','SAHAGÚN','SAN ANDRÉS SOTAVENTO','SAN ANTERO','SAN BERNARDO DEL VIENTO','SAN CARLOS','SAN PELAYO','TIERRALTA','VALENCIA'] },
+    { nombre: 'CUNDINAMARCA', ciudades: ['AGUA DE DIOS','ALBÁN','ANAPOIMA','ANOLAIMA','APULO','ARBELÁEZ','BELTRÁN','BITUIMA','BOJACÁ','CABRERA','CACHIPAY','CAJICÁ','CAPARRAPÍ','CAQUEZA','CARMEN DE CARUPA','CHAGUANÍ','CHÍA','CHIPAQUE','CHOACHÍ','CHOCONTÁ','COGUA','COTA','CUCUNUBÁ','EL COLEGIO','EL PEÑÓN','EL ROSAL','FACATATIVÁ','FOMEQUE','FOSCA','FUNZA','FÚQUENE','FUSAGASUGÁ','GACHALA','GACHANCIPÁ','GACHETA','GAMA','GIRARDOT','GRANADA','GUACHETÁ','GUADUAS','GUASCA','GUATAQUÍ','GUATAVITA','GUAYABAL DE SIQUIMA','GUAYABETAL','GUTIÉRREZ','JERUSALÉN','JUNÍN','LA CALERA','LA MESA','LA PALMA','LA PEÑA','LA VEGA','LENGUAZAQUE','MACHETA','MADRID','MANTA','MEDINA','MOSQUERA','NARIÑO','NEMOCoN','NILO','NIMAIMA','NOCAIMA','PACHO','PAIME','PANDI','PARATEBUENO','PASCA','PUERTO SALGAR','PULI','QUEBRADANEGRA','QUETAME','QUIPILE','RICAURTE','SAN ANTONIO DE TEQUENDAMA','SAN BERNARDO','SAN CAYETANO','SAN FRANCISCO','SAN JUAN DE RÍO SECO','SASAIMA','SESQUILÉ','SIBATÉ','SILVANIA','SIMIJACA','SOACHA','SOPÓ','SUBACHOQUE','SUESCA','SUPATÁ','SUSA','SUTATAUSA','TABIO','TAUSA','TENA','TENJO','TIBACUY','TIBIRITA','TOCAIMA','TOCANCIPÁ','TOPAIPI','UBALÁ','UBAQUE','UBATE','UNE','ÚTICA','VENECIA','VERGARA','VIANÍ','VILLAGOMEZ','VILLAPINZÓN','VILLETA','VIOTÁ','YACOPÍ','ZIPACoN','ZIPAQUIRÁ'] },
+    { nombre: 'GUAINIA', ciudades: ['BARRANCO MINA','CACAHUAL','INÍRIDA','LA GUADALUPE','MAPIRIPaN','MORICHAL','PANA PANA','PUERTO COLOMBIA','SAN FELIPE'] },
+    { nombre: 'GUAVIARE', ciudades: ['CALAMAR','EL RETORNO','MIRAFLORES','SAN JOSÉ DEL GUAVIARE'] },
+    { nombre: 'HUILA', ciudades: ['ACEVEDO','AGRADO','AIPE','ALGECIRAS','ALTAMIRA','BARAYA','CAMPOALEGRE','COLOMBIA','ELÍAS','GARZÓN','GIGANTE','GUADALUPE','HOBO','IQUIRA','ISNOS','LA ARGENTINA','LA PLATA','NÁTAGA','NEIVA','OPORAPA','PAICOL','PALERMO','PALESTINA','PITAL','PITALITO','RIVERA','SALADOBLANCO','SAN AGUSTÍN','SANTA MARÍA','SUAZA','TARQUI','TELLO','TERUEL','TESALIA','TIMANÁ','VILLAVIEJA','YAGUARÁ'] },
+    { nombre: 'LA GUAJIRA', ciudades: ['ALBANIA','BARRANCAS','DIBULLA','DISTRACCION','EL MOLINO','FONSECA','HATONUEVO','LA JAGUA DEL PILAR','MAICAO','MANAURE','RIOHACHA','SAN JUAN DEL CESAR','URIBIA','URUMITA','VILLANUEVA'] },
+    { nombre: 'MAGDALENA', ciudades: ['ALGARROBO','ARACATACA','ARIGUANÍ','CERRO SAN ANTONIO','CHIBOLO','CIÉNAGA','CONCORDIA','EL BANCO','EL PIÑON','EL RETEN','FUNDACION','GUAMAL','NUEVA GRANADA','PEDRAZA','PIJIÑO DEL CARMEN','PIVIJAY','PLATO','PUEBLO VIEJO','REMOLINO','SABANAS DE SAN ANGEL','SALAMINA','SAN SEBASTIAN DE BUENAVISTA','SAN ZENON','SANTA ANA','SANTA BARBARA DE PINTO','SANTA MARTA','SITIONUEVO','TENERIFE','ZAPAYAN','ZONA BANANERA'] },
+    { nombre: 'META', ciudades: ['ACACiAS','BARRANCA DE UPIA','CABUYARO','CASTILLA LA NUEVA','CUMARAL','EL CALVARIO','EL CASTILLO','EL DORADO','FUENTE DE ORO','GRANADA','GUAMAL','LA MACARENA','LA URIBE','LEJANÍAS','MAPIRIPaN','MESETAS','PUERTO CONCORDIA','PUERTO GAITÁN','PUERTO LLERAS','PUERTO LOPEZ','PUERTO RICO','RESTREPO','SAN CARLOS GUAROA','SAN JUAN DE ARAMA','SAN JUANITO','SAN LUIS DE CUBARRAL','SAN MARTÍN','VILLAVICENCIO','VISTA HERMOSA'] },
+    { nombre: 'NARIÑO', ciudades: ['ALBAN','ALDANA','ANCUYA','ARBOLEDA','BARBACOAS','BELEN','BUESACO','CHACHAGUI','COLON','CONSACA','CONTADERO','CÓRDOBA','CUASPUD','CUMBAL','CUMBITARA','EL CHARCO','EL PEÑOL','EL ROSARIO','El Tablon de Gomez','EL TAMBO','FRANCISCO PIZARRO','FUNES','GUACHUCAL','GUAITARILLA','GUALMATAN','ILES','IMUES','IPIALES','LA CRUZ','LA FLORIDA','LA LLANADA','LA TOLA','LA UNION','LEIVA','LINARES','LOS ANDES','Magui','MALLAMA','MOSQUERA','NARIÑO','OLAYA HERRERA','OSPINA','PASTO','POLICARPA','POTOSÍ','PROVIDENCIA','PUERRES','PUPIALES','RICAURTE','ROBERTO PAYAN','SAMANIEGO','SAN BERNARDO','SAN LORENZO','SAN PABLO','SAN PEDRO DE CARTAGO','SANDONÁ','SANTA BaRBARA','SANTA CRUZ','SAPUYES','TAMINANGO','TANGUA','TUMACO','TUQUERRES','YACUANQUER'] },
+    { nombre: 'NORTE DE SANTANDER', ciudades: ['ABREGO','ARBOLEDAS','BOCHALEMA','BUCARASICA','CACHIRÁ','CÁCOTA','CHINÁCOTA','CHITAGÁ','CONVENCIÓN','CÚCUTA','CUCUTILLA','DURANIA','EL CARMEN','EL TARRA','EL ZULIA','GRAMALOTE','HACARÍ','HERRÁN','LA ESPERANZA','LA PLAYA','LABATECA','LOS PATIOS','LOURDES','MUTISCUA','OCAÑA','PAMPLONA','PAMPLONITA','PUERTO SANTANDER','RAGONVALIA','SALAZAR','SAN CALIXTO','SAN CAYETANO','SANTIAGO','SARDINATA','SILOS','TEORAMA','TIBÚ','TOLEDO','VILLA CARO','VILLA DEL ROSARIO'] },
+    { nombre: 'PUTUMAYO', ciudades: ['COLÓN','MOCOA','ORITO','PUERTO ASIS','PUERTO CAICEDO','PUERTO GUZMAN','PUERTO LEGUIZAMO','SAN FRANCISCO','SAN MIGUEL','SANTIAGO','SIBUNDOY','VALLE DEL GUAMUEZ','VILLA GARZON'] },
+    { nombre: 'QUINDIO', ciudades: ['ARMENIA','BUENAVISTA','CALARCA','CIRCASIA','CORDOBA','FILANDIA','GENOVA','LA TEBAIDA','MONTENEGRO','PIJAO','QUIMBAYA','SALENTO'] },
+    { nombre: 'RISARALDA', ciudades: ['APÍA','BALBOA','BELÉN DE UMBRÍA','DOSQUEBRADAS','GUÁTICA','LA CELIA','LA VIRGINIA','MARSELLA','MISTRATÓ','PEREIRA','PUEBLO RICO','QUINCHiA','SANTA ROSA DE CABAL','SANTUARIO'] },
+    { nombre: 'SANTANDER', ciudades: ['AGUADA','ALBANIA','ARATOCA','BARBOSA','BARICHARA','BARRANCABERMEJA','BETULIA','BOLÍVAR','BUCARAMANGA','CABRERA','CALIFORNIA','CAPITANEJO','CARCASÍ','CEPITÁ','CERRITO','CHARALÁ','CHARTA','CHIMA','CHIPATÁ','CIMITARRA','CONCEPCIÓN','CONFINES','CONTRATACIÓN','COROMORO','CURITÍ','EL CARMEN DE CHUCURÍ','EL GUACAMAYO','EL PEÑÓN','EL PLAYÓN','ENCINO','ENCISO','FLORIÁN','FLORIDABLANCA','GALÁN','GAMBITA','GIRÓN','GUACA','GUADALUPE','GUAPOTÁ','GUAVATÁ','GUEPSA','HATO','JESÚS MARÍA','JORDÁN','LA BELLEZA','LA PAZ','LANDÁZURI','LEBRÍJA','LOS SANTOS','MACARAVITA','MÁLAGA','MATANZA','MOGOTES','MOLAGAVITA','OCAMONTE','OIBA','ONZAGA','PALMAR','PALMAS DEL SOCORRO','PÁRAMO','PIEDECUESTA','PINCHOTE','PUENTE NACIONAL','PUERTO PARRA','PUERTO WILCHES','RIONEGRO','SABANA DE TORRES','SAN ANDRÉS','SAN BENITO','SAN GIL','SAN JOAQUÍN','SAN JOSÉ DE MIRANDA','SAN MIGUEL','SAN VICENTE DE CHUCURÍ','SANTA BÁRBARA','SANTA HELENA DEL OPÓN','SIMACOTA','SOCORRO','SUAITA','SUCRE','SURATA','TONA','VALLE DE SAN JOSÉ','VÉLEZ','VETAS','VILLANUEVA','ZAPATOCA'] },
+    { nombre: 'SUCRE', ciudades: ['BUENAVISTA','CAIMITO','CHALÁN','COLOSO','COROZAL','COVEÑAS','EL ROBLE','GALERAS','GUARANDA','LA UNIÓN','LOS PALMITOS','MAJAGUAL','MORROA','OVEJAS','PALMITO','SAMPUÉS','SAN BENITO ABAD','SAN JUAN BETULIA','SAN MARCOS','SAN ONOFRE','SAN PEDRO','SANTIAGO DE TOLÚ','SINCÉ','SINCELEJO','SUCRE','TOLÚ VIEJO'] },
+    { nombre: 'TOLIMA', ciudades: ['ALPUJARRA','ALVARADO','AMBALEMA','ANZOÁTEGUI','ARMERO','ATACO','CAJAMARCA','CARMEN DE APICALÁ','CASABIANCA','CHAPARRAL','COELLO','COYAIMA','CUNDAY','DOLORES','ESPINAL','FALAN','FLANDES','FRESNO','GUAMO','HERVEO','HONDA','IBAGUE','ICONONZO','LERIDA','LIBANO','MARIQUITA','MELGAR','MURILLO','NATAGAIMA','ORTEGA','PALOCABILDO','PIEDRAS','PLANADAS','PRADO','PURIFICACIÓN','RIOBLANCO','RONCESVALLES','ROVIRA','SALDAÑA','SAN ANTONIO','SAN LUIS','SANTA ISABEL','SUÁREZ','VALLE DE SAN JUAN','VENADILLO','VILLAHERMOSA','VILLARRICA'] },
+    { nombre: 'VALLE DEL CAUCA', ciudades: ['ALCALA','ANDALUCÍA','ANSERMANUEVO','ARGELIA','BOLÍVAR','BUENAVENTURA','BUGA','BUGALAGRANDE','CAICEDONIA','CALI','CALIMA','CANDELARIA','CARTAGO','DAGUA','EL ÁGUILA','EL CAIRO','EL CERRITO','EL DOVIO','FLORIDA','GINEBRA','GUACARÍ','JAMUNDÍ','LA CUMBRE','LA UNIÓN','LA VICTORIA','OBANDO','PALMIRA','PRADERA','RESTREPO','RIOFRIO','ROLDANILLO','SAN PEDRO','SEVILLA','TORO','TRUJILLO','TULUÁ','ULLOA','VERSALLES','VIJES','YOTOCO','YUMBO','ZARZAL'] },
+    { nombre: 'VAUPES', ciudades: ['CARURU','MITÚ','PACOA','PAPUNAHUA','TARAIRA','YAVARATÉ'] },
+    { nombre: 'VICHADA', ciudades: ['CUMARIBO','LA PRIMAVERA','PUERTO CARREÑO','SANTA ROSALÍA',] }
+  ];  
+
+  ngOnInit(): void {
+    this.estadoFormulario = this.data ? 'Actualizar' : 'Agregar';
+
+    // Inicializa el formulario reactivo con los nuevos campos
+    this.supplierForm = this.fb.group({
+      name: [this.data?.name || '', Validators.required],
+      document: [this.data?.document || '', Validators.required],
+      t_document: [this.data?.t_document || '', Validators.required],
+      phone: [
+        this.data?.phone || '', // Trae el valor de la base de datos
+        [
+          Validators.required,
+          Validators.pattern(/^\d+$/) // Valida que sean solo números
+        ]
+      ],
+      address: [this.data?.address || '', Validators.required],
+      email: [
+        this.data?.email || '',
+        [
+          Validators.required,
+          Validators.email // Valida el formato de correo electrónico
+        ]
+      ],
+      departamento: [this.data?.departamento || '', Validators.required],
+      ciudad: [this.data?.ciudad || '', Validators.required],       
+      estado: [this.data?.estado || false],
+    });
+
+    // Inicializa las ciudades filtradas si es una edición
+    if (this.data?.departamento) {
+      const selected = this.departamentos.find(d => d.nombre === this.data.departamento);
+      this.ciudadesFiltradas = selected ? selected.ciudades : [];
+    }
+
+    // Asegúrate de que el valor de ciudad es válido
+    if (this.data?.ciudad && !this.ciudadesFiltradas.includes(this.data.ciudad)) {
+      this.supplierForm.get('ciudad')?.setValue(''); // Reinicia la ciudad si no es válida
+    }
+  }  
+
+  validateNumberInput(event: KeyboardEvent): void {
+    const allowedKeys = /^[0-9]$/;
+    if (!allowedKeys.test(event.key)) {
+      event.preventDefault(); // Cancela el ingreso de caracteres no permitidos
+    }
+  }
+
+  onSave(): void {
+    // Marca todos los campos como tocados
+    this.supplierForm.markAllAsTouched();
+  
+    // Verifica si el formulario es inválido
+    if (this.supplierForm.invalid) {
+      // Mensaje de alerta general
+      alert('Por favor, complete todos los campos obligatorios antes de guardar.');
+      return;
+    }
+  
+    const formData = this.supplierForm.value;
+  
+    if (this.data) {
+      // Actualizar supplier existente
+      this.supplierService.updateSupplier(formData, this.data.id)
+        .subscribe(
+          () => this.dialogRef.close(1),
+          () => this.dialogRef.close(2)
+        );
+    } else {
+      // Crear nuevo supplier
+      this.supplierService.saveSupplier(formData)
+        .subscribe(
+          () => this.dialogRef.close(1),
+          () => this.dialogRef.close(2)
+        );
+    }
+  }
+  
+
+   // Método para manejar el cambio de departamento
+   onDepartmentChange(departamento: string): void {
+    const selected = this.departamentos.find(d => d.nombre === departamento);
+    this.ciudadesFiltradas = selected ? selected.ciudades : [];
+    this.supplierForm.get('ciudad')?.setValue(''); // Reinicia el campo de ciudad
+  }
+
+  onCancel(): void {
+    this.dialogRef.close(3);
+  }
+}

@@ -1,0 +1,89 @@
+/* Contenedor principal */
+.home-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    align-items: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+  
+  .header {
+    display: flex; /* Activa el modelo de flexbox */
+    justify-content: flex-end; /* Alinea el contenido al final a la derecha */
+    align-items: left; /* Centra el contenido verticalmente */
+    padding: 20px; /* Opcional: Espaciado interno */
+    background-color: #f9f9f9; /* Color de fondo opcional */
+  }
+  
+  .header-title {
+    font-size: 2.5rem; /* Tamaño del texto */
+    color: #007bff; /* Color del texto */
+    margin: 0; /* Elimina márgenes adicionales */
+  }
+  
+  
+  /* Menú de opciones */
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* Cambia a 7 columnas iguales */
+    gap: 20px; /* Espaciado entre columnas y filas */
+    width: 100%;
+    max-width: 1200px;
+  }
+  
+  /* Botones del menú */
+  .menu-button {
+    width: 200px; /* Ancho fijo para los íconos */
+    height: 180px; /* Alto fijo para los íconos */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between; /* Asegura espacio entre imagen y texto */
+    padding: 15px; /* Aumenta el espacio interior */
+    background: #ffffff;
+    border: 2px solid #007bff;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+  }
+  
+  /* Íconos de los botones */
+  .menu-button img {
+    width: 100px; /* Ancho fijo para los íconos */
+    height: 100px; /* Alto fijo para los íconos */
+    object-fit: contain; /* Mantiene la proporción de la imagen dentro del contenedor */
+    margin-bottom: 10px; /* Espaciado entre el ícono y el texto */
+  }
+  
+  /* Texto debajo de los íconos */
+  .menu-button span {
+    font-size: 1.2rem; /* Aumenta el tamaño del texto */
+    color: #007bff;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  /* Efecto al pasar el mouse */
+  .menu-button:hover {
+    transform: scale(1.1); /* Efecto de escala mayor */
+    background-color: #e0f7ff;
+  }
+
+  /* Clase para el contenedor opcional */
+  .text-container {
+    width: 100%; /* Asegura que el contenedor ocupe todo el ancho disponible */
+    padding: 20px; /* Espaciado interno opcional */
+    background-color: #f9f9f9; /* Color de fondo opcional */
+  }
+  
+  /* Clase específica para alinear el texto a la derecha */
+  .align-right {
+    text-align: right; /* Alinea el texto al extremo derecho */
+    font-size: 1.5rem; /* Tamaño del texto */
+    color: #007bff; /* Color del texto */
+    margin: 0; /* Elimina márgenes no deseados */
+  }
+  
+  
