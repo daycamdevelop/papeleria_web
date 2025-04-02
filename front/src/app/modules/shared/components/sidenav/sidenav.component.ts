@@ -11,10 +11,10 @@ export class SidenavComponent {
   mobileQuery: MediaQueryList;
 
   menuNav = [
-    {name: "Home", route: "home", icon: "home"},    
+    {name: "Home", route: "home", icon: "home"},
     {name: "Clientes", route: "client", icon: "people"},
-    {name: "Proveedores", route: "casuppliertegory", icon: "category"},
-    {name: "Vendedores", route: "category", icon: "store"},    
+    {name: "Proveedores", route: "supplier", icon: "category"},
+    {name: "Vendedores", route: "category", icon: "store"},
     {name: "Productos", route: "product", icon: "shopping_cart"}
   ]
 

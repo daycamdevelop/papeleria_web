@@ -1,0 +1,65 @@
+package com.company.inventory.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+
+import com.company.inventory.model.Proveedor;
+import com.company.inventory.response.ProveedorResponseRest;
+import com.company.inventory.services.interfaces.IProveedorService;
+
+@CrossOrigin(origins = {"http://localhost:4200"})
+@RestController
+@RequestMapping("/api/v1")
+public class ProveedorRestController {
+	
+	@Autowired
+	private IProveedorService supplierService;
+	
+	@PostMapping("/proveedor")
+	public ResponseEntity<ProveedorResponseRest> save(@RequestBody Proveedor supplier) {
+	    ResponseEntity<ProveedorResponseRest> response = supplierService.save(supplier);
+	    return response;
+	}
+	
+	@GetMapping("/proveedor/{id}")
+	public ResponseEntity<ProveedorResponseRest> searchSupplierById(@PathVariable Long id){
+		ResponseEntity<ProveedorResponseRest> response = supplierService.searchById(id);
+		return response;
+	}
+	
+	@DeleteMapping("/proveedor/{id}")
+	public ResponseEntity<ProveedorResponseRest> deleteById(@PathVariable Long id){
+		ResponseEntity<ProveedorResponseRest> response =  supplierService.deleteById(id);
+		return response;
+	}
+	
+	@GetMapping("/proveedor")
+	public ResponseEntity<ProveedorResponseRest> searchClient(){
+		ResponseEntity<ProveedorResponseRest> response = supplierService.search();
+		return response;
+	}
+	
+	@PutMapping("/proveedor/{id}")
+	public ResponseEntity<ProveedorResponseRest> update(@RequestBody Proveedor supplier, @PathVariable Long id){
+		ResponseEntity<ProveedorResponseRest> response = supplierService.update(supplier, id);
+		return response;
+	}
+	
+	/*@GetMapping("/proveedor/{document}")
+	public ResponseEntity<ClientResponseRest> searchClientByDocument(@PathVariable String document){
+		ResponseEntity<ClientResponseRest> response =  clientService.searchByDocument(document);
+		return response;
+	}
+*/
+}
+

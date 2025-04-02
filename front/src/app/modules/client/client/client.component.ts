@@ -59,7 +59,7 @@ export class ClientComponent implements OnInit {
 
   processClientResponse(resp: any): void {
     const dataClient: ClientElement[] = [];
-    if (resp.metadata[0].code === '00') {
+    if (resp.metadata[0].code === '200') {
       const listClient = resp.clientResponse.client;
       listClient.forEach((element: ClientElement) => {
         dataClient.push(element);
