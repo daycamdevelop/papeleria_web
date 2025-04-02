@@ -25,11 +25,11 @@ public class ClientRestController {
     public ResponseEntity<ClientResponseRest> searchClientById(@PathVariable Long id) {
         return clientService.searchById(id);
     }
-
+/*
     @GetMapping("/client/document/{document}")
     public ResponseEntity<ClientResponseRest> searchClientByDocument(@PathVariable String document) {
         return clientService.searchByDocument(document);
-    }
+    }*/
 
     @DeleteMapping("/client/{id}")
     public ResponseEntity<ClientResponseRest> deleteById(@PathVariable Long id) {

@@ -8,8 +8,8 @@ import org.springframework.data.repository.query.Param;
 import com.company.inventory.model.Client;
 
 public interface IClientDao extends CrudRepository<Client, Long> {
-    Optional<Client> findByDocument(String document);
+    /*Optional<Client> findByDocument(String nit);
 
-    @Query("SELECT c FROM Client c WHERE LOWER(c.document) LIKE LOWER(CONCAT('%', :document, '%'))")
-    List<Client> findByDocumentLike(@Param("document") String document);
+    @Query("SELECT * FROM cliente c where lower(c.nit) like lower('%'|| ':nit' ||'%');")
+    List<Client> findByDocumentLike(@Param("nit") String nit);*/
 }

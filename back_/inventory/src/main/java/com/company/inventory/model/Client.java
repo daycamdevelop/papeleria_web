@@ -22,53 +22,53 @@ public class Client implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String name;
-	private String document;
-	private String t_document;
-	private String phone;
-	private String address;
-	private String email;
+	private String nombre;
+	private String nit;
+	private String t_documento;
+	private String telefono;
+	private String direccion;
+	private String correo;
 	private String estado;
 	private String valor_credito;
 	private String fecha_credito;
-	private String departamento;
+	private String ciudaddane;
 	private String ciudad;
 	
 	public String getName() {
-		return name;
+		return nombre;
 	}
 	public void setName(String name) {
-		this.name = name;
+		this.nombre = name;
 	}
 	public String getDocument() {
-		return document;
+		return nit;
 	}
 	public void setDocument(String document) {
-		this.document = document;
+		this.nit = document;
 	}
 	public String getT_document() {
-		return t_document;
+		return t_documento;
 	}
 	public void setT_document(String t_document) {
-		this.t_document = t_document;
+		this.t_documento = t_document;
 	}
 	public String getPhone() {
-		return phone;
+		return telefono;
 	}
 	public void setPhone(String phone) {
-		this.phone = phone;
+		this.telefono = phone;
 	}
 	public String getAddress() {
-		return address;
+		return direccion;
 	}
 	public void setAddress(String address) {
-		this.address = address;
+		this.direccion = address;
 	}
 	public String getEmail() {
-		return email;
+		return correo;
 	}
 	public void setEmail(String email) {
-		this.email = email;
+		this.correo = email;
 	}
 	public String getEstado() {
 		return estado;
@@ -89,10 +89,10 @@ public class Client implements Serializable{
 		this.fecha_credito = fecha_credito;
 	}
 	public String getDepartamento() {
-		return departamento;
+		return ciudaddane;
 	}
 	public void setDepartamento(String departamento) {
-		this.departamento = departamento;
+		this.ciudaddane = departamento;
 	}
 	public String getCiudad() {
 		return ciudad;
