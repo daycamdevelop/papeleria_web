@@ -20,14 +20,23 @@ public class Cliente implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nombre;
-	private String nit;
 	private String t_documento;
-	private String telefono;
+	private String nit;
 	private String direccion;
+	private String telefono;
+	private String ciudad;
 	private String correo;
 	private String estado;
+	private String desvincular;
 	private String valor_credito;
 	private String fecha_credito;
+	private String remitente;
+	private String cedularemitente;
+	private String telefonoremitente;
+	private String tipo;
 	private String ciudaddane;
-	private String ciudad;
+	private String dv;
+	private String tipopersona;
+	private String tipoiva;
+	
 }

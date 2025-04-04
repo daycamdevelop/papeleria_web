@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 import { HomeComponent } from './components/home/home.component';
 import { DashboardComponent } from './pages/dashboard.component';
 import { SharedModule } from '../shared/shared.module';
-import { CategoryModule } from '../category/category.module';
-import { ClientModule } from '../client/client.module';
-import { ProductModule } from '../product/product.module';
-import { SupplierModule } from '../supplier/supplier.module';
+import { VendedorModule } from '../vendedor/vendedor.module';
+import { ClienteModule } from '../cliente/cliente.module';
+import { ProductosModule } from '../productos/productos.module';
+import { ProveedorModule } from '../proveedor/proveedor.module';
 import { DashboardRoutingModule } from './dashboard-routing.module'; // Importa el módulo de rutas
 
 @NgModule({
@@ -17,10 +17,10 @@ import { DashboardRoutingModule } from './dashboard-routing.module'; // Importa 
   imports: [
     CommonModule,
     SharedModule,
-    CategoryModule,
-    ClientModule,
-    SupplierModule,
-    ProductModule,
+    VendedorModule,
+    ClienteModule,
+    ProveedorModule,
+    ProductosModule,
     DashboardRoutingModule // Agrega el módulo de rutas
   ]
 })

@@ -90,24 +90,21 @@ public class VendedorServiceImpl implements IVendedorService {
 
 	@Override
 	@Transactional
-	public ResponseEntity<VendedorResponseRest> update(Vendedor category, Long id) {
+	public ResponseEntity<VendedorResponseRest> update(Vendedor vendedor, Long id) {
 		VendedorResponseRest response = new VendedorResponseRest();
 		List<Vendedor> list = new ArrayList<>();
 		try {
-			Optional<Vendedor> categorySearch = categoryDao.findById(id);
-			if(categorySearch.isPresent()) {
+			Optional<Vendedor> vendedorSearch = categoryDao.findById(id);
+			if(vendedorSearch.isPresent()) {
 				//Se procede a actualizar el registro
-				categorySearch.get().setName(category.getName());
-				categorySearch.get().setDocument(category.getDocument());
-				categorySearch.get().setT_document(category.getT_document());
-				categorySearch.get().setPhone(category.getPhone());
-				categorySearch.get().setAddress(category.getAddress());
-				categorySearch.get().setEmail(category.getEmail());
-				categorySearch.get().setEstado(category.getEstado());
-				categorySearch.get().setDepartamento(category.getDepartamento());
-				categorySearch.get().setCiudad(category.getCiudad());
+				vendedorSearch.get().setNombre(vendedor.getNombre());
+				vendedorSearch.get().setNit(vendedor.getNit());
+				vendedorSearch.get().setCelular(vendedor.getCelular());
+				vendedorSearch.get().setDireccion(vendedor.getDireccion());
+				vendedorSearch.get().setCorreo(vendedor.getCorreo());
+				vendedorSearch.get().setEstado(vendedor.getEstado());
 				
-				Vendedor categoryToUpdate = categoryDao.save(categorySearch.get());
+				Vendedor categoryToUpdate = categoryDao.save(vendedorSearch.get());
 				if(categoryToUpdate != null) {
 					list.add(categoryToUpdate);
 					response.getVendedorResponse().setVendedor(list);

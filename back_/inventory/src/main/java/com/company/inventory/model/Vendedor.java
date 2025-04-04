@@ -9,7 +9,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
 
-
 @Data
 @Entity
 @Table(name="vendedor")
@@ -20,14 +19,13 @@ public class Vendedor implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String name;
-	private String document;
-	private String t_document;
-	private String phone;
-	private String address;
-	private String email;
+	private String nombre;
+	private String nit;
+	private String direccion;
+	private String telefono;
+	private String celular;
+	private String correo;
 	private String estado;
-	private String departamento;
-	private String ciudad;
+	private String desvincular;
 
 }

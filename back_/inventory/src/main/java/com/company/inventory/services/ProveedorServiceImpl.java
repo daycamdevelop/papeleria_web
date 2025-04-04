@@ -107,24 +107,21 @@ public class ProveedorServiceImpl implements IProveedorService {
 
 	@Override
 	@Transactional
-	public ResponseEntity<ProveedorResponseRest> update(Proveedor supplier, Long id) {
+	public ResponseEntity<ProveedorResponseRest> update(Proveedor proveedor, Long id) {
 		ProveedorResponseRest response = new ProveedorResponseRest();
 		List<Proveedor> list = new ArrayList<>();
 		try {
-			Optional<Proveedor> supplierSearch = supplierDao.findById(id);
-			if(supplierSearch.isPresent()) {
+			Optional<Proveedor> proveedorSearch = supplierDao.findById(id);
+			if(proveedorSearch.isPresent()) {
 				//Se procede a actualizar el registro
-				supplierSearch.get().setName(supplier.getName());
-				supplierSearch.get().setDocument(supplier.getDocument());
-				supplierSearch.get().setT_document(supplier.getT_document());
-				supplierSearch.get().setPhone(supplier.getPhone());
-				supplierSearch.get().setAddress(supplier.getAddress());
-				supplierSearch.get().setEmail(supplier.getEmail());
-				supplierSearch.get().setEstado(supplier.getEstado());
-				supplierSearch.get().setDepartamento(supplier.getDepartamento());
-				supplierSearch.get().setCiudad(supplier.getCiudad());
+				proveedorSearch.get().setNombre(proveedor.getNombre());
+				proveedorSearch.get().setNit(proveedor.getNit());
+				proveedorSearch.get().setCelular(proveedor.getCelular());
+				proveedorSearch.get().setDireccion(proveedor.getDireccion());
+				proveedorSearch.get().setCorreo(proveedor.getCorreo());
+				proveedorSearch.get().setEstado(proveedor.getEstado());
 				
-				Proveedor supplierToUpdate = supplierDao.save(supplierSearch.get());
+				Proveedor supplierToUpdate = supplierDao.save(proveedorSearch.get());
 				if(supplierToUpdate != null) {
 					list.add(supplierToUpdate);
 					response.getProveedorResponse().setProveedor(list);
