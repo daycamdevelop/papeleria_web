@@ -9,8 +9,8 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.company.inventory</groupId>
-	<artifactId>inventory</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>daycamdevelop</artifactId>
+	<version>0.0.1</version>
 	<name>inventory</name>
 	<description>Proyecto para control de inventarios</description>
 	<properties>
