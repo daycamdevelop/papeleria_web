@@ -8,7 +8,7 @@ import com.company.inventory.model.Cliente;
 import com.company.inventory.response.ClienteResponseRest;
 import com.company.inventory.services.interfaces.IClienteService;
 
-@CrossOrigin(origins = {"http://localhost:4200", "https://papeleria-web-vn2s.onrender.com"})
+@CrossOrigin(origins = {"http://localhost:4200", "https://daycamdevelop.github.io"})
 @RestController
 @RequestMapping("/api/v1")
 public class ClienteRestController {
