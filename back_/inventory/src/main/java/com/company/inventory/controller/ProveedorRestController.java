@@ -17,7 +17,7 @@ import com.company.inventory.model.Proveedor;
 import com.company.inventory.response.ProveedorResponseRest;
 import com.company.inventory.services.interfaces.IProveedorService;
 
-@CrossOrigin(origins = {"http://localhost:4200"})
+@CrossOrigin(origins = {"https://papeleria-web-vn2s.onrender.com"})
 @RestController
 @RequestMapping("/api/v1")
 public class ProveedorRestController {
