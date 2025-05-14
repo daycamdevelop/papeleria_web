@@ -9,6 +9,7 @@ import { NewClienteComponent } from '../new-cliente/new-cliente.component';
 import { ConfirmComponent } from '../../shared/components/confirm/confirm.component';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-cliente',
@@ -21,6 +22,7 @@ export class ClienteComponent implements OnInit {
   private clienteService = inject(ClienteService);
   private snackBar = inject(MatSnackBar);
   public dialog = inject(MatDialog);
+  public loading = false;
 
   searchSubject = new Subject<string>(); // Observable para manejar debounce
   displayedColumns: string[] = ['id', 'name', 'document', 't_document', 'phone', 'address', 'email', 'estado', 'actions'];
@@ -30,6 +32,7 @@ export class ClienteComponent implements OnInit {
   paginator!: MatPaginator;
 
   ngOnInit(): void {
+    this.loading = true;
     this.getClient();
 
     // Configuración del debounce para la búsqueda
@@ -49,6 +52,7 @@ export class ClienteComponent implements OnInit {
   getClient(): void {
     this.clienteService.getClient().subscribe(
       (data: any) => {
+        this.loading = false;
         this.processClientResponse(data);
       },
       (error: any) => {
@@ -90,8 +94,7 @@ export class ClienteComponent implements OnInit {
         this.openSnackBar('Error al buscar el cliente.', 'Error');
       }
     );
-  }
-  
+  }  
 
   openClientDialog(): void {
     const dialogRef = this.dialog.open(NewClienteComponent, {

@@ -21,8 +21,10 @@ export class ProveedorComponent implements OnInit{
   private proveedorService = inject(ProveedorService);
   private snackBar = inject(MatSnackBar);
   public dialog = inject(MatDialog);
+  public loading = false;
 
   ngOnInit(): void {
+    this.loading = true;
     this.getSupplier();
   }
 
@@ -40,6 +42,7 @@ export class ProveedorComponent implements OnInit{
     this.proveedorService.getSupplier()
       .subscribe( (data:any) => {
         this.processSupplierResponse(data);
+        this.loading = false;
       }, (error: any) => {
         console.log("error: ", error);
       })

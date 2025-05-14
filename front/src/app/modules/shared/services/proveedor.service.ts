@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
-const base_url = "https://papeleria-web-vn2s.onrender.com/api/v1";
+const base_url = environment.url;
 
 @Injectable({
   providedIn: 'root'

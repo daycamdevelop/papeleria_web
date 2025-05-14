@@ -5,6 +5,7 @@ import { MaterialModule } from '../shared/material.module';
 import { ProveedorComponent } from './proveedor/proveedor.component';
 import { NewProveedorComponent } from './new-proveedor/new-proveedor.component'; // Agrega este si existe
 import { ProveedorRoutingModule } from './proveedor-routing.module'; // Importa el enrutamiento
+import { LoadingComponent } from '../shared/components/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ProveedorRoutingModule } from './proveedor-routing.module'; // Importa 
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    ProveedorRoutingModule // Agrega el enrutamiento
+    ProveedorRoutingModule,
+    LoadingComponent
   ]
 })
 export class ProveedorModule {}

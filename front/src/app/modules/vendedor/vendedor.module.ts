@@ -5,6 +5,7 @@ import { MaterialModule } from '../shared/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NewVendedorComponent } from './components/new-vendedor/new-vendedor.component';
 import { VendedorRoutingModule } from './vendedor-routing.module';
+import { LoadingComponent } from '../shared/components/loading/loading.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { VendedorRoutingModule } from './vendedor-routing.module';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    VendedorRoutingModule
+    VendedorRoutingModule,
+    LoadingComponent
   ]
 })
 export class VendedorModule { }

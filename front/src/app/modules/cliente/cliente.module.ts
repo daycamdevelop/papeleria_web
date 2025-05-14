@@ -5,18 +5,20 @@ import { MaterialModule } from '../shared/material.module';
 import { ClienteComponent } from './cliente/cliente.component';
 import { NewClienteComponent } from './new-cliente/new-cliente.component';
 import { ClienteRoutingModule } from './cliente-routing.module'; // Importa el enrutamiento
+import { LoadingComponent } from '../shared/components/loading/loading.component';
 
 @NgModule({
   declarations: [
     ClienteComponent,
-    NewClienteComponent    
+    NewClienteComponent
   ],
   imports: [
     CommonModule,
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    ClienteRoutingModule // Agrega el enrutamiento
+    ClienteRoutingModule,
+    LoadingComponent
   ]
 })
 export class ClienteModule {}

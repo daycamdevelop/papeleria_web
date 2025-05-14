@@ -3,21 +3,28 @@
   display: flex;
   flex-direction: column;
   margin-left: 10px;
-  align-items: center;
   padding: 20px;
-  background-color: #f9f9f9;
+  background-color: white;
 }
 
 .header {
   display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: white;
+  flex-direction: column;
+}
+
+.headerImage {
+  display: flex;
   /* Activa el modelo de flexbox */
-  justify-content: flex-end;
+  justify-content: center;
   /* Alinea el contenido al final a la derecha */
-  align-items: left;
+  align-items: start;
   /* Centra el contenido verticalmente */
-  padding: 20px;
+  padding: 0px 10px 40px 10px;
   /* Opcional: Espaciado interno */
-  background-color: #f9f9f9;
+  background-color: white;
   /* Color de fondo opcional */
 }
 
@@ -30,11 +37,10 @@
   /* Elimina márgenes adicionales */
 }
 
-
 /* Menú de opciones */
 .menu-grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(7, 1fr);
   /* Cambia a 7 columnas iguales */
   gap: 20px;
   /* Espaciado entre columnas y filas */
@@ -76,7 +82,7 @@
 }
 
 /* Texto debajo de los íconos */
-.menu-button span {
+span {
   font-size: 1.2rem;
   /* Aumenta el tamaño del texto */
   color: #007bff;
@@ -110,9 +116,9 @@
 .text-container {
   width: 100%;
   /* Asegura que el contenedor ocupe todo el ancho disponible */
-  padding: 20px;
+  padding: 20px 0px;
   /* Espaciado interno opcional */
-  background-color: #f9f9f9;
+  background-color: white;
   /* Color de fondo opcional */
 }
 
@@ -126,4 +132,9 @@
   /* Color del texto */
   margin: 0;
   /* Elimina márgenes no deseados */
+}
+
+.botonAyuda{
+  background-color: white;
+  border: 0px;
 }

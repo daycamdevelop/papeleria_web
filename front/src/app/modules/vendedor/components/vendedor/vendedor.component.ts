@@ -19,8 +19,10 @@ export class VendedorComponent implements OnInit{
   private vendedorService = inject(VendedorService);
   private snackBar = inject(MatSnackBar);
   public dialog = inject(MatDialog);
+  public loading = false;
 
   ngOnInit(): void {
+    this.loading = true;
     this.getCategories();
   }
 
@@ -39,7 +41,7 @@ export class VendedorComponent implements OnInit{
     this.vendedorService.getCategories()
       .subscribe( (data:any) => {
         this.processCategoriesResponse(data);
-
+        this.loading = false;
       }, (error: any) => {
         console.log("error: ", error);
       })
