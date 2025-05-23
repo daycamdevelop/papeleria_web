@@ -2,6 +2,7 @@ import { Component, Inject, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ClienteService } from 'src/app/modules/shared/services/cliente.service';
+import { ClientElement } from '../cliente/cliente.component';
 
 @Component({
   selector: 'app-new-cliente',
@@ -128,7 +129,27 @@ export class NewClienteComponent implements OnInit {
       return;
     }
   
-    const formData = this.clientForm.value;
+    let formData:ClientElement = {
+      nombre: this.clientForm.get('name')?.value,
+      t_documento: '',
+      nit: '',
+      direccion: '',
+      telefono: 0,
+      ciudad: '',
+      correo: '',
+      estado: '',
+      desvincular: '',
+      valor_credito: 0,
+      fecha_credito: '',
+      remitente: '',
+      cedularemitente: '',
+      telefonoremitente: '',
+      tipo: '',
+      ciudaddane: '',
+      dv: '',
+      tipopersona: '',
+      tipoiva: ''
+    };
   
     if (this.data) {
       // Actualizar proveedor existente

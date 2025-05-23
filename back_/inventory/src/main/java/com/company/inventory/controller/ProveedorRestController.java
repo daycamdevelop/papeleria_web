@@ -17,41 +17,41 @@ import com.company.inventory.model.Proveedor;
 import com.company.inventory.response.ProveedorResponseRest;
 import com.company.inventory.services.interfaces.IProveedorService;
 
-@CrossOrigin(origins = {"https://daycamdevelop.github.io"})
+@CrossOrigin(origins = {"http://localhost:4200","http://localhost:8080", "https://daycamdevelop.github.io"})
 @RestController
 @RequestMapping("/api/v1")
 public class ProveedorRestController {
 	
 	@Autowired
-	private IProveedorService supplierService;
+	private IProveedorService proveedorService;
 	
 	@PostMapping("/proveedor")
-	public ResponseEntity<ProveedorResponseRest> save(@RequestBody Proveedor supplier) {
-	    ResponseEntity<ProveedorResponseRest> response = supplierService.save(supplier);
+	public ResponseEntity<ProveedorResponseRest> save(@RequestBody Proveedor proveedor) {
+	    ResponseEntity<ProveedorResponseRest> response = proveedorService.save(proveedor);
 	    return response;
 	}
 	
 	@GetMapping("/proveedor/{id}")
 	public ResponseEntity<ProveedorResponseRest> searchSupplierById(@PathVariable Long id){
-		ResponseEntity<ProveedorResponseRest> response = supplierService.searchById(id);
+		ResponseEntity<ProveedorResponseRest> response = proveedorService.searchById(id);
 		return response;
 	}
 	
 	@DeleteMapping("/proveedor/{id}")
 	public ResponseEntity<ProveedorResponseRest> deleteById(@PathVariable Long id){
-		ResponseEntity<ProveedorResponseRest> response =  supplierService.deleteById(id);
+		ResponseEntity<ProveedorResponseRest> response =  proveedorService.deleteById(id);
 		return response;
 	}
 	
 	@GetMapping("/proveedor")
 	public ResponseEntity<ProveedorResponseRest> searchClient(){
-		ResponseEntity<ProveedorResponseRest> response = supplierService.search();
+		ResponseEntity<ProveedorResponseRest> response = proveedorService.search();
 		return response;
 	}
 	
 	@PutMapping("/proveedor/{id}")
-	public ResponseEntity<ProveedorResponseRest> update(@RequestBody Proveedor supplier, @PathVariable Long id){
-		ResponseEntity<ProveedorResponseRest> response = supplierService.update(supplier, id);
+	public ResponseEntity<ProveedorResponseRest> update(@RequestBody Proveedor proveedor, @PathVariable Long id){
+		ResponseEntity<ProveedorResponseRest> response = proveedorService.update(proveedor, id);
 		return response;
 	}
 	

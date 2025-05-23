@@ -16,7 +16,7 @@ import com.company.inventory.services.interfaces.IProveedorService;
 @Service
 public class ProveedorServiceImpl implements IProveedorService {
 	@Autowired
-	private IProveedorDao supplierDao;
+	private IProveedorDao proveedorDao;
 	
 	
 	@Override
@@ -25,8 +25,8 @@ public class ProveedorServiceImpl implements IProveedorService {
 		
 		ProveedorResponseRest response = new ProveedorResponseRest();
 		try {
-			List<Proveedor> supplier = (List<Proveedor>)supplierDao.findAll();
-			response.getProveedorResponse().setProveedor(supplier);
+			List<Proveedor> proveedor = (List<Proveedor>)proveedorDao.findAll();
+			response.getProveedorResponse().setProveedor(proveedor);
 			response.setMetadata(true, "200", "Respuesta exitosa");
 		} catch (Exception e) {
 			response.setMetadata(false, "500", "Error al consultar");
@@ -39,14 +39,14 @@ public class ProveedorServiceImpl implements IProveedorService {
 
 	@Override
 	@Transactional
-	public ResponseEntity<ProveedorResponseRest> save(Proveedor supplier) {
+	public ResponseEntity<ProveedorResponseRest> save(Proveedor proveedor) {
 		ProveedorResponseRest response = new ProveedorResponseRest();
 		List<Proveedor> list = new ArrayList<>();
 		
 		try {
-			Proveedor supplierSsved = supplierDao.save(supplier);
-			if (supplierSsved != null) {
-				list.add(supplierSsved);
+			Proveedor proveedorSaved = proveedorDao.save(proveedor);
+			if (proveedorSaved != null) {
+				list.add(proveedorSaved);
 				response.getProveedorResponse().setProveedor(list);
 				response.setMetadata(true, "200", "Respuesta exitosa");
 			}else {
@@ -68,9 +68,9 @@ public class ProveedorServiceImpl implements IProveedorService {
 		ProveedorResponseRest response = new ProveedorResponseRest();
 		List<Proveedor> list = new ArrayList<>();
 		try {
-			Optional<Proveedor> supplier = supplierDao.findById(id);
-			if(supplier.isPresent()) {
-				list.add(supplier.get());
+			Optional<Proveedor> proveedor = proveedorDao.findById(id);
+			if(proveedor.isPresent()) {
+				list.add(proveedor.get());
 				response.getProveedorResponse().setProveedor(list);
 				response.setMetadata(true, "200", "Proveedor encontrado");
 			}else {
@@ -92,7 +92,7 @@ public class ProveedorServiceImpl implements IProveedorService {
 	public ResponseEntity<ProveedorResponseRest> deleteById(Long id) {
 		ProveedorResponseRest response = new ProveedorResponseRest();
 		try {
-			supplierDao.deleteById(id);
+			proveedorDao.deleteById(id);
 			response.setMetadata(true, "200", "Registro eliminado");
 		} catch (Exception e) {
 			response.setMetadata(false, "500", "Error al Eliminar");
@@ -111,7 +111,7 @@ public class ProveedorServiceImpl implements IProveedorService {
 		ProveedorResponseRest response = new ProveedorResponseRest();
 		List<Proveedor> list = new ArrayList<>();
 		try {
-			Optional<Proveedor> proveedorSearch = supplierDao.findById(id);
+			Optional<Proveedor> proveedorSearch = proveedorDao.findById(id);
 			if(proveedorSearch.isPresent()) {
 				//Se procede a actualizar el registro
 				proveedorSearch.get().setNombre(proveedor.getNombre());
@@ -121,9 +121,9 @@ public class ProveedorServiceImpl implements IProveedorService {
 				proveedorSearch.get().setCorreo(proveedor.getCorreo());
 				proveedorSearch.get().setEstado(proveedor.getEstado());
 				
-				Proveedor supplierToUpdate = supplierDao.save(proveedorSearch.get());
-				if(supplierToUpdate != null) {
-					list.add(supplierToUpdate);
+				Proveedor proveedorToUpdate = proveedorDao.save(proveedorSearch.get());
+				if(proveedorToUpdate != null) {
+					list.add(proveedorToUpdate);
 					response.getProveedorResponse().setProveedor(list);
 					response.setMetadata(true, "200", "Categoria Actualizada");
 				}else {

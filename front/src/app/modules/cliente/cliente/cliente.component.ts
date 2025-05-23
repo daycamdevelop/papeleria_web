@@ -23,9 +23,10 @@ export class ClienteComponent implements OnInit {
   private snackBar = inject(MatSnackBar);
   public dialog = inject(MatDialog);
   public loading = false;
+  public listClient:ClientElement[] = [];
 
   searchSubject = new Subject<string>(); // Observable para manejar debounce
-  displayedColumns: string[] = ['id', 'name', 'document', 't_document', 'phone', 'address', 'email', 'estado', 'actions'];
+  displayedColumns: string[] = ['id', 'name', 'nit', 'phone', 'address', 'email', 'estado', 'actions'];
   dataSource = new MatTableDataSource<ClientElement>();
 
   @ViewChild(MatPaginator)
@@ -64,18 +65,26 @@ export class ClienteComponent implements OnInit {
   processClientResponse(resp: any): void {
     const dataClient: ClientElement[] = [];
     if (resp.metadata[0].code === '200') {
-      const listClient = resp.clienteResponse.cliente;
-      listClient.forEach((element: ClientElement) => {
+      this.listClient = resp.clienteResponse.cliente;
+      this.listClient.forEach((element: ClientElement) => {
         dataClient.push(element);
       });
-      this.dataSource = new MatTableDataSource<ClientElement>(dataClient);
-      this.dataSource.paginator = this.paginator;
+      this.llenarTabla(dataClient);
     }
   }
 
-  onSearch(document: string): void {
+  llenarTabla(dataClient:ClientElement[]){
+    this.dataSource = new MatTableDataSource<ClientElement>(dataClient);
+    this.dataSource.paginator = this.paginator;
+  }
+
+  onSearch(text: string): void {
+    this.llenarTabla(this.listClient.filter((cli)=>{
+      return cli.nombre.includes(text)||cli.nit.includes(text)
+    }));
+    /*
     // Maneja la búsqueda al escribir
-    this.searchSubject.next(document.trim());
+    this.searchSubject.next(document.trim());*/
   }
 
   searchByDocument(document: string): void {
@@ -118,11 +127,11 @@ export class ClienteComponent implements OnInit {
     });
   }
 
-  edit(id: number, name: string, document: string, t_document: string, phone: string, address: string, email: string, estado: string, valor_credito: string, fecha_credito: string, departamento: string, ciudad: string): void {
+  edit(id: number, name: string, t_documento: string, nit: string, phone: string, address: string, email: string, estado: string, valor_credito: string, fecha_credito: string, departamento: string, ciudad: string): void {
     const dialogRef = this.dialog.open(NewClienteComponent, {
       width: '100%',
       height: '60%',
-      data: { id, name, document, t_document, phone, address, email, estado, valor_credito, fecha_credito, departamento, ciudad }
+      data: { id, name, t_documento, nit, phone, address, email, estado, valor_credito, fecha_credito, departamento, ciudad }
     });
 
     dialogRef.afterClosed().subscribe((result: any) => {
@@ -152,16 +161,24 @@ export class ClienteComponent implements OnInit {
 }
 
 export interface ClientElement {
-  id: number;
+  id?: number;
   nombre: string;
-  document: string;
-  t_document: string;
-  phone: string;
-  address: string;
-  email: string;
-  estado: string;
-  valor_credito: string;
-  fecha_credito: string;
-  departamento: string;
+  t_documento: string;
+  nit: string;
+  direccion: string;
+  telefono: number;
   ciudad: string;
+  correo: string;
+  estado: string;
+  desvincular: string;
+  valor_credito: number;
+  fecha_credito: string;
+  remitente: string;
+  cedularemitente: string;
+  telefonoremitente: string;
+  tipo: string;
+  ciudaddane: string;
+  dv: string;
+  tipopersona: string;
+  tipoiva: string;
 }

@@ -15,7 +15,7 @@ export class ProductService {
    * Obtiene todos los Productos
    */
   getProduct() {
-    const endpoint = `${base_url}/product`;
+    const endpoint = `${base_url}/producto`;
     return this.http.get(endpoint);
   }
 
@@ -23,7 +23,7 @@ export class ProductService {
    * Guarda un Productos
    */
   saveProduct(body: any) {
-    const endpoint = `${base_url}/product`;
+    const endpoint = `${base_url}/producto`;
     return this.http.post(endpoint, body);
   }
 
@@ -31,7 +31,7 @@ export class ProductService {
    * Actualiza un Productos
    */
   updateProduct(body: any, id: any) {
-    const endpoint = `${base_url}/product/${id}`; // Eliminado el espacio extra
+    const endpoint = `${base_url}/producto/${id}`; // Eliminado el espacio extra
     return this.http.put(endpoint, body);
   }
 
@@ -39,7 +39,7 @@ export class ProductService {
    * Elimina un Productos
    */
   deleteProduct(id: any) {
-    const endpoint = `${base_url}/product/${id}`; // Eliminado el espacio extra
+    const endpoint = `${base_url}/producto/${id}`; // Eliminado el espacio extra
     return this.http.delete(endpoint);
   }
 
@@ -47,7 +47,7 @@ export class ProductService {
    * Obtiene un Product por ID
    */
   getProductById(id: any) {
-    const endpoint = `${base_url}/product/${id}`; // Eliminado el espacio extra
+    const endpoint = `${base_url}/producto/${id}`; // Eliminado el espacio extra
     return this.http.get(endpoint);
   }
 
@@ -55,7 +55,7 @@ export class ProductService {
    * Busca un Producto por documento
    */
   getProductByDocument(document: string) {
-    const endpoint = `${base_url}/product/document/${document}`;
+    const endpoint = `${base_url}/producto/document/${document}`;
     return this.http.get(endpoint);
   }
 
@@ -63,7 +63,7 @@ export class ProductService {
    * Exporta los datos de Productoss a Excel
    */
   exportProduct() {
-    const endpoint = `${base_url}/product/export/excel`;
+    const endpoint = `${base_url}/producto/export/excel`;
     return this.http.get(endpoint, {
       responseType: 'blob'
     });

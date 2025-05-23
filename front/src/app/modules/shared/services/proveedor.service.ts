@@ -14,11 +14,9 @@ export class ProveedorService {
   /**
    * get all supplier
    */
-  getSupplier(){
-
+  getProveedor(){
     const endpoint = `${base_url}/proveedor`;
     return this.http.get(endpoint);
-
   }
 
   /**

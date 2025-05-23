@@ -10,8 +10,8 @@ public class CorsConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**") // Aplica a todas las rutas
-        .allowedOrigins("https://daycamdevelop.github.io", "http://localhost:4200")
-                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+        .allowedOrigins("https://daycamdevelop.github.io", "http://localhost:4200", "http://localhost:8080", "http://127.0.0.1:4200", "http://127.0.0.1:8080")
+                .allowedMethods("*")
                 .allowedHeaders("*")
                 .allowCredentials(true);
     }

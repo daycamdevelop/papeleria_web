@@ -25,7 +25,7 @@ export class ProveedorComponent implements OnInit{
 
   ngOnInit(): void {
     this.loading = true;
-    this.getSupplier();
+    this.getProveedor();
   }
 
   goToHome(): void {
@@ -33,37 +33,37 @@ export class ProveedorComponent implements OnInit{
   }
 
   displayedColumns: string[] = ['id', 'name', 'document', 't_document', 'phone', 'address', 'email', 'estado', 'actions'];
-  dataSource = new MatTableDataSource<SupplierElement>();
+  dataSource = new MatTableDataSource<ProveedorElement>();
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
 
-  getSupplier(): void {
-    this.proveedorService.getSupplier()
+  getProveedor(): void {
+    this.proveedorService.getProveedor()
       .subscribe( (data:any) => {
-        this.processSupplierResponse(data);
+        this.processProveedorResponse(data);
         this.loading = false;
       }, (error: any) => {
         console.log("error: ", error);
       })
   }
 
-  processSupplierResponse(resp: any){
+  processProveedorResponse(resp: any){
 
-    const dataSupplier: SupplierElement[] = [];
+    const listProveedor: ProveedorElement[] = [];
 
     if( resp.metadata[0].code == "200") {
-      let listSupplier = resp.proveedorResponse.proveedor;
-      listSupplier.forEach((element: SupplierElement) => {
-        dataSupplier.push(element);
+      let listProveedor = resp.proveedorResponse.proveedor;
+      listProveedor.forEach((element: ProveedorElement) => {
+        listProveedor.push(element);
       });
-      this.dataSource = new MatTableDataSource<SupplierElement>(dataSupplier);
+      this.dataSource = new MatTableDataSource<ProveedorElement>(listProveedor);
       this.dataSource.paginator = this.paginator;      
     }
 
   }
 
-  openSupplierDialog(){
+  openProveedorDialog(){
     const dialogRef = this.dialog.open(NewProveedorComponent , {
       width: '100%', // Cambia el ancho del modal
       height: '60%', // Opcional: establece la altura
@@ -73,7 +73,7 @@ export class ProveedorComponent implements OnInit{
       
       if( result == 1){
         this.openSnackBar("Proveedor Agregado", "Exitoso");
-        this.getSupplier();
+        this.getProveedor();
       } else if (result == 2) {
         this.openSnackBar("Se produjo un error al guardar el proveedor", "Error");
       }
@@ -84,7 +84,6 @@ export class ProveedorComponent implements OnInit{
     return this.snackBar.open(message, action, {
       duration: 2000
     })
-
   }
 
   edit(id:number, name: string, document: string, t_document: string, phone: string, address: string, email: string, estado: string, departamento: string, ciudad: string){
@@ -98,7 +97,7 @@ export class ProveedorComponent implements OnInit{
       
       if(result == 1){
         this.openSnackBar("Proveedor Actualizado", "Exitoso");
-        this.getSupplier();
+        this.getProveedor();
       } else if (result == 2) {
         this.openSnackBar("Se produjo un error al actualizar proveedor", "Error");
       }
@@ -114,7 +113,7 @@ export class ProveedorComponent implements OnInit{
       
       if( result == 1){
         this.openSnackBar("Proveedor Eliminado", "Exitoso");
-        this.getSupplier();
+        this.getProveedor();
       } else if (result == 2) {
         this.openSnackBar("Se produjo un error al eliminar proveedor", "Error");
       }
@@ -124,7 +123,7 @@ export class ProveedorComponent implements OnInit{
 
 }
 
-export interface SupplierElement {
+export interface ProveedorElement {
   id: number;
   name: string;
   document: string;

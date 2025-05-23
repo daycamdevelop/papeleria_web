@@ -16,7 +16,7 @@ import com.company.inventory.model.Vendedor;
 import com.company.inventory.response.VendedorResponseRest;
 import com.company.inventory.services.interfaces.IVendedorService;
 
-@CrossOrigin(origins = {"http://localhost:4200"})
+@CrossOrigin(origins = {"http://localhost:4200","http://localhost:8080", "https://daycamdevelop.github.io"})
 @RestController
 @RequestMapping("/api/v1")
 public class VendedorRestController {
