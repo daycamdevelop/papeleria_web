@@ -1,16 +1,20 @@
 <div class="p15">
     <mat-card class="flex-row">
-
         <mat-card class="flex-column w40 noBorder">
             <mat-card-header class="noPadding">
                 <h2 class="alinear">DATOS INICIALES</h2>
             </mat-card-header>
             <mat-card-content class="border">
-                <mat-form-field appearance="fill">
-                    <mat-label>CODIGO</mat-label>
-                    <input matInput #input [(ngModel)]="productoSeleccionado.codigo">
-                </mat-form-field>
-                <img src="assets/images/Buscar.png" alt="verificador" class="icon" />
+                <div class="flex-row">
+                    <mat-form-field appearance="fill">
+                        <mat-label>CODIGO</mat-label>
+                        <input matInput #input [(ngModel)]="productoSeleccionado.codigo">
+                    </mat-form-field>
+                    <div class="w20">
+                        <img src="assets/images/Buscar.png" alt="verificador" class="icon" (click)="searchProduct()" />
+                        <h3>BUSCAR</h3>
+                    </div>
+                </div>
                 <mat-form-field appearance="fill">
                     <mat-label>NOMBRE</mat-label>
                     <input matInput #input [(ngModel)]="productoSeleccionado.nombre">
@@ -21,9 +25,9 @@
                 </mat-form-field>
                 <mat-form-field class="w40">
                     <mat-label>ESTADO</mat-label>
-                    <mat-select>
-                        <mat-option *ngFor="let food of foods" [value]="food.value">
-                            {{ food.viewValue }}
+                    <mat-select [(ngModel)]="productoSeleccionado.estado">
+                        <mat-option *ngFor="let estado of estados" [value]="estado.value">
+                            {{ estado.viewValue }}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
@@ -42,6 +46,11 @@
                     <mat-label>COSTO VENTA</mat-label>
                     <input matInput #input [(ngModel)]="productoSeleccionado.costoventa">
                 </mat-form-field>
+                <!--
+                <mat-form-field appearance="fill" class="w10">
+                    <mat-label>PORCENTAJE</mat-label>
+                    <input matInput #input [(ngModel)]="productoSeleccionado.porcentaje">
+                </mat-form-field>-->
                 <mat-form-field appearance="fill" class="w40">
                     <mat-label>COSTO VENTA 2</mat-label>
                     <input matInput #input [(ngModel)]="productoSeleccionado.costoventa2">
@@ -50,7 +59,6 @@
                     <mat-label>COSTO VENTA 3</mat-label>
                     <input matInput #input [(ngModel)]="productoSeleccionado.costoventa3">
                 </mat-form-field>
-
                 <mat-form-field appearance="fill" class="w10">
                     <mat-label>IVA</mat-label>
                     <input matInput #input [(ngModel)]="productoSeleccionado.iva">
@@ -68,9 +76,9 @@
                         <mat-card-content class="border flex-row">
                             <mat-form-field class="w60">
                                 <mat-label>LINEA DE PRODUCTOS</mat-label>
-                                <mat-select>
-                                    <mat-option *ngFor="let food of foods" [value]="food.value">
-                                        {{ food.viewValue }}
+                                <mat-select [(ngModel)]="productoSeleccionado.linea">
+                                    <mat-option *ngFor="let linea of lineas" [value]="linea.value">
+                                        {{ linea.viewValue }}
                                     </mat-option>
                                 </mat-select>
                             </mat-form-field>
@@ -87,9 +95,9 @@
                         <mat-card-content class="border flex-row">
                             <mat-form-field class="w60">
                                 <mat-label>BODEGA</mat-label>
-                                <mat-select>
-                                    <mat-option *ngFor="let food of foods" [value]="food.value">
-                                        {{ food.viewValue }}
+                                <mat-select [(ngModel)]="productoSeleccionado.bodega">
+                                    <mat-option *ngFor="let bodega of bodegas" [value]="bodega.value">
+                                        {{ bodega.viewValue }}
                                     </mat-option>
                                 </mat-select>
                             </mat-form-field>
@@ -112,29 +120,26 @@
             </mat-card>
             <mat-card>
                 <mat-card-content class="flex-row">
-                    <div class="w40">
+                    <div class="w40" hidden>
+                        <img src="assets/images/Pos.png" alt="verificador" class="icon" />
+                        <h3>RESOLUCION POS</h3>
+                    </div>
+                    <div class="w40" hidden>
+                        <img src="assets/images/Precio.png" alt="verificador" class="icon" />
+                        <h3>CONTRASEÑA LIMPIAR</h3>
+                    </div>
+                    <div class="w30" hidden>
+                        <img src="assets/images/Precio.png" alt="verificador" class="icon" />
+                        <h3>CONTRASEÑA BORRAR</h3>
+                    </div>
+                    <div class="w30" hidden>
                         <img src="assets/images/Modificar.png" alt="verificador" class="icon" />
-                        <h3>MODIFICAR</h3>
-                    </div>
-                    <div class="w40">
-                        <img src="assets/images/Borrar.png" alt="verificador" class="icon" />
-                        <h3>DESVINCULAR</h3>
-                    </div>
-                    <div class="w30">
-                        <img src="assets/images/Insertar.png" alt="verificador" class="icon" />
-                        <h3>INSERTAR</h3>
-                    </div>
-                    <div class="w30">
-                        <img src="assets/images/Limpiar.png" alt="verificador" class="icon" />
-                        <h3>LIMPIAR</h3>
+                        <h3>CAMBIOS</h3>
                     </div>
                 </mat-card-content>
             </mat-card>
         </mat-card>
     </mat-card>
-
-
-
     <mat-card>
         <mat-card-header class="noPadding">
             <h2>TABLA DE PRODUCTOS</h2>
@@ -228,24 +233,25 @@
             <mat-card-content class="w20 flex-column">
                 <mat-card-content class="flex-row">
                     <div class="w40">
-                        <img src="assets/images/Modificar.png" alt="verificador" class="icon" />
+                        <img src="assets/images/Modificar.png" alt="verificador" class="icon" (click)="edit()" />
                         <h3>MODIFICAR</h3>
                     </div>
                     <div class="w40">
-                        <img src="assets/images/Borrar.png" alt="verificador" class="icon" />
+                        <img src="assets/images/Borrar.png" alt="verificador" class="icon" (click)="delete()" />
                         <h3>DESVINCULAR</h3>
                     </div>
                 </mat-card-content>
                 <mat-card-content class="flex-row">
                     <div class="w30">
-                        <img src="assets/images/Insertar.png" alt="verificador" class="icon" />
+                        <img src="assets/images/Insertar.png" alt="verificador" class="icon" (click)="insert()" />
                         <h3>INSERTAR</h3>
                     </div>
                     <div class="w30">
-                        <img src="assets/images/Limpiar.png" alt="verificador" class="icon" />
+                        <img src="assets/images/Limpiar.png" alt="verificador" class="icon"
+                            (click)="quitarSeleccion()" />
                         <h3>LIMPIAR</h3>
                     </div>
-                    <div class="w30">
+                    <div class="w30" hidden>
                         <img src="assets/images/Restaurar.png" alt="verificador" class="icon" />
                         <h3>VINCULAR</h3>
                     </div>

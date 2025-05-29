@@ -30,8 +30,8 @@ export class ProductosComponent {
     nombre: '',
     cantidad: '',
     fecharegistro: '',
-    linea: 0,
-    bodega: 0,
+    linea: 2,
+    bodega: 1,
     estado: '',
     desvincular: '',
     costo: 0,
@@ -45,19 +45,22 @@ export class ProductosComponent {
     registro2: ''
   };
 
-  foods: any[] = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'},
+  bodegas: any[] = [
+    {value: 1, viewValue: 'principal'}
+  ];
+
+  lineas: any[] = [
+    {value: 2, viewValue: 'varios'}
+  ];
+
+  estados: any[] = [
+    {value: 'activo', viewValue: 'activo'},
+    {value: 'inactivo', viewValue: 'inactivo'}
   ];
 
   ngOnInit(): void {
     this.loading = true;
     this.getProductos();
-
-    this.searchSubject.pipe(debounceTime(300)).subscribe((valor: string) => {
-      this.searchProduct(valor);
-    });
   }
 
   goToHome(): void {
@@ -70,47 +73,29 @@ export class ProductosComponent {
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
 
-  openProductosDialog() {
-    const dialogRef = this.dialog.open(NewProveedorComponent, {
-      width: '100%', // Cambia el ancho del modal
-      height: '60%', // Opcional: establece la altura
-    });
-
-    dialogRef.afterClosed().subscribe((result: any) => {
-      if (result == 1) {
-        this.openSnackBar("Producto Agregado", "Exitoso");
-        this.getProductos();
-      } else if (result == 2) {
-        this.openSnackBar("Se produjo un error al guardar el producto", "Error");
-      }
-    });
-  }
-
   openSnackBar(message: string, action: string): MatSnackBarRef<SimpleSnackBar> {
     return this.snackBar.open(message, action, {
       duration: 2000
     })
   }
 
-  edit(id: number, name: string, document: string, t_document: string, phone: string, address: string, email: string, estado: string, departamento: string, ciudad: string) {
-    const dialogRef = this.dialog.open(NewProveedorComponent, {
-      width: '100%', // Cambia el ancho del modal
-      height: '60%', // Opcional: establece la altura
-      data: { id: id, name: name, document: document, t_document: t_document, phone: phone, address: address, email: email, estado: estado, departamento: departamento, ciudad: ciudad }
-    });
-    dialogRef.afterClosed().subscribe((result: any) => {
-      if (result == 1) {
-        this.openSnackBar("Producto Actualizado", "Exitoso");
-        this.getProductos();
-      } else if (result == 2) {
-        this.openSnackBar("Se produjo un error al actualizar producto", "Error");
-      }
-    });
+  insert() {
+    this.productService.saveProduct(this.productoSeleccionado).subscribe((result: any) => {
+      this.openSnackBar("Producto Agregado", "Exitoso");
+      this.getProductos();
+    })
   }
 
-  delete(id: any) {
+  edit() {
+    this.productService.updateProduct(this.productoSeleccionado, this.productoSeleccionado.id).subscribe((result: any) => {
+      this.openSnackBar("Producto Actualizado", "Exitoso");
+      this.getProductos();
+    })
+  }
+
+  delete() {
     const dialogRef = this.dialog.open(ConfirmComponent, {
-      data: { id: id, module: "supplier" }
+      data: { id: this.productoSeleccionado.id, module: "product" }
     });
     dialogRef.afterClosed().subscribe((result: any) => {
       if (result == 1) {
@@ -139,22 +124,54 @@ export class ProductosComponent {
       this.listProducts.forEach((element: ProductosElement) => {
         dataProducts.push(element);
       });
-      this.dataSource = new MatTableDataSource<ProductosElement>(dataProducts);
-      this.dataSource.paginator = this.paginator;
+      this.llenarTabla(dataProducts);
+      this.searchProduct();
     }
   }
 
-  searchProduct(valor:string){
+  llenarTabla(dataClient:ProductosElement[]){
+    this.dataSource = new MatTableDataSource<ProductosElement>(dataClient);
+    this.dataSource.paginator = this.paginator;
+  }
+
+  searchProduct(){
+    this.listFilterProducts = [];
     this.listProducts.forEach((element: ProductosElement) => {
-      if(element.nombre){
+      if(this.productoSeleccionado.codigo == "*" || this.productoSeleccionado.codigo == ""){
+        this.listFilterProducts.push(element);
+      } else if(element.codigo.toLocaleLowerCase() == this.productoSeleccionado.codigo.toLocaleLowerCase()){
         this.listFilterProducts.push(element);
       }
-      
     });
+    this.llenarTabla(this.listFilterProducts);
   }
 
   seleccionTabla(producto:ProductosElement){
     this.productoSeleccionado = producto;
+  }
+
+  quitarSeleccion(){
+    this.productoSeleccionado = {
+      id: 0,
+      codigo: '',
+      nombre: '',
+      cantidad: '',
+      fecharegistro: '',
+      linea: 0,
+      bodega: 0,
+      estado: '',
+      desvincular: '',
+      costo: 0,
+      costoventa: 0,
+      serial: '',
+      costoventa2: 0,
+      costoventa3: 0,
+      iva: 0,
+      observacion: '',
+      registro: '',
+      registro2: ''
+    };
+    this.searchProduct();
   }
 }
 

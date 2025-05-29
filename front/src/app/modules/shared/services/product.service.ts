@@ -31,7 +31,7 @@ export class ProductService {
    * Actualiza un Productos
    */
   updateProduct(body: any, id: any) {
-    const endpoint = `${base_url}/producto/${id}`; // Eliminado el espacio extra
+    const endpoint = `${base_url}/producto/${id}`;
     return this.http.put(endpoint, body);
   }
 
@@ -39,7 +39,7 @@ export class ProductService {
    * Elimina un Productos
    */
   deleteProduct(id: any) {
-    const endpoint = `${base_url}/producto/${id}`; // Eliminado el espacio extra
+    const endpoint = `${base_url}/producto/${id}`;
     return this.http.delete(endpoint);
   }
 
@@ -47,7 +47,7 @@ export class ProductService {
    * Obtiene un Product por ID
    */
   getProductById(id: any) {
-    const endpoint = `${base_url}/producto/${id}`; // Eliminado el espacio extra
+    const endpoint = `${base_url}/producto/${id}`;
     return this.http.get(endpoint);
   }
 

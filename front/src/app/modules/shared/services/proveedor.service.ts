@@ -22,7 +22,7 @@ export class ProveedorService {
   /**
    * save the supplier
    */
-  saveSupplier(body: any) {
+  saveProveedor(body: any) {
     const endpoint = `${base_url}/proveedor`;
     return this.http.post(endpoint, body);
   }
@@ -30,24 +30,24 @@ export class ProveedorService {
   /**
    * update supplier
    */
-  updateSupplier(body: any, id: any){
-    const endpoint = `${base_url}/proveedor/ ${id}`;
+  updateProveedor(body: any, id: any){
+    const endpoint = `${base_url}/proveedor/${id}`;
     return this.http.put(endpoint, body);
   }
 
   /**
    * update supplier
    */
-  deleteSupplier(id: any){
-    const endpoint = `${base_url}/proveedor/ ${id}`;
+  deleteProveedor(id: any){
+    const endpoint = `${base_url}/proveedor/${id}`;
     return this.http.delete(endpoint);
   }
 
   /**
    * update supplier
    */
-  getSupplierById(id: any){
-    const endpoint = `${base_url}/proveedor/ ${id}`;
+  getProveedorById(id: any){
+    const endpoint = `${base_url}/proveedor/${id}`;
     return this.http.get(endpoint);
   }
 
@@ -55,7 +55,7 @@ export class ProveedorService {
   /**
    * export excel supplier
    */
-  exportSupplier(){
+  exportProveedor(){
     const endpoint = `${base_url}/proveedor/export/excel`;
     return this.http.get(endpoint, {
       responseType: 'blob'

@@ -130,14 +130,14 @@ export class NewProveedorComponent implements OnInit {
   
     if (this.data) {
       // Actualizar supplier existente
-      this.supplierService.updateSupplier(formData, this.data.id)
+      this.supplierService.updateProveedor(formData, this.data.id)
         .subscribe(
           () => this.dialogRef.close(1),
           () => this.dialogRef.close(2)
         );
     } else {
       // Crear nuevo supplier
-      this.supplierService.saveSupplier(formData)
+      this.supplierService.saveProveedor(formData)
         .subscribe(
           () => this.dialogRef.close(1),
           () => this.dialogRef.close(2)

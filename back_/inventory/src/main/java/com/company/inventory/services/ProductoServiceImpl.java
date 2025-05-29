@@ -22,11 +22,16 @@ public class ProductoServiceImpl implements IProductoService {
 	@Override
 	@Transactional(readOnly = true)
 	public ResponseEntity<ProductoResponseRest> search() {
-		
 		ProductoResponseRest response = new ProductoResponseRest();
 		try {
 			List<Producto> producto = (List<Producto>)productoDao.findAll();
-			response.getProductoResponse().setProducto(producto);
+			List<Producto> productosActivos = new ArrayList<>();
+			for (Producto prod : producto) {
+			    if(prod.getEstado().equals("activo")) {
+			    		productosActivos.add(prod);
+			    }
+			}
+			response.getProductoResponse().setProducto(productosActivos);
 			response.setMetadata(true, "200", "Respuesta exitosa");
 		} catch (Exception e) {
 			response.setMetadata(false, "500", "Error al consultar");
@@ -42,7 +47,6 @@ public class ProductoServiceImpl implements IProductoService {
 	public ResponseEntity<ProductoResponseRest> save(Producto producto) {
 		ProductoResponseRest response = new ProductoResponseRest();
 		List<Producto> list = new ArrayList<>();
-		
 		try {
 			Producto productoSaved = productoDao.save(producto);
 			if (productoSaved != null) {
@@ -50,7 +54,7 @@ public class ProductoServiceImpl implements IProductoService {
 				response.getProductoResponse().setProducto(list);
 				response.setMetadata(true, "200", "Respuesta exitosa");
 			}else {
-				response.setMetadata(false, "404", "Provvedor no guardado");
+				response.setMetadata(false, "404", "Producto no guardado");
 				return new ResponseEntity<ProductoResponseRest>(response, HttpStatus.BAD_REQUEST); 
 			}
 		} catch (Exception e) {
@@ -72,9 +76,9 @@ public class ProductoServiceImpl implements IProductoService {
 			if(producto.isPresent()) {
 				list.add(producto.get());
 				response.getProductoResponse().setProducto(list);
-				response.setMetadata(true, "200", "Proveedor encontrado");
+				response.setMetadata(true, "200", "Producto encontrado");
 			}else {
-				response.setMetadata(false, "404", "Proveedor No Encontrada");
+				response.setMetadata(false, "404", "Producto No Encontrada");
 				return new ResponseEntity<ProductoResponseRest>(response, HttpStatus.NOT_FOUND);
 			}
 		} catch (Exception e) {
@@ -92,8 +96,16 @@ public class ProductoServiceImpl implements IProductoService {
 	public ResponseEntity<ProductoResponseRest> deleteById(Long id) {
 		ProductoResponseRest response = new ProductoResponseRest();
 		try {
-			productoDao.deleteById(id);
-			response.setMetadata(true, "200", "Registro eliminado");
+			Optional<Producto> productoSearch = productoDao.findById(id);
+			if (productoSearch.isPresent()) {
+			    Producto producto = productoSearch.get();
+			    producto.setEstado("inactivo");
+				this.update(producto, id);
+				//productoDao.deleteById(id);
+				response.setMetadata(true, "200", "Registro eliminado");
+			} else {
+				response.setMetadata(false, "404", "Producto no encontrado");
+			}
 		} catch (Exception e) {
 			response.setMetadata(false, "500", "Error al Eliminar");
 			e.getStackTrace();
@@ -102,8 +114,6 @@ public class ProductoServiceImpl implements IProductoService {
 		
 		return new ResponseEntity<ProductoResponseRest>(response, HttpStatus.OK);
 	}
-	
-
 
 	@Override
 	@Transactional
@@ -135,19 +145,17 @@ public class ProductoServiceImpl implements IProductoService {
 				if(productoToUpdate != null) {
 					list.add(productoToUpdate);
 					response.getProductoResponse().setProducto(list);
-					response.setMetadata(true, "200", "Categoria Actualizada");
+					response.setMetadata(true, "200", "Producto Actualizada");
 				}else {
-					response.setMetadata(false, "404", "Categoria No Actualizada");
+					response.setMetadata(false, "404", "Producto No Actualizada");
 					return new ResponseEntity<ProductoResponseRest>(response, HttpStatus.BAD_REQUEST);
 				}
-				
 			}else {
-				response.setMetadata(false, "404", "Categoria No Guardada");
+				response.setMetadata(false, "404", "Producto No Guardada");
 				return new ResponseEntity<ProductoResponseRest>(response, HttpStatus.NOT_FOUND);
 			}
-			
 		} catch (Exception e) {
-			response.setMetadata(false, "500", "Error al actualizar categoria");
+			response.setMetadata(false, "500", "Error al actualizar producto");
 			e.getStackTrace();
 			return new ResponseEntity<ProductoResponseRest>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
