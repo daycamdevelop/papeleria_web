@@ -1,8 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { CategoryService } from '../../services/category.service';
-import { ClientService } from '../../services/client.service';
-import { SupplierService } from '../../services/supplier.service';
+import { VendedorService } from '../../services/vendedor.service';
+import { ClienteService } from '../../services/cliente.service';
+import { ProveedorService } from '../../services/proveedor.service';
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-confirm',
@@ -10,13 +11,12 @@ import { SupplierService } from '../../services/supplier.service';
   styleUrls: ['./confirm.component.css']
 })
 export class ConfirmComponent {
-
-  private categoryService= inject(CategoryService);
-  private clientService= inject(ClientService);
-  private supplierService= inject(SupplierService);
+  private vendedorService= inject(VendedorService);
+  private clientService= inject(ClienteService);
+  private proveedorService= inject(ProveedorService);
+  private productService= inject(ProductService);
   private dialogRef= inject(MatDialogRef);
   public data = inject(MAT_DIALOG_DATA);
-
 
   onNoClick(){
     this.dialogRef.close(3)
@@ -24,9 +24,8 @@ export class ConfirmComponent {
 
   delete(){
     if (this.data != null){     
-      
       if (this.data.module == "category") {
-        this.categoryService.deleteCategorie(this.data.id).
+        this.vendedorService.deleteCategorie(this.data.id).
               subscribe( (data:any) =>{
                 this.dialogRef.close(1);
               }, (error: any) => {
@@ -39,8 +38,15 @@ export class ConfirmComponent {
               }, (error: any) => {
                 this.dialogRef.close(2);
               })
-      }else if (this.data.module == "supplier") {
-        this.supplierService.deleteSupplier(this.data.id).
+      }else if (this.data.module == "proveedor") {
+        this.proveedorService.deleteProveedor(this.data.id).
+              subscribe( (data:any) =>{
+                this.dialogRef.close(1);
+              }, (error: any) => {
+                this.dialogRef.close(2);
+              })
+      }else if (this.data.module == "product") {
+        this.productService.deleteProduct(this.data.id).
               subscribe( (data:any) =>{
                 this.dialogRef.close(1);
               }, (error: any) => {

@@ -1,0 +1,33 @@
+.content{
+    width: 600px;
+}
+
+span {
+  font-size: 1.2rem;
+  color: #007bff;
+  font-weight: bold;
+  text-align: center;
+}
+
+.seccion {
+    display: flex;
+    justify-content: space-between;
+}
+
+.licencia{
+    width: 160px;
+    height: 160px;
+}
+
+.flecha{
+    width: 100px;
+    height: 120px;
+}
+
+.botonAyuda{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    background-color: white;
+    border: 0px;
+}

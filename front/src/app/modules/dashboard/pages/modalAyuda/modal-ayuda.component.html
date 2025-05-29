@@ -1,0 +1,48 @@
+<div class="content">
+  <h2 mat-dialog-title>Informacion</h2>
+  <mat-dialog-content>
+    <div class="seccion">
+      <span>Version Programa:</span>
+      <p>{{version}}</p>
+    </div>
+    <div class="seccion">
+      <span>Empresa promotora:</span>
+      <p>DayCam Technology</p>
+    </div>
+    <div class="seccion">
+      <span></span>
+      <p>NIT: 901045388</p>
+    </div>
+    <div class="seccion">
+      <span>Contacto:</span>
+      <p>314 357 7129</p>
+    </div>
+    <div class="seccion">
+      <span></span>
+      <p>320 478 8642</p>
+    </div>
+    <div class="seccion">
+      <span>Direccion:</span>
+      <p>Bogotá, Colombia - Calle 11 #13-66</p>
+    </div>
+    <br/>
+    <div class="seccion">
+      <div>
+        <button mat-raised-button (click)="verLicencia()" class="botonAyuda">
+            <img src="assets/images/Pos.png" alt="Clientes" class="licencia"/>
+        </button>
+      </div>
+      <div>
+        <button mat-raised-button (click)="descargarAPK()" class="botonAyuda">
+          <a href="assets/apk/DayCamApp_v11.apk" download>
+            <img src="assets/images/Baja.png" alt="Clientes" class="flecha"/>
+          </a>
+        </button>
+      </div>
+    </div>
+    <div class="seccion">
+      <span>LICENCIA</span>
+      <span>DESCARGAR APK</span>
+    </div>
+  </mat-dialog-content>
+</div>

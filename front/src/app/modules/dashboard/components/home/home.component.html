@@ -1,93 +1,100 @@
 <div class="home-container">
     <!-- Header -->
     <div class="header">
-    
+        <button mat-raised-button (click)="abrirAyuda()" class="botonAyuda">
+            <img src="assets/images/Ayuda.png" alt="Clientes" />
+        </button>
+        <span>Ayuda</span>
     </div>
+    <div class="headerImage">
+        <img src="assets/images/Header.png" alt="Clientes" />
+    </div>
+    
 
     <!-- Menú de opciones -->
     <div class="menu-grid">
 
-        <button class="menu-button" (click)="navigateTo('client')">
+        <button class="menu-button" (click)="navigateTo('cliente')">
             <img src="assets/images/Cliente.png" alt="Clientes" />
             <span>Clientes</span>
         </button>
 
-        <button class="menu-button" (click)="navigateTo('supplier')">
+        <button class="menu-button" (click)="navigateTo('proveedor')">
             <img src="assets/images/Proveedores.png" alt="Proveedores" />
             <span>Proveedores</span>
         </button>
 
-        <button class="menu-button" (click)="navigateTo('category')">
+        <button class="menu-button" (click)="navigateTo('vendedor')">
             <img src="assets/images/Vendedor.png" alt="Vendedores" />
             <span>Vendedores</span>
         </button>
 
-        <button class="menu-button" (click)="navigateTo('product')">
+        <button class="menu-button" (click)="navigateTo('productos')">
             <img src="assets/images/Inventario.png" alt="Productos" />
             <span>Productos</span>
         </button>
 
-        <button class="menu-button" (click)="navigateTo('facturar')">
+        <button class="menu-button" (click)="navigateTo('facturar')" disabled>
             <img src="assets/images/Imprimir.png" alt="Facturar" />
             <span>Facturar</span>
         </button>
 
-        <button class="menu-button" (click)="navigateTo('kardex')">
+        <button class="menu-button" (click)="navigateTo('kardex')" disabled>
             <img src="assets/images/Kardex.png" alt="Kardex" />
             <span>Kardex</span>
         </button>
 
-        <button class="menu-button" (click)="navigateTo('compras')">
+        <button class="menu-button" (click)="navigateTo('compras')" disabled>
             <img src="assets/images/Compras.png" alt="compras" />
             <span>Compras</span>
         </button>
 
-        <button class="menu-button" (click)="navigateTo('inventarios')">
+        <button class="menu-button" (click)="navigateTo('inventarios')" disabled>
             <img src="assets/images/Inventarios.jpg" alt="inventarios" />
             <span>Inventarios</span>
         </button>
 
-        <button class="menu-button" (click)="navigateTo('devoluciones')">
+        <button class="menu-button" (click)="navigateTo('devoluciones')" disabled>
             <img src="assets/images/Reporte.png" alt="devoluciones" />
             <span>Devoluciones</span>
         </button>
 
-        <button class="menu-button" (click)="navigateTo('usuarios')">
+        <button class="menu-button" (click)="navigateTo('usuarios')" disabled>
             <img src="assets/images/User.png" alt="usuarios" />
             <span>Usuarios</span>
         </button>
 
-        <button class="menu-button" (click)="navigateTo('utilidades')">
+        <button class="menu-button" (click)="navigateTo('utilidades')" disabled>
             <img src="assets/images/Utilidades.png" alt="utilidades" />
             <span>Utilidades</span>
         </button>
 
-        <button class="menu-button" (click)="navigateTo('reportes')">
+        <button class="menu-button" (click)="navigateTo('reportes')" disabled>
             <img src="assets/images/ConsultaInvent.png" alt="reportes" />
             <span>Reportes</span>
         </button>
 
-        <button class="menu-button" (click)="navigateTo('bajas')">
+        <button class="menu-button" (click)="navigateTo('bajas')" disabled>
             <img src="assets/images/Bajas.png" alt="bajas" />
             <span>Bajas</span>
         </button>
 
-        <button class="menu-button" (click)="navigateTo('verificador')">
+        <button class="menu-button" (click)="navigateTo('verificador')" disabled>
             <img src="assets/images/Base.png" alt="verificador" />
             <span>Verificador de Precios</span>
         </button>
 
-        <button class="menu-button" (click)="navigateTo('cotizacion')">
+        <button class="menu-button" (click)="navigateTo('cotizacion')" disabled>
             <img src="assets/images/Cotizacion.png" alt="cotizacion" />
             <span>Cotización</span>
         </button>
 
-        <button class="menu-button" (click)="navigateTo('facturarElec')">
+        <button class="menu-button" (click)="navigateTo('facturarElec')" disabled>
             <img src="assets/images/Imprimir.png" alt="facturarElec" />
             <span>Factura Electronica</span>
         </button>
 
-        <button class="menu-button" (click)="navigateTo('facturar-pos')">
+        <button class="menu-button" (click)="navigateTo('facturar-pos')" disabled>
             <img src="assets/images/Pos.png" alt="P.O.S." />
             <span>P.O.S. Electrónico</span>
         </button>
@@ -95,7 +102,7 @@
     </div>
     <br>
     <div class="text-container">
-        <h1 class="align-right">Bienvenido, Walter Ortiz</h1>
+        <h1 class="align-right">Bienvenido, Usuario</h1>
     </div>
       
 </div>
