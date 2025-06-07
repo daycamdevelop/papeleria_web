@@ -1,4 +1,4 @@
-<div class="p15">
+<div class="p5">
     <mat-card class="flex-row">
         <mat-card class="flex-column w40 noBorder">
             <mat-card-header class="noPadding">
@@ -6,7 +6,7 @@
             </mat-card-header>
             <mat-card-content class="border">
                 <div class="flex-row">
-                    <mat-form-field appearance="fill">
+                    <mat-form-field appearance="outline">
                         <mat-label>CODIGO</mat-label>
                         <input matInput #input [(ngModel)]="productoSeleccionado.codigo">
                     </mat-form-field>
@@ -15,15 +15,15 @@
                         <h3>BUSCAR</h3>
                     </div>
                 </div>
-                <mat-form-field appearance="fill">
+                <mat-form-field appearance="outline" class="w70">
                     <mat-label>NOMBRE</mat-label>
-                    <input matInput #input [(ngModel)]="productoSeleccionado.nombre">
+                    <input matInput [(ngModel)]="productoSeleccionado.nombre">
                 </mat-form-field>
-                <mat-form-field appearance="fill">
+                <mat-form-field appearance="outline">
                     <mat-label>SERIAL</mat-label>
                     <input matInput #input [(ngModel)]="productoSeleccionado.serial">
                 </mat-form-field>
-                <mat-form-field class="w40">
+                <mat-form-field appearance="outline" class="w40">
                     <mat-label>ESTADO</mat-label>
                     <mat-select [(ngModel)]="productoSeleccionado.estado">
                         <mat-option *ngFor="let estado of estados" [value]="estado.value">
@@ -31,35 +31,35 @@
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
-                <mat-form-field appearance="fill" class="w30">
+                <mat-form-field appearance="outline" class="w30">
                     <mat-label>CANTIDAD</mat-label>
                     <input matInput #input [(ngModel)]="productoSeleccionado.cantidad">
                 </mat-form-field>
                 <mat-checkbox>
                     PORCENTAJE %
                 </mat-checkbox>
-                <mat-form-field appearance="fill" class="w40">
+                <mat-form-field appearance="outline" class="w40">
                     <mat-label>COSTO COMPRA</mat-label>
                     <input matInput #input [(ngModel)]="productoSeleccionado.costo">
                 </mat-form-field>
-                <mat-form-field appearance="fill" class="w40">
+                <mat-form-field appearance="outline" class="w40">
                     <mat-label>COSTO VENTA</mat-label>
                     <input matInput #input [(ngModel)]="productoSeleccionado.costoventa">
                 </mat-form-field>
                 <!--
-                <mat-form-field appearance="fill" class="w10">
+                <mat-form-field appearance="outline" class="w10">
                     <mat-label>PORCENTAJE</mat-label>
                     <input matInput #input [(ngModel)]="productoSeleccionado.porcentaje">
                 </mat-form-field>-->
-                <mat-form-field appearance="fill" class="w40">
+                <mat-form-field appearance="outline" class="w40">
                     <mat-label>COSTO VENTA 2</mat-label>
                     <input matInput #input [(ngModel)]="productoSeleccionado.costoventa2">
                 </mat-form-field>
-                <mat-form-field appearance="fill" class="w40">
+                <mat-form-field appearance="outline" class="w40">
                     <mat-label>COSTO VENTA 3</mat-label>
                     <input matInput #input [(ngModel)]="productoSeleccionado.costoventa3">
                 </mat-form-field>
-                <mat-form-field appearance="fill" class="w10">
+                <mat-form-field appearance="outline" class="w10">
                     <mat-label>IVA</mat-label>
                     <input matInput #input [(ngModel)]="productoSeleccionado.iva">
                 </mat-form-field>
@@ -76,7 +76,7 @@
                         <mat-card-content class="border flex-row">
                             <mat-form-field class="w60">
                                 <mat-label>LINEA DE PRODUCTOS</mat-label>
-                                <mat-select [(ngModel)]="productoSeleccionado.linea">
+                                <mat-select appearance="outline" [(ngModel)]="productoSeleccionado.linea">
                                     <mat-option *ngFor="let linea of lineas" [value]="linea.value">
                                         {{ linea.viewValue }}
                                     </mat-option>
@@ -95,7 +95,7 @@
                         <mat-card-content class="border flex-row">
                             <mat-form-field class="w60">
                                 <mat-label>BODEGA</mat-label>
-                                <mat-select [(ngModel)]="productoSeleccionado.bodega">
+                                <mat-select appearance="outline" [(ngModel)]="productoSeleccionado.bodega">
                                     <mat-option *ngFor="let bodega of bodegas" [value]="bodega.value">
                                         {{ bodega.viewValue }}
                                     </mat-option>

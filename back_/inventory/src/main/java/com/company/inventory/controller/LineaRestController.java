@@ -13,49 +13,49 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
-import com.company.inventory.model.Producto;
-import com.company.inventory.response.ProductoResponseRest;
-import com.company.inventory.services.interfaces.IProductoService;
+import com.company.inventory.model.Linea;
+import com.company.inventory.response.LineaResponseRest;
+import com.company.inventory.services.interfaces.ILineaService;
 
 @CrossOrigin(origins = {"http://localhost:4200","http://localhost:8080", "https://daycamdevelop.github.io"})
 @RestController
 @RequestMapping("/api/v1")
 public class LineaRestController {
-	/*
-	@Autowired
-	private IProductoService productoService;
 	
-	@PostMapping("/producto")
-	public ResponseEntity<ProductoResponseRest> save(@RequestBody Producto producto) {
-	    ResponseEntity<ProductoResponseRest> response = productoService.save(producto);
+	@Autowired
+	private ILineaService LineaService;
+	
+	@PostMapping("/linea")
+	public ResponseEntity<LineaResponseRest> save(@RequestBody Linea linea) {
+	    ResponseEntity<LineaResponseRest> response = LineaService.save(linea);
 	    return response;
 	}
 	
-	@GetMapping("/producto/{id}")
-	public ResponseEntity<ProductoResponseRest> searchSupplierById(@PathVariable Long id){
-		ResponseEntity<ProductoResponseRest> response = productoService.searchById(id);
+	@GetMapping("/linea/{id}")
+	public ResponseEntity<LineaResponseRest> searchSupplierById(@PathVariable Long id){
+		ResponseEntity<LineaResponseRest> response = LineaService.searchById(id);
 		return response;
 	}
 	
-	@DeleteMapping("/producto/{id}")
-	public ResponseEntity<ProductoResponseRest> deleteById(@PathVariable Long id){
-		ResponseEntity<ProductoResponseRest> response =  productoService.deleteById(id);
+	@DeleteMapping("/linea/{id}")
+	public ResponseEntity<LineaResponseRest> deleteById(@PathVariable Long id){
+		ResponseEntity<LineaResponseRest> response =  LineaService.deleteById(id);
 		return response;
 	}
 	
-	@GetMapping("/producto")
-	public ResponseEntity<ProductoResponseRest> searchClient(){
-		ResponseEntity<ProductoResponseRest> response = productoService.search();
+	@GetMapping("/linea")
+	public ResponseEntity<LineaResponseRest> searchClient(){
+		ResponseEntity<LineaResponseRest> response = LineaService.search();
 		return response;
 	}
 	
-	@PutMapping("/producto/{id}")
-	public ResponseEntity<ProductoResponseRest> update(@RequestBody Producto producto, @PathVariable Long id){
-		ResponseEntity<ProductoResponseRest> response = productoService.update(producto, id);
+	@PutMapping("/linea/{id}")
+	public ResponseEntity<LineaResponseRest> update(@RequestBody Linea linea, @PathVariable Long id){
+		ResponseEntity<LineaResponseRest> response = LineaService.update(linea, id);
 		return response;
 	}
 	
-	/*@GetMapping("/producto/{document}")
+	/*@GetMapping("/linea/{document}")
 	public ResponseEntity<ClientResponseRest> searchClientByDocument(@PathVariable String document){
 		ResponseEntity<ClientResponseRest> response =  clientService.searchByDocument(document);
 		return response;

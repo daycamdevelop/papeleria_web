@@ -8,7 +8,8 @@ ul li {
 
 mat-form-field {
   width: 70%;
-  padding: 5px;
+  padding: 0px 2.5px;
+  height: 60px;
 }
 
 .mat-cell:nth-child(1),
@@ -17,7 +18,6 @@ mat-form-field {
 }
 
 mat-card{
-  padding: 10px !important;
   width: 100%;
   border: none;
   box-shadow: none;
@@ -45,13 +45,13 @@ button:disabled {
 }
 
 h2 {
-  font-size: 18px;
+  font-size: 12px;
   font-weight: 500;
   color: rgb(102,102,0);
 }
 
 h3 {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 500;
   color: rgb(0,153,255);
 }
@@ -148,8 +148,7 @@ h2{
 }
 
 .icon {
-  width: 60px;
-  padding: 5px;
+  width: 30px;
 }
 
 .center{

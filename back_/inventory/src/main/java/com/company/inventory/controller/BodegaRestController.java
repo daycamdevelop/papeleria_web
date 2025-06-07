@@ -12,46 +12,46 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/*
-import com.company.inventory.model.bodega;
-import com.company.inventory.response.bodegaResponseRest;
-import com.company.inventory.services.interfaces.IbodegaService;*/
+
+import com.company.inventory.model.Bodega;
+import com.company.inventory.response.BodegaResponseRest;
+import com.company.inventory.services.interfaces.IBodegaService;
 
 @CrossOrigin(origins = {"http://localhost:4200","http://localhost:8080", "https://daycamdevelop.github.io"})
 @RestController
 @RequestMapping("/api/v1")
 public class BodegaRestController {
-	/*
+	
 	@Autowired
-	private IbodegaService bodegaService;
+	private IBodegaService bodegaService;
 	
 	@PostMapping("/bodega")
-	public ResponseEntity<bodegaResponseRest> save(@RequestBody bodega bodega) {
-	    ResponseEntity<bodegaResponseRest> response = bodegaService.save(bodega);
+	public ResponseEntity<BodegaResponseRest> save(@RequestBody Bodega bodega) {
+	    ResponseEntity<BodegaResponseRest> response = bodegaService.save(bodega);
 	    return response;
 	}
 	
 	@GetMapping("/bodega/{id}")
-	public ResponseEntity<bodegaResponseRest> searchSupplierById(@PathVariable Long id){
-		ResponseEntity<bodegaResponseRest> response = bodegaService.searchById(id);
+	public ResponseEntity<BodegaResponseRest> searchSupplierById(@PathVariable Long id){
+		ResponseEntity<BodegaResponseRest> response = bodegaService.searchById(id);
 		return response;
 	}
 	
 	@DeleteMapping("/bodega/{id}")
-	public ResponseEntity<bodegaResponseRest> deleteById(@PathVariable Long id){
-		ResponseEntity<bodegaResponseRest> response =  bodegaService.deleteById(id);
+	public ResponseEntity<BodegaResponseRest> deleteById(@PathVariable Long id){
+		ResponseEntity<BodegaResponseRest> response =  bodegaService.deleteById(id);
 		return response;
 	}
 	
 	@GetMapping("/bodega")
-	public ResponseEntity<bodegaResponseRest> searchClient(){
-		ResponseEntity<bodegaResponseRest> response = bodegaService.search();
+	public ResponseEntity<BodegaResponseRest> searchClient(){
+		ResponseEntity<BodegaResponseRest> response = bodegaService.search();
 		return response;
 	}
 	
 	@PutMapping("/bodega/{id}")
-	public ResponseEntity<bodegaResponseRest> update(@RequestBody bodega bodega, @PathVariable Long id){
-		ResponseEntity<bodegaResponseRest> response = bodegaService.update(bodega, id);
+	public ResponseEntity<BodegaResponseRest> update(@RequestBody Bodega bodega, @PathVariable Long id){
+		ResponseEntity<BodegaResponseRest> response = bodegaService.update(bodega, id);
 		return response;
 	}
 	

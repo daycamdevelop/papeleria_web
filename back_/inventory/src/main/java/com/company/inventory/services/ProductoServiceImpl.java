@@ -101,7 +101,6 @@ public class ProductoServiceImpl implements IProductoService {
 			    Producto producto = productoSearch.get();
 			    producto.setEstado("inactivo");
 				this.update(producto, id);
-				//productoDao.deleteById(id);
 				response.setMetadata(true, "200", "Registro eliminado");
 			} else {
 				response.setMetadata(false, "404", "Producto no encontrado");
