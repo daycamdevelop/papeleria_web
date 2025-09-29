@@ -3,7 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { VendedorService } from '../../services/vendedor.service';
 import { ClienteService } from '../../services/cliente.service';
 import { ProveedorService } from '../../services/proveedor.service';
-import { ProductService } from '../../services/product.service';
+import { ProductoService } from '../../services/producto.service';
 
 @Component({
   selector: 'app-confirm',
@@ -14,7 +14,7 @@ export class ConfirmComponent {
   private vendedorService= inject(VendedorService);
   private clientService= inject(ClienteService);
   private proveedorService= inject(ProveedorService);
-  private productService= inject(ProductService);
+  private productoService= inject(ProductoService);
   private dialogRef= inject(MatDialogRef);
   public data = inject(MAT_DIALOG_DATA);
 
@@ -46,7 +46,7 @@ export class ConfirmComponent {
                 this.dialogRef.close(2);
               })
       }else if (this.data.module == "product") {
-        this.productService.deleteProduct(this.data.id).
+        this.productoService.deleteProduct(this.data.id).
               subscribe( (data:any) =>{
                 this.dialogRef.close(1);
               }, (error: any) => {

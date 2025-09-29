@@ -13,7 +13,7 @@ export class SidenavComponent {
   version:string = "";
 
   menuNav = [
-    {name: "Inicio", route: "home", icon: "home"},
+    {name: "Menu", route: "home", icon: "home"},
     {name: "Bajas", route: "facturar", icon: "cloud_download"},
     {name: "Clientes", route: "cliente", icon: "people"},
     {name: "Compras", route: "cliente", icon: "add_shopping_cart"},

@@ -13,49 +13,49 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
-import com.company.inventory.model.Bodega;
-import com.company.inventory.response.BodegaResponseRest;
-import com.company.inventory.services.interfaces.IBodegaService;
+import com.company.inventory.model.Compra;
+import com.company.inventory.response.CompraResponseRest;
+import com.company.inventory.services.interfaces.ICompraService;
 
 @CrossOrigin(origins = {"http://localhost:4200","http://localhost:8080", "https://daycamdevelop.github.io"})
 @RestController
 @RequestMapping("/api/v1")
-public class BodegaRestController {
+public class CompraRestController {
 	
 	@Autowired
-	private IBodegaService bodegaService;
+	private ICompraService compraService;
 	
-	@PostMapping("/bodega")
-	public ResponseEntity<BodegaResponseRest> save(@RequestBody Bodega bodega) {
-	    ResponseEntity<BodegaResponseRest> response = bodegaService.save(bodega);
+	@PostMapping("/compra")
+	public ResponseEntity<CompraResponseRest> save(@RequestBody Compra compra) {
+	    ResponseEntity<CompraResponseRest> response = compraService.save(compra);
 	    return response;
 	}
 	
-	@GetMapping("/bodega/{id}")
-	public ResponseEntity<BodegaResponseRest> searchSupplierById(@PathVariable Long id){
-		ResponseEntity<BodegaResponseRest> response = bodegaService.searchById(id);
+	@GetMapping("/compra/{id}")
+	public ResponseEntity<CompraResponseRest> searchSupplierById(@PathVariable Long id){
+		ResponseEntity<CompraResponseRest> response = compraService.searchById(id);
 		return response;
 	}
 	
-	@DeleteMapping("/bodega/{id}")
-	public ResponseEntity<BodegaResponseRest> deleteById(@PathVariable Long id){
-		ResponseEntity<BodegaResponseRest> response =  bodegaService.deleteById(id);
+	@DeleteMapping("/compra/{id}")
+	public ResponseEntity<CompraResponseRest> deleteById(@PathVariable Long id){
+		ResponseEntity<CompraResponseRest> response =  compraService.deleteById(id);
 		return response;
 	}
 	
-	@GetMapping("/bodega")
-	public ResponseEntity<BodegaResponseRest> searchClient(){
-		ResponseEntity<BodegaResponseRest> response = bodegaService.search();
+	@GetMapping("/compra")
+	public ResponseEntity<CompraResponseRest> searchClient(){
+		ResponseEntity<CompraResponseRest> response = compraService.search();
 		return response;
 	}
 	
-	@PutMapping("/bodega/{id}")
-	public ResponseEntity<BodegaResponseRest> update(@RequestBody Bodega bodega, @PathVariable Long id){
-		ResponseEntity<BodegaResponseRest> response = bodegaService.update(bodega, id);
+	@PutMapping("/compra/{id}")
+	public ResponseEntity<CompraResponseRest> update(@RequestBody Compra compra, @PathVariable Long id){
+		ResponseEntity<CompraResponseRest> response = compraService.update(compra, id);
 		return response;
 	}
 	
-	/*@GetMapping("/bodega/{document}")
+	/*@GetMapping("/compra/{document}")
 	public ResponseEntity<ClientResponseRest> searchClientByDocument(@PathVariable String document){
 		ResponseEntity<ClientResponseRest> response =  clientService.searchByDocument(document);
 		return response;

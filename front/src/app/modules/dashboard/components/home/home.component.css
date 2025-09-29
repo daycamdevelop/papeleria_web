@@ -2,8 +2,7 @@
 .home-container {
   display: flex;
   flex-direction: column;
-  margin-left: 10px;
-  padding: 20px;
+  padding: 15px;
   background-color: white;
 }
 
@@ -49,9 +48,9 @@
 
 /* Botones del menú */
 .menu-button {
-  width: 200px;
+  width: 150px;
   /* Ancho fijo para los íconos */
-  height: 180px;
+  height: 150px;
   /* Alto fijo para los íconos */
   display: flex;
   flex-direction: column;
@@ -69,10 +68,10 @@
 }
 
 /* Íconos de los botones */
-.menu-button img {
-  width: 100px;
+img {
+  width: 70px;
   /* Ancho fijo para los íconos */
-  height: 100px;
+  height: 70px;
   /* Alto fijo para los íconos */
   object-fit: contain;
   /* Mantiene la proporción de la imagen dentro del contenedor */
@@ -82,7 +81,7 @@
 
 /* Texto debajo de los íconos */
 span {
-  font-size: 1.2rem;
+  font-size: 18px;
   /* Aumenta el tamaño del texto */
   color: #007bff;
   font-weight: bold;
