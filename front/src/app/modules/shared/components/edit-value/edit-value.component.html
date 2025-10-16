@@ -1,0 +1,11 @@
+<div class="general">
+    <h1 mat-dialog-title> Confirmación </h1>
+    <mat-form-field appearance="outline">
+        <mat-label>NUEVO VALOR</mat-label>
+        <input matInput #input [(ngModel)]="valor">
+    </mat-form-field>
+    <div mat-dialog-actions>
+        <button mat-button (click)="onNoClick()">Cancelar</button>
+        <button mat-button (click)="delete()" cdkFocusInitial>Aceptar</button>
+    </div>
+</div>

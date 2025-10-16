@@ -28,7 +28,7 @@ public class FacturaServiceImpl implements IFacturaService {
 			List<Factura> facturasActivos = new ArrayList<>();
 			for (Factura prod : factura) {
 			    if(prod.getEstado().equals("activo")) {
-			    		facturasActivos.add(prod);
+			    	facturasActivos.add(prod);
 			    }
 			}
 			response.getFacturaResponse().setFactura(facturasActivos);

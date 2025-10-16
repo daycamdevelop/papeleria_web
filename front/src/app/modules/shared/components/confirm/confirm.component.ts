@@ -25,7 +25,7 @@ export class ConfirmComponent {
   delete(){
     if (this.data != null){     
       if (this.data.module == "category") {
-        this.vendedorService.deleteCategorie(this.data.id).
+        this.vendedorService.deleteVendedor(this.data.id).
               subscribe( (data:any) =>{
                 this.dialogRef.close(1);
               }, (error: any) => {

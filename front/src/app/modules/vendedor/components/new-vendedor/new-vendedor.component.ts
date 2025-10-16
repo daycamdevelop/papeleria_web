@@ -130,14 +130,14 @@ export class NewVendedorComponent implements OnInit {
   
     if (this.data) {
       // Actualizar category existente
-      this.vendedorService.updateCategorie(formData, this.data.id)
+      this.vendedorService.updateVendedor(formData, this.data.id)
         .subscribe(
           () => this.dialogRef.close(1),
           () => this.dialogRef.close(2)
         );
     } else {
       // Crear nuevo category
-      this.vendedorService.saveCategorie(formData)
+      this.vendedorService.saveVendedor(formData)
         .subscribe(
           () => this.dialogRef.close(1),
           () => this.dialogRef.close(2)

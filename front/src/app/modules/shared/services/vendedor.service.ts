@@ -11,53 +11,32 @@ export class VendedorService {
 
   constructor(private http: HttpClient) { }
 
-  /**
-   * get all categories
-   */
-  getCategories(){
-
+  getVendedor(){
     const endpoint = `${base_url}/vendedor`;
     return this.http.get(endpoint);
-
   }
 
-  /**
-   * save the categories
-   */
-  saveCategorie(body: any) {
+  saveVendedor(body: any) {
     const endpoint = `${base_url}/vendedor`;
     return this.http.post(endpoint, body);
   }
 
-  /**
-   * update categorie
-   */
-  updateCategorie(body: any, id: any){
+  updateVendedor(body: any, id: any){
     const endpoint = `${base_url}/vendedor/ ${id}`;
     return this.http.put(endpoint, body);
   }
 
-  /**
-   * update categorie
-   */
-  deleteCategorie(id: any){
+  deleteVendedor(id: any){
     const endpoint = `${base_url}/vendedor/ ${id}`;
     return this.http.delete(endpoint);
   }
 
-  /**
-   * update categorie
-   */
-  getCategorieById(id: any){
+  getVendedorById(id: any){
     const endpoint = `${base_url}/vendedor/ ${id}`;
     return this.http.get(endpoint);
   }
 
-
-  /**
-   * export excel categories
-   */
-  exportCategories(){
+  exportVendedors(){
     const endpoint = `${base_url}/vendedor/export/excel`;
     return this.http.get(endpoint, {
       responseType: 'blob'

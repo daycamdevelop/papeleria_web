@@ -11,14 +11,14 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="productos")
+@Table(name="facturar")
 public class Factura implements Serializable{
 
 	private static final long serialVersionUID = -4310027227752446841L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;	
+	private Long id;
 	private int numfactura;
 	private String fechafactura;
 	private int cliente;

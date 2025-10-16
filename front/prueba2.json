@@ -1,0 +1,159 @@
+{
+    "columns": [
+        {
+            "width": 72,
+            "text": "PRODUCTOS",
+            "style": "table",
+            "_margin": [
+                0,
+                0,
+                0,
+                5
+            ],
+            "_inlines": [],
+            "_minWidth": 57.412109375,
+            "_maxWidth": 57.412109375,
+            "_calcWidth": 72,
+            "positions": [
+                {
+                    "pageNumber": 1,
+                    "pageOrientation": "portrait",
+                    "pageInnerHeight": null,
+                    "pageInnerWidth": 210,
+                    "left": 10,
+                    "top": 366.09375,
+                    "verticalRatio": 0,
+                    "horizontalRatio": 0
+                }
+            ]
+        },
+        {
+            "width": 36,
+            "text": "CANT",
+            "style": "table",
+            "_margin": [
+                0,
+                0,
+                0,
+                5
+            ],
+            "_inlines": [],
+            "_minWidth": 25.9912109375,
+            "_maxWidth": 25.9912109375,
+            "_calcWidth": 36,
+            "positions": [
+                {
+                    "pageNumber": 1,
+                    "pageOrientation": "portrait",
+                    "pageInnerHeight": null,
+                    "pageInnerWidth": 210,
+                    "left": 92,
+                    "top": 366.09375,
+                    "verticalRatio": 0,
+                    "horizontalRatio": 0.3904761904761905
+                }
+            ]
+        },
+        {
+            "width": 36,
+            "text": "UNIT",
+            "style": "table",
+            "_margin": [
+                0,
+                0,
+                0,
+                5
+            ],
+            "_inlines": [],
+            "_minWidth": 22.1630859375,
+            "_maxWidth": 22.1630859375,
+            "_calcWidth": 36,
+            "positions": [
+                {
+                    "pageNumber": 1,
+                    "pageOrientation": "portrait",
+                    "pageInnerHeight": null,
+                    "pageInnerWidth": 210,
+                    "left": 138,
+                    "top": 366.09375,
+                    "verticalRatio": 0,
+                    "horizontalRatio": 0.6095238095238096
+                }
+            ]
+        },
+        {
+            "width": 36,
+            "text": "VAL",
+            "style": "table",
+            "_margin": [
+                0,
+                0,
+                0,
+                5
+            ],
+            "_inlines": [],
+            "_minWidth": 17.91015625,
+            "_maxWidth": 17.91015625,
+            "_calcWidth": 36,
+            "positions": [
+                {
+                    "pageNumber": 1,
+                    "pageOrientation": "portrait",
+                    "pageInnerHeight": null,
+                    "pageInnerWidth": 210,
+                    "left": 184,
+                    "top": 366.09375,
+                    "verticalRatio": 0,
+                    "horizontalRatio": 0.8285714285714286
+                }
+            ]
+        }
+    ],
+    "columnGap": 10,
+    "_margin": null,
+    "_gap": 10,
+    "_minWidth": "040%20%20%20%30",
+    "_maxWidth": "040%20%20%20%30",
+    "positions": [
+        {
+            "pageNumber": 1,
+            "pageOrientation": "portrait",
+            "pageInnerHeight": null,
+            "pageInnerWidth": 210,
+            "left": 10,
+            "top": 366.09375,
+            "verticalRatio": 0,
+            "horizontalRatio": 0
+        },
+        {
+            "pageNumber": 1,
+            "pageOrientation": "portrait",
+            "pageInnerHeight": null,
+            "pageInnerWidth": 210,
+            "left": 92,
+            "top": 366.09375,
+            "verticalRatio": 0,
+            "horizontalRatio": 0.3904761904761905
+        },
+        {
+            "pageNumber": 1,
+            "pageOrientation": "portrait",
+            "pageInnerHeight": null,
+            "pageInnerWidth": 210,
+            "left": 138,
+            "top": 366.09375,
+            "verticalRatio": 0,
+            "horizontalRatio": 0.6095238095238096
+        },
+        {
+            "pageNumber": 1,
+            "pageOrientation": "portrait",
+            "pageInnerHeight": null,
+            "pageInnerWidth": 210,
+            "left": 184,
+            "top": 366.09375,
+            "verticalRatio": 0,
+            "horizontalRatio": 0.8285714285714286
+        }
+    ]
+}

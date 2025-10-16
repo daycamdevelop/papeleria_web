@@ -5,12 +5,14 @@ import { RouterModule } from '@angular/router';
 import { MaterialModule } from './material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ConfirmComponent } from './components/confirm/confirm.component';
-import { LoadingComponent } from './components/loading/loading.component';
+import { EditValueComponent } from './components/edit-value/edit-value.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     SidenavComponent,
-    ConfirmComponent
+    ConfirmComponent,
+    EditValueComponent
   ],
   exports: [
     SidenavComponent
@@ -19,7 +21,8 @@ import { LoadingComponent } from './components/loading/loading.component';
     CommonModule,
     RouterModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ]
 })
 export class SharedModule { }

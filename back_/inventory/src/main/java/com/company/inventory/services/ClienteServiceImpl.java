@@ -119,10 +119,10 @@ public class ClienteServiceImpl implements IClienteService {
                 Cliente clientToUpdate = clientSearch.get();
                 clientToUpdate.setNombre(client.getNombre());
                 clientToUpdate.setNit(client.getNit());
-                clientToUpdate.setT_documento(null);
-                clientToUpdate.setTelefono(null);
-                clientToUpdate.setDireccion(null);
-                clientToUpdate.setCorreo(null);
+                clientToUpdate.setT_documento(client.getT_documento());
+                clientToUpdate.setTelefono(client.getTelefono());
+                clientToUpdate.setDireccion(client.getDireccion());
+                clientToUpdate.setCorreo(client.getCorreo());
                 clientToUpdate.setEstado(client.getEstado());
                 clientToUpdate.setValor_credito(client.getValor_credito());
                 clientToUpdate.setFecha_credito(client.getFecha_credito());

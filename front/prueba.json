@@ -1,0 +1,66 @@
+{
+    "columns": [
+        {
+            "width": 80,
+            "text": "FECHA CREDITO",
+            "style": "subheader",
+            "alignment": "left",
+            "_margin": [
+                0,
+                0,
+                0,
+                5
+            ],
+            "_inlines": [],
+            "_minWidth": 40.205078125,
+            "_maxWidth": 74.150390625,
+            "_calcWidth": 80,
+            "positions": [
+                {
+                    "pageNumber": 1,
+                    "pageOrientation": "portrait",
+                    "pageInnerHeight": null,
+                    "pageInnerWidth": 210,
+                    "left": 10,
+                    "top": 335.3125,
+                    "verticalRatio": 0,
+                    "horizontalRatio": 0
+                }
+            ]
+        },
+        {
+            "width": 120,
+            "text": "",
+            "style": "subheader",
+            "alignment": "right",
+            "_margin": [
+                0,
+                0,
+                0,
+                5
+            ],
+            "_inlines": [],
+            "_minWidth": 0,
+            "_maxWidth": 0,
+            "_calcWidth": 120,
+            "positions": []
+        }
+    ],
+    "columnGap": 10,
+    "_margin": null,
+    "_gap": 10,
+    "_minWidth": "040%60%10",
+    "_maxWidth": "040%60%10",
+    "positions": [
+        {
+            "pageNumber": 1,
+            "pageOrientation": "portrait",
+            "pageInnerHeight": null,
+            "pageInnerWidth": 210,
+            "left": 10,
+            "top": 335.3125,
+            "verticalRatio": 0,
+            "horizontalRatio": 0
+        }
+    ]
+}

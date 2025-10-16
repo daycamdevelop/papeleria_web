@@ -9,7 +9,7 @@ import { NewClienteComponent } from '../new-cliente/new-cliente.component';
 import { ConfirmComponent } from '../../shared/components/confirm/confirm.component';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
+import { ClientElement } from '../../shared/model/CLienteElement';
 
 @Component({
   selector: 'app-cliente',
@@ -127,21 +127,36 @@ export class ClienteComponent implements OnInit {
     });
   }
 
-  edit(id: number, name: string, t_documento: string, nit: string, phone: string, address: string, email: string, estado: string, valor_credito: string, fecha_credito: string, departamento: string, ciudad: string): void {
-    const dialogRef = this.dialog.open(NewClienteComponent, {
-      width: '100%',
-      height: '60%',
-      data: { id, name, t_documento, nit, phone, address, email, estado, valor_credito, fecha_credito, departamento, ciudad }
-    });
-
-    dialogRef.afterClosed().subscribe((result: any) => {
-      if (result === 1) {
-        this.openSnackBar('Cliente Actualizado', 'Exitoso');
-        this.getClient();
-      } else if (result === 2) {
-        this.openSnackBar('Se produjo un error al actualizar cliente', 'Error');
-      }
-    });
+  edit(id: number): void {
+    let cliente:ClientElement | undefined = this.listClient.find((lc)=>lc.id==id);
+    if(cliente){
+      const dialogRef = this.dialog.open(NewClienteComponent, {
+        width: '100%',
+        height: '60%',
+        data: { 
+          id, 
+          name: cliente.nombre, 
+          t_document: cliente.t_documento, 
+          document: cliente.nit,
+          phone: cliente.telefono,
+          address: cliente.direccion, 
+          email: cliente.correo, 
+          estado: cliente.estado, 
+          valor_credito: cliente.valor_credito, 
+          fecha_credito: cliente.fecha_credito, 
+          departamento: cliente.ciudad, 
+          ciudad: cliente.ciudad
+        }
+      });
+      dialogRef.afterClosed().subscribe((result: any) => {
+        if (result === 1) {
+          this.openSnackBar('Cliente Actualizado', 'Exitoso');
+          this.getClient();
+        } else if (result === 2) {
+          this.openSnackBar('Se produjo un error al actualizar cliente', 'Error');
+        }
+      });
+    }
   }
 
   delete(id: any): void {
@@ -158,27 +173,4 @@ export class ClienteComponent implements OnInit {
       }
     });
   }
-}
-
-export interface ClientElement {
-  id?: number;
-  nombre: string;
-  t_documento: string;
-  nit: string;
-  direccion: string;
-  telefono: number;
-  ciudad: string;
-  correo: string;
-  estado: string;
-  desvincular: string;
-  valor_credito: number;
-  fecha_credito: string;
-  remitente: string;
-  cedularemitente: string;
-  telefonoremitente: string;
-  tipo: string;
-  ciudaddane: string;
-  dv: string;
-  tipopersona: string;
-  tipoiva: string;
 }

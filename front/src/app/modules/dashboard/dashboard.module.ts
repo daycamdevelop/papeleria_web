@@ -8,6 +8,8 @@ import { ClienteModule } from '../cliente/cliente.module';
 import { ProductosModule } from '../productos/productos.module';
 import { ProveedorModule } from '../proveedor/proveedor.module';
 import { DashboardRoutingModule } from './dashboard-routing.module'; // Importa el módulo de rutas
+import { ComprasModule } from '../compras/compras.module';
+import { FacturasModule } from '../facturas/facturas.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { DashboardRoutingModule } from './dashboard-routing.module'; // Importa 
     SharedModule,
     VendedorModule,
     ClienteModule,
+    ComprasModule,
+    FacturasModule,
     ProveedorModule,
     ProductosModule,
     DashboardRoutingModule // Agrega el módulo de rutas

@@ -19,7 +19,7 @@
   /* Activa el modelo de flexbox */
   justify-content: center;
   /* Alinea el contenido al final a la derecha */
-  align-items: start;
+  align-items: flex-start;
   /* Centra el contenido verticalmente */
   padding: 0px 10px 40px 10px;
   /* Opcional: Espaciado interno */

@@ -23,7 +23,7 @@ export class VendedorComponent implements OnInit{
 
   ngOnInit(): void {
     this.loading = true;
-    this.getCategories();
+    this.getVendedors();
   }
 
   goToHome(): void {
@@ -36,18 +36,17 @@ export class VendedorComponent implements OnInit{
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
 
-  getCategories(): void {
-
-    this.vendedorService.getCategories()
+  getVendedors(): void {
+    this.vendedorService.getVendedor()
       .subscribe( (data:any) => {
-        this.processCategoriesResponse(data);
+        this.processVendedorsResponse(data);
         this.loading = false;
       }, (error: any) => {
         console.log("error: ", error);
       })
   }
 
-  processCategoriesResponse(resp: any){
+  processVendedorsResponse(resp: any){
 
     const dataCategory: CategoryElement[] = [];
 
@@ -76,7 +75,7 @@ export class VendedorComponent implements OnInit{
       
       if( result == 1){
         this.openSnackBar("Vendedor Agregada", "Exitosa");
-        this.getCategories();
+        this.getVendedors();
       } else if (result == 2) {
         this.openSnackBar("Se produjo un error al guardar vendedor", "Error");
       }
@@ -94,7 +93,7 @@ export class VendedorComponent implements OnInit{
       
       if( result == 1){
         this.openSnackBar("Vendedor Actualizada", "Exitosa");
-        this.getCategories();
+        this.getVendedors();
       } else if (result == 2) {
         this.openSnackBar("Se produjo un error al actualizar vendedor", "Error");
       }
@@ -110,7 +109,7 @@ export class VendedorComponent implements OnInit{
       
       if( result == 1){
         this.openSnackBar("Vendedor Eliminada", "Exitosa");
-        this.getCategories();
+        this.getVendedors();
       } else if (result == 2) {
         this.openSnackBar("Se produjo un error al eliminar vendedor", "Error");
       }
@@ -120,12 +119,12 @@ export class VendedorComponent implements OnInit{
   buscar( termino: string){
 
     if( termino.length === 0){
-      return this.getCategories();
+      return this.getVendedors();
     }
 
-    this.vendedorService.getCategorieById(termino)
+    this.vendedorService.getVendedorById(termino)
             .subscribe( (resp: any) => {
-              this.processCategoriesResponse(resp);
+              this.processVendedorsResponse(resp);
             })
   }
 

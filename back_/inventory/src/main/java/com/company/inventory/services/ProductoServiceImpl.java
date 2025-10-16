@@ -28,7 +28,9 @@ public class ProductoServiceImpl implements IProductoService {
 			List<Producto> productosActivos = new ArrayList<>();
 			for (Producto prod : producto) {
 			    if(prod.getEstado().equals("activo")) {
-			    		productosActivos.add(prod);
+			    	prod.setCodigo(prod.getCodigo().toLowerCase());
+			    	prod.setNombre(prod.getNombre().toLowerCase());
+			    	productosActivos.add(prod);
 			    }
 			}
 			response.getProductoResponse().setProducto(productosActivos);
@@ -90,7 +92,6 @@ public class ProductoServiceImpl implements IProductoService {
 		return new ResponseEntity<ProductoResponseRest>(response, HttpStatus.OK);
 	}
 
-
 	@Override
 	@Transactional
 	public ResponseEntity<ProductoResponseRest> deleteById(Long id) {
@@ -110,7 +111,6 @@ public class ProductoServiceImpl implements IProductoService {
 			e.getStackTrace();
 			return new ResponseEntity<ProductoResponseRest>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		
 		return new ResponseEntity<ProductoResponseRest>(response, HttpStatus.OK);
 	}
 

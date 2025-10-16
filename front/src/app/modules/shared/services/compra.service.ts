@@ -11,33 +11,28 @@ export class CompraService {
 
   constructor(private http: HttpClient) { }
 
-  getProduct() {
+  getCompra() {
     const endpoint = `${base_url}/compra`;
     return this.http.get(endpoint);
   }
 
-  saveProduct(body: any) {
+  saveCompra(body: any) {
     const endpoint = `${base_url}/compra`;
     return this.http.post(endpoint, body);
   }
 
-  updateProduct(body: any, id: any) {
+  updateCompra(body: any, id: any) {
     const endpoint = `${base_url}/compra/${id}`;
     return this.http.put(endpoint, body);
   }
 
-  deleteProduct(id: any) {
+  deleteCompra(id: any) {
     const endpoint = `${base_url}/compra/${id}`;
     return this.http.delete(endpoint);
   }
 
-  getProductById(id: any) {
+  getCompraById(id: any) {
     const endpoint = `${base_url}/compra/${id}`;
-    return this.http.get(endpoint);
-  }
-
-  getProductByDocument(document: string) {
-    const endpoint = `${base_url}/compra/document/${document}`;
     return this.http.get(endpoint);
   }
 

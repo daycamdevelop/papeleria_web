@@ -36,7 +36,7 @@ export class ProductosComponent {
     id: 0,
     codigo: '',
     nombre: '',
-    cantidad: '',
+    cantidad: 0,
     fecharegistro: '',
     linea: 2,
     bodega: 1,
@@ -172,7 +172,7 @@ export class ProductosComponent {
     this.listProductos.forEach((element: ProductosElement) => {
       if(this.productoSeleccionado.codigo == "*" || this.productoSeleccionado.codigo == ""){
         this.listFilterProducts.push(element);
-      } else if(element.codigo.toLocaleLowerCase().includes(this.productoSeleccionado.codigo.toLocaleLowerCase())){
+      } else if(element.codigo.includes(this.productoSeleccionado.codigo)){
         this.listFilterProducts.push(element);
       }
     });
@@ -188,7 +188,7 @@ export class ProductosComponent {
       id: 0,
       codigo: '',
       nombre: '',
-      cantidad: '',
+      cantidad: 0,
       fecharegistro: '',
       linea: 0,
       bodega: 0,

@@ -1,0 +1,236 @@
+table {
+  width: 100%;
+}
+
+ul li {
+  list-style: none;
+}
+
+.h50{
+  height: 50px;
+}
+
+.h250{
+  height: 250px;
+}
+
+.h300{
+  height: 300px;
+}
+
+.h370{
+  height: 370px;
+}
+
+mat-form-field {
+  width: 70%;
+  padding: 0px 2.5px;
+}
+
+.mat-cell:nth-child(1),
+.mat-header-cell:nth-child(1) {
+  flex: 0 0 6%;
+}
+
+mat-card{
+  width: 100%;
+  border: none;
+  box-shadow: none;
+}
+
+mat-card-content{
+  padding: 10px !important;
+  width: 100%;
+}
+
+mat-label{
+  font-size: 14px;
+  font-weight: 500;
+  color: rgb(0,153,255);
+}
+
+button {
+  color: white !important;
+  background-color: rgb(0,153,255) !important;
+}
+
+button:disabled {
+  color: white !important;
+  background-color: gray !important;
+}
+
+h2 {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgb(102,102,0);
+}
+
+h3 {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgb(0,153,255);
+  margin: 0px;
+}
+
+h4 {
+  font-size: 12px;
+  margin: 0px;
+}
+
+.flex-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.flex-column {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+h2{
+  margin: 0px !important;
+}
+
+.w10 {
+  width: 10%;
+}
+
+.w15 {
+  width: 15%;
+}
+
+.w20 {
+  width: 20%;
+}
+
+.w25 {
+  width: 25%;
+}
+
+.w30 {
+  width: 30%;
+}
+
+.w40 {
+  width: 40%;
+}
+
+.w50 {
+  width: 50%;
+}
+
+.w55 {
+  width: 55%;
+}
+
+.w60 {
+  width: 60%;
+}
+
+.w70 {
+  width: 70%;
+}
+
+.w80 {
+  width: 80%;
+}
+
+.w90 {
+  width: 90%;
+}
+
+.w100 {
+  width: 100%;
+}
+
+.border {
+  border: 1px lightgray solid;
+}
+
+.noMargin {
+  margin: 0px;
+}
+
+.noPadding {
+  padding: 0px;
+}
+
+.noBorder {
+  border: 0px;
+  box-shadow: none;
+}
+
+.p5{
+  padding: 5px;
+}
+
+.p15{
+  padding: 15px;
+}
+
+.icon {
+  width: 50px;
+}
+
+.center{
+  text-align: center;
+  display: flex;
+  align-items: center;
+}
+
+.tabla-scroll-container {
+  overflow-x: auto;
+}
+
+table, mat-paginator{
+  width: 70%;
+}
+
+.col-100{
+  width: 100px;
+  min-width: 100px;
+  max-width: 100px;
+}
+
+.col-200{
+  width: 200px;
+  min-width: 200px;
+  max-width: 200px;
+}
+
+.col-300{
+  width: 300px;
+  min-width: 300px;
+  max-width: 300px;
+}
+
+.col-400{
+  width: 400px;
+  min-width: 400px;
+  max-width: 400px;
+}
+
+.selected {
+  background: rgb(247, 235, 128) !important;
+}
+
+.selectedVenta {
+  background: rgb(233, 210, 4);
+}
+
+.m-10 {
+  margin: 10px;
+}
+
+tr:hover {
+  background-color: rgb(247, 235, 128) !important;
+  cursor: pointer; /* opcional, mantiene el puntero de clic */
+}
+
+.lower {
+  text-transform: lowercase;
+}
