@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { ConfirmComponent } from 'src/app/modules/shared/components/confirm/confirm.component';
 import { VendedorService } from 'src/app/modules/shared/services/vendedor.service';
 import { NewVendedorComponent } from '../new-vendedor/new-vendedor.component';
+import { VendedorElement } from 'src/app/modules/shared/model/VendedorElement';
 
 @Component({
   selector: 'app-vendedor',
@@ -30,8 +31,8 @@ export class VendedorComponent implements OnInit{
     this.router.navigate(['/dashboard/home']);
   }
 
-  displayedColumns: string[] = ['id', 'name', 'document', 't_document', 'phone', 'address', 'email', 'estado', 'actions'];
-  dataSource = new MatTableDataSource<CategoryElement>();
+  displayedColumns: string[] = ['id', 'nombre', 'nit', 'direccion', 'telefono', 'celular', 'correo', 'estado', 'actions'];
+  dataSource = new MatTableDataSource<VendedorElement>();
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -47,28 +48,21 @@ export class VendedorComponent implements OnInit{
   }
 
   processVendedorsResponse(resp: any){
-
-    const dataCategory: CategoryElement[] = [];
-
+    const dataCategory: VendedorElement[] = [];
     if( resp.metadata[0].code == "200") {
-
-      let listCategory = resp.vendedorResponse.vendedor;
-
-      listCategory.forEach((element: CategoryElement) => {
+      resp.vendedorResponse.vendedor.forEach((element: VendedorElement) => {
         dataCategory.push(element);
       });
 
-      this.dataSource = new MatTableDataSource<CategoryElement>(dataCategory);
-      this.dataSource.paginator = this.paginator;
-      
+      this.dataSource = new MatTableDataSource<VendedorElement>(dataCategory.sort((a,b)=>(a.id ? a.id : 0) - (b.id ? b.id : 0)));
+      this.dataSource.paginator = this.paginator; 
     }
-
   }
 
   openCategoryDialog(){
     const dialogRef = this.dialog.open(NewVendedorComponent , {
       width: '100%', // Cambia el ancho del modal
-      height: '60%', // Opcional: establece la altura
+      height: '70%', // Opcional: establece la altura
     });
 
     dialogRef.afterClosed().subscribe((result:any) => {
@@ -82,15 +76,14 @@ export class VendedorComponent implements OnInit{
     });
   }
 
-  edit(id:number, name: string, document: string, t_document: string, phone: string, address: string, email: string, estado: string, departamento: string, ciudad: string){
+  edit(id:number, nombre: string, nit: string, telefono: string, celular:string, direccion: string, correo: string, estado: string){
     const dialogRef = this.dialog.open(NewVendedorComponent , {
       width: '100%', // Cambia el ancho del modal
-      height: '60%', // Opcional: establece la altura
-      data: {id: id, name: name, document: document, t_document: t_document, phone: phone, address: address, email: email, estado: estado, departamento: departamento, ciudad: ciudad}
+      height: '70%', // Opcional: establece la altura
+      data: {id: id, nombre: nombre, nit: nit, telefono: telefono, celular: celular, direccion: direccion, correo: correo, estado: estado}
     });
 
     dialogRef.afterClosed().subscribe((result:any) => {
-      
       if( result == 1){
         this.openSnackBar("Vendedor Actualizada", "Exitosa");
         this.getVendedors();
@@ -123,22 +116,14 @@ export class VendedorComponent implements OnInit{
     }
 
     this.vendedorService.getVendedorById(termino)
-            .subscribe( (resp: any) => {
-              this.processVendedorsResponse(resp);
-            })
+    .subscribe( (resp: any) => {
+      this.processVendedorsResponse(resp);
+    })
   }
 
   openSnackBar(message: string, action: string) : MatSnackBarRef<SimpleSnackBar>{
     return this.snackBar.open(message, action, {
       duration: 2000
     })
-
   }
-
-}
-
-export interface CategoryElement {
-  description: string;
-  id: number;
-  name: string;
 }

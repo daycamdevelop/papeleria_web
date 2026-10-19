@@ -17,8 +17,8 @@ public class ClienteRestController {
     private IClienteService clientService;
 
     @PostMapping("/cliente")
-    public ResponseEntity<ClienteResponseRest> save(@RequestBody Cliente client) {
-        return clientService.save(client);
+    public ResponseEntity<ClienteResponseRest> save(@RequestBody Cliente cliente) {
+        return clientService.save(cliente);
     }
 
     @GetMapping("/cliente/{id}")
@@ -42,7 +42,7 @@ public class ClienteRestController {
     }
 
     @PutMapping("/cliente/{id}")
-    public ResponseEntity<ClienteResponseRest> update(@RequestBody Cliente client, @PathVariable Long id) {
-        return clientService.update(client, id);
+    public ResponseEntity<ClienteResponseRest> update(@RequestBody Cliente cliente, @PathVariable Long id) {
+        return clientService.update(cliente, id);
     }
 }

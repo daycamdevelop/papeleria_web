@@ -7,9 +7,10 @@ import { VendedorModule } from '../vendedor/vendedor.module';
 import { ClienteModule } from '../cliente/cliente.module';
 import { ProductosModule } from '../productos/productos.module';
 import { ProveedorModule } from '../proveedor/proveedor.module';
-import { DashboardRoutingModule } from './dashboard-routing.module'; // Importa el módulo de rutas
+import { DashboardRoutingModule } from './dashboard-routing.module';
 import { ComprasModule } from '../compras/compras.module';
 import { FacturasModule } from '../facturas/facturas.module';
+import { FacturaElectronicaModule } from '../factura-electronica/factura-electronica.module';
 
 @NgModule({
   declarations: [
@@ -23,9 +24,10 @@ import { FacturasModule } from '../facturas/facturas.module';
     ClienteModule,
     ComprasModule,
     FacturasModule,
+    FacturaElectronicaModule,
     ProveedorModule,
     ProductosModule,
-    DashboardRoutingModule // Agrega el módulo de rutas
+    DashboardRoutingModule
   ]
 })
 export class DashboardModule {}

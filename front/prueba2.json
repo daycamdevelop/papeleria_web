@@ -1,159 +1,70 @@
 {
-    "columns": [
+    "number": "990091950",
+    "prefix": "SETP",
+    "document_type_code": "01",
+    "operation_type_code": "10",
+    "resolution_number": 18760000001,
+    "date": "2026-10-05",
+    "time": "09:36:40",
+    "currency_type_code": "COP",
+    "customer": {
+        "identification_number": "1",
+        "name": "consumidor final",
+        "phone": "3123456789",
+        "address": "Calle 1 # 1 - 10",
+        "email": "abb@gmail.com",
+        "merchant_registration": "No tiene",
+        "identification_type_code": "13",
+        "language_code": "es",
+        "organization_type_code": "0",
+        "country_code": "CO",
+        "municipality_code": "11001",
+        "regime_type_code": "0",
+        "tax_code": "01",
+        "liability_type_code": "O-47"
+    },
+    "payment_forms": [
         {
-            "width": 72,
-            "text": "PRODUCTOS",
-            "style": "table",
-            "_margin": [
-                0,
-                0,
-                0,
-                5
-            ],
-            "_inlines": [],
-            "_minWidth": 57.412109375,
-            "_maxWidth": 57.412109375,
-            "_calcWidth": 72,
-            "positions": [
-                {
-                    "pageNumber": 1,
-                    "pageOrientation": "portrait",
-                    "pageInnerHeight": null,
-                    "pageInnerWidth": 210,
-                    "left": 10,
-                    "top": 366.09375,
-                    "verticalRatio": 0,
-                    "horizontalRatio": 0
-                }
-            ]
-        },
-        {
-            "width": 36,
-            "text": "CANT",
-            "style": "table",
-            "_margin": [
-                0,
-                0,
-                0,
-                5
-            ],
-            "_inlines": [],
-            "_minWidth": 25.9912109375,
-            "_maxWidth": 25.9912109375,
-            "_calcWidth": 36,
-            "positions": [
-                {
-                    "pageNumber": 1,
-                    "pageOrientation": "portrait",
-                    "pageInnerHeight": null,
-                    "pageInnerWidth": 210,
-                    "left": 92,
-                    "top": 366.09375,
-                    "verticalRatio": 0,
-                    "horizontalRatio": 0.3904761904761905
-                }
-            ]
-        },
-        {
-            "width": 36,
-            "text": "UNIT",
-            "style": "table",
-            "_margin": [
-                0,
-                0,
-                0,
-                5
-            ],
-            "_inlines": [],
-            "_minWidth": 22.1630859375,
-            "_maxWidth": 22.1630859375,
-            "_calcWidth": 36,
-            "positions": [
-                {
-                    "pageNumber": 1,
-                    "pageOrientation": "portrait",
-                    "pageInnerHeight": null,
-                    "pageInnerWidth": 210,
-                    "left": 138,
-                    "top": 366.09375,
-                    "verticalRatio": 0,
-                    "horizontalRatio": 0.6095238095238096
-                }
-            ]
-        },
-        {
-            "width": 36,
-            "text": "VAL",
-            "style": "table",
-            "_margin": [
-                0,
-                0,
-                0,
-                5
-            ],
-            "_inlines": [],
-            "_minWidth": 17.91015625,
-            "_maxWidth": 17.91015625,
-            "_calcWidth": 36,
-            "positions": [
-                {
-                    "pageNumber": 1,
-                    "pageOrientation": "portrait",
-                    "pageInnerHeight": null,
-                    "pageInnerWidth": 210,
-                    "left": 184,
-                    "top": 366.09375,
-                    "verticalRatio": 0,
-                    "horizontalRatio": 0.8285714285714286
-                }
-            ]
+            "payment_form_code": "1",
+            "payment_method_code": "10"
         }
     ],
-    "columnGap": 10,
-    "_margin": null,
-    "_gap": 10,
-    "_minWidth": "040%20%20%20%30",
-    "_maxWidth": "040%20%20%20%30",
-    "positions": [
+    "legal_monetary_totals": {
+        "line_extension_amount": 37815.13,
+        "tax_exclusive_amount": 37815.13,
+        "tax_inclusive_amount": 45000,
+        "allowance_total_amount": 0,
+        "charge_total_amount": 0,
+        "payable_amount": 45000
+    },
+    "tax_totals": [
         {
-            "pageNumber": 1,
-            "pageOrientation": "portrait",
-            "pageInnerHeight": null,
-            "pageInnerWidth": 210,
-            "left": 10,
-            "top": 366.09375,
-            "verticalRatio": 0,
-            "horizontalRatio": 0
-        },
+            "tax_code": "01",
+            "percent": 19,
+            "tax_amount": 7184.87,
+            "taxable_amount": 37815.13
+        }
+    ],
+    "send": true,
+    "invoice_lines": [
         {
-            "pageNumber": 1,
-            "pageOrientation": "portrait",
-            "pageInnerHeight": null,
-            "pageInnerWidth": 210,
-            "left": 92,
-            "top": 366.09375,
-            "verticalRatio": 0,
-            "horizontalRatio": 0.3904761904761905
-        },
-        {
-            "pageNumber": 1,
-            "pageOrientation": "portrait",
-            "pageInnerHeight": null,
-            "pageInnerWidth": 210,
-            "left": 138,
-            "top": 366.09375,
-            "verticalRatio": 0,
-            "horizontalRatio": 0.6095238095238096
-        },
-        {
-            "pageNumber": 1,
-            "pageOrientation": "portrait",
-            "pageInnerHeight": null,
-            "pageInnerWidth": 210,
-            "left": 184,
-            "top": 366.09375,
-            "verticalRatio": 0,
-            "horizontalRatio": 0.8285714285714286
+            "base_quantity": 1,
+            "code": "1286",
+            "free_of_charge_indicator": false,
+            "tax_totals": [
+                {
+                    "tax_code": "01",
+                    "percent": 19,
+                    "tax_amount": 7184.87,
+                    "taxable_amount": 37815.13
+                }
+            ],
+            "unit_measure_code": "WSD",
+            "line_extension_amount": 37815.13,
+            "description": "10259",
+            "price_amount": 37815.13,
+            "invoiced_quantity": 1,
+            "item_identification_type_code": "999"
         }
     ]
 }

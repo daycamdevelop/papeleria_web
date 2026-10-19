@@ -1,0 +1,39 @@
+<div class="form-row">
+
+      <mat-form-field appearance="fill">
+        <mat-label>Celular</mat-label>
+        <input 
+          matInput 
+          type="tel" 
+          placeholder="Ingrese el celular" 
+          formControlName="celular" 
+          required 
+          (keypress)="validateNumberInput($event)" />
+        <mat-error *ngIf="supplierForm.get('celular')?.hasError('pattern')">
+          El celular debe ser numérico.
+        </mat-error>
+        <mat-error *ngIf="supplierForm.get('celular')?.hasError('required')">
+          El celular es obligatorio.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Correo</mat-label>
+        <input 
+          matInput 
+          type="email" 
+          placeholder="Ingrese el correo electrónico" 
+          formControlName="email" 
+          required />
+        
+        <!-- Mensaje de error cuando el campo está vacío -->
+        <mat-error *ngIf="supplierForm.get('email')?.hasError('required')">
+          El correo es obligatorio.
+        </mat-error>
+      
+        <!-- Mensaje de error cuando el correo no es válido -->
+        <mat-error *ngIf="supplierForm.get('email')?.hasError('email') && supplierForm.get('email')?.touched">
+          El formato del correo electrónico es incorrecto.
+        </mat-error>
+      </mat-form-field>           
+    </div>

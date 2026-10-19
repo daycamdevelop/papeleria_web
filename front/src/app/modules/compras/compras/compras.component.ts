@@ -216,11 +216,15 @@ export class ComprasComponent {
 
   editarValor(element: ProductosTablaCompraElement, atributo: keyof ProductosTablaCompraElement): void {
     let dataElement:any = element[atributo];
+    console.log(element)
     console.log("Valor "+dataElement)
     const dialogRef = this.dialog.open(EditValueComponent, {
       width: '350px',
       height: '250px',
-      data: dataElement
+      data: {
+        valor: dataElement,
+        tipo: atributo == 'cantidad' ? 1 : 2
+      }
     });
 
     dialogRef.afterClosed().subscribe((result: any) => {
@@ -332,5 +336,10 @@ export class ComprasComponent {
   ajustarValor(numero:number){
     let valor = numero.toFixed(2); // "123.46"
     return parseFloat(valor)
+  }
+
+  navigateTo(route: string): void {
+    // Aseguramos que las rutas comiencen con 'dashboard'
+    this.router.navigate([`/dashboard/compras/${route}`]);
   }
 }

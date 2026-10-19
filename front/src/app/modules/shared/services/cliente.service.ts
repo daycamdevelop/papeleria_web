@@ -14,7 +14,7 @@ export class ClienteService {
   /**
    * Obtiene todos los clientes
    */
-  getClient() {
+  getCliente() {
     const endpoint = `${base_url}/cliente`;
     return this.http.get(endpoint);
   }
@@ -22,7 +22,7 @@ export class ClienteService {
   /**
    * Guarda un cliente
    */
-  saveClient(body: any) {
+  saveCliente(body: any) {
     const endpoint = `${base_url}/cliente`;
     return this.http.post(endpoint, body);
   }
@@ -30,7 +30,7 @@ export class ClienteService {
   /**
    * Actualiza un cliente
    */
-  updateClient(body: any, id: any) {
+  updateCliente(body: any, id: any) {
     const endpoint = `${base_url}/cliente/${id}`; // Eliminado el espacio extra
     return this.http.put(endpoint, body);
   }
@@ -38,7 +38,7 @@ export class ClienteService {
   /**
    * Elimina un cliente
    */
-  deleteClient(id: any) {
+  deleteCliente(id: any) {
     const endpoint = `${base_url}/cliente/${id}`; // Eliminado el espacio extra
     return this.http.delete(endpoint);
   }
@@ -46,7 +46,7 @@ export class ClienteService {
   /**
    * Obtiene un cliente por ID
    */
-  getClientById(id: any) {
+  getClienteById(id: any) {
     const endpoint = `${base_url}/cliente/${id}`; // Eliminado el espacio extra
     return this.http.get(endpoint);
   }
@@ -54,7 +54,7 @@ export class ClienteService {
   /**
    * Busca un cliente por documento
    */
-  getClientByDocument(document: string) {
+  getClienteByDocument(document: string) {
     const endpoint = `${base_url}/cliente/document/${document}`;
     return this.http.get(endpoint);
   }
@@ -62,7 +62,7 @@ export class ClienteService {
   /**
    * Exporta los datos de clientes a Excel
    */
-  exportClient() {
+  exportCliente() {
     const endpoint = `${base_url}/cliente/export/excel`;
     return this.http.get(endpoint, {
       responseType: 'blob'

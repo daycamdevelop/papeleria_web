@@ -6,11 +6,6 @@ ul li {
   list-style: none;
 }
 
-.scale{
-  transform: scale(0.7);
-  transform-origin: left top;
-}
-
 .h50{
   height: 50px;
 }
@@ -70,6 +65,10 @@ h3 {
   font-size: 12px;
   font-weight: 500;
   color: rgb(0,153,255);
+}
+
+.image{
+  width: 150px;
 }
 
 .flex-row {
@@ -132,6 +131,10 @@ h2{
 
 .w90 {
   width: 90%;
+}
+
+.w95 {
+  width: 95%;
 }
 
 .w100 {

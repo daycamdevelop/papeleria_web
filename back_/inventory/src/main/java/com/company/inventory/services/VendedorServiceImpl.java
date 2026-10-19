@@ -99,6 +99,7 @@ public class VendedorServiceImpl implements IVendedorService {
 				//Se procede a actualizar el registro
 				vendedorSearch.get().setNombre(vendedor.getNombre());
 				vendedorSearch.get().setNit(vendedor.getNit());
+				vendedorSearch.get().setTelefono(vendedor.getTelefono());
 				vendedorSearch.get().setCelular(vendedor.getCelular());
 				vendedorSearch.get().setDireccion(vendedor.getDireccion());
 				vendedorSearch.get().setCorreo(vendedor.getCorreo());
@@ -143,7 +144,4 @@ public class VendedorServiceImpl implements IVendedorService {
 		
 		return new ResponseEntity<VendedorResponseRest>(response, HttpStatus.OK);
 	}
-	
-	
-
 }

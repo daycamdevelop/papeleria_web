@@ -36,6 +36,11 @@ export class FacturaService {
     return this.http.get(endpoint);
   }
 
+  getFacturaPDF(numfactura: any) {
+    const endpoint = `${base_url}/facturaPDF?numerofactura=`+numfactura;
+    return this.http.get(endpoint);
+  }
+
   exportProduct() {
     const endpoint = `${base_url}/factura/export/excel`;
     return this.http.get(endpoint, {

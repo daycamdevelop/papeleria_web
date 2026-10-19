@@ -2,9 +2,9 @@ import { Component, Inject, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ClienteService } from 'src/app/modules/shared/services/cliente.service';
-import { ClientElement } from '../../shared/model/CLienteElement';
+import { ClientElement } from '../../shared/model/ClienteElement';
 import { formatoFecha } from '../../shared/util/util';
-import { departamentos, tiposIdentificacion } from '../../shared/util/options';
+import { departamentos, mapdepartamentos, mapTiposIdentificacion, tiposIdentificacion } from '../../shared/util/options';
 
 @Component({
   selector: 'app-new-cliente',
@@ -20,6 +20,7 @@ export class NewClienteComponent implements OnInit {
   public data = inject(MAT_DIALOG_DATA);
   estadoFormulario: string = "";
   ciudadesFiltradas: string[] = [];
+  showDv:boolean = false;
 
   // Lista de tipos de documento
   tiposIdentificacion: string[] = tiposIdentificacion;
@@ -34,7 +35,8 @@ export class NewClienteComponent implements OnInit {
     this.clientForm = this.fb.group({
       name: [this.data?.name || '', Validators.required],
       document: [this.data?.document || '', Validators.required],
-      t_document: [this.data?.t_document || '', Validators.required],
+      t_document: [mapTiposIdentificacion(this.data?.t_document) || '', Validators.required],
+      dv: [this.data?.dv || '99', Validators.required],
       phone: [
         this.data?.phone || '', // Trae el valor de la base de datos
         [
@@ -50,16 +52,24 @@ export class NewClienteComponent implements OnInit {
           Validators.email // Valida el formato de correo electrónico
         ]
       ],
-      departamento: [this.data?.departamento || '', Validators.required],
-      ciudad: [this.data?.ciudad || '', Validators.required],       
+      departamento: [mapdepartamentos(this.data?.departamento) || '', Validators.required],
+      ciudad: [this.data?.ciudad || '', Validators.required],
       valor_credito: [this.data?.valor_credito || null],
       fecha_credito: [this.data?.fecha_credito || null],
-      estado: [this.data?.estado || false],
+      estado: [this.data?.estado || true],
     });
+
+    // Observa los cambios del tipo de documento
+    this.clientForm.get('t_document')?.valueChanges.subscribe((value) => {
+      this.toggleDvValidator(value);
+    });
+
+    // Aplica una validación inicial
+    this.toggleDvValidator(this.data?.t_document);
 
     // Inicializa las ciudades filtradas si es una edición
     if (this.data?.departamento) {
-      const selected = this.departamentos.find(d => d.nombre === this.data.departamento);
+      const selected = this.departamentos.find(d => d.nombre === mapdepartamentos(this.data.departamento));
       this.ciudadesFiltradas = selected ? selected.ciudades : [];
     }
 
@@ -67,7 +77,20 @@ export class NewClienteComponent implements OnInit {
     if (this.data?.ciudad && !this.ciudadesFiltradas.includes(this.data.ciudad)) {
       this.clientForm.get('ciudad')?.setValue(''); // Reinicia la ciudad si no es válida
     }
-  }  
+  }
+
+  private toggleDvValidator(tipoDoc: string) {
+    const dvControl = this.clientForm.get('dv');
+    if (tipoDoc && tipoDoc.includes('NIT')) {
+      this.showDv = true;
+      dvControl?.setValidators([Validators.required]);
+    } else {
+      this.showDv = false;
+      dvControl?.clearValidators();
+      dvControl?.setValue('99'); // limpia el campo si no aplica
+    }
+    dvControl?.updateValueAndValidity();
+  }
 
   validateNumberInput(event: KeyboardEvent): void {
     const allowedKeys = /^[0-9]$/;
@@ -111,23 +134,23 @@ export class NewClienteComponent implements OnInit {
   
     if (this.data) {
       // Actualizar proveedor existente
-      this.clientService.updateClient(formData, this.data.id)
+      this.clientService.updateCliente(formData, this.data.id)
         .subscribe(
           () => this.dialogRef.close(1),
           () => this.dialogRef.close(2)
         );
     } else {
       // Crear nuevo proveedor
-      this.clientService.saveClient(formData)
-        .subscribe(
-          () => this.dialogRef.close(1),
-          () => this.dialogRef.close(2)
-        );
+      this.clientService.saveCliente(formData)
+      .subscribe(
+        () => this.dialogRef.close(1),
+        () => this.dialogRef.close(2)
+      );
     }
   }
 
-   // Método para manejar el cambio de departamento
-   onDepartmentChange(departamento: string): void {
+  // Método para manejar el cambio de departamento
+  onDepartmentChange(departamento: string): void {
     const selected = this.departamentos.find(d => d.nombre === departamento);
     this.ciudadesFiltradas = selected ? selected.ciudades : [];
     this.clientForm.get('ciudad')?.setValue(''); // Reinicia el campo de ciudad

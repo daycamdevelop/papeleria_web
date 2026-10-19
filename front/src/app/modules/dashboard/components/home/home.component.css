@@ -50,7 +50,7 @@
 .menu-button {
   width: 150px;
   /* Ancho fijo para los íconos */
-  height: 150px;
+  height: 120px;
   /* Alto fijo para los íconos */
   display: flex;
   flex-direction: column;
@@ -67,16 +67,10 @@
   transition: transform 0.2s, background-color 0.2s;
 }
 
-/* Íconos de los botones */
 img {
-  width: 70px;
-  /* Ancho fijo para los íconos */
-  height: 70px;
-  /* Alto fijo para los íconos */
+  width: 50px;
+  height: 50px;
   object-fit: contain;
-  /* Mantiene la proporción de la imagen dentro del contenedor */
-  margin-bottom: 10px;
-  /* Espaciado entre el ícono y el texto */
 }
 
 /* Texto debajo de los íconos */
@@ -110,14 +104,9 @@ span {
   color: #7e7f80;
 }
 
-/* Clase para el contenedor opcional */
 .text-container {
   width: 100%;
-  /* Asegura que el contenedor ocupe todo el ancho disponible */
-  padding: 20px 0px;
-  /* Espaciado interno opcional */
   background-color: white;
-  /* Color de fondo opcional */
 }
 
 /* Clase específica para alinear el texto a la derecha */
@@ -135,4 +124,75 @@ span {
 .botonAyuda{
   background-color: white;
   border: 0px;
+}
+
+.flex-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.w5 {
+  width: 5%;
+}
+
+.w10 {
+  width: 10%;
+}
+
+.w15 {
+  width: 15%;
+}
+
+.w20 {
+  width: 20%;
+}
+
+.w25 {
+  width: 25%;
+}
+
+.w30 {
+  width: 30%;
+}
+
+.w40 {
+  width: 40%;
+}
+
+.w50 {
+  width: 50%;
+}
+
+.w55 {
+  width: 55%;
+}
+
+.w60 {
+  width: 60%;
+}
+
+.w70 {
+  width: 70%;
+}
+
+.w80 {
+  width: 80%;
+}
+
+.w90 {
+  width: 90%;
+}
+
+.w95 {
+  width: 95%;
+}
+
+.w100 {
+  width: 100%;
+}
+
+span {
+  font-size: 12px;
 }

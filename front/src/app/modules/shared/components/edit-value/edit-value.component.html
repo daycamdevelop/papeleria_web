@@ -2,10 +2,13 @@
     <h1 mat-dialog-title> Confirmación </h1>
     <mat-form-field appearance="outline">
         <mat-label>NUEVO VALOR</mat-label>
-        <input matInput #input [(ngModel)]="valor">
+        <input matInput #MyInput [(ngModel)]="valor" 
+        (focus)="MyInput.select()"
+        (keydown.enter)="onClick()"
+        (input)="formatearPrecio()">
     </mat-form-field>
     <div mat-dialog-actions>
+        <button mat-button (click)="onClick()" cdkFocusInitial>Aceptar</button>
         <button mat-button (click)="onNoClick()">Cancelar</button>
-        <button mat-button (click)="delete()" cdkFocusInitial>Aceptar</button>
     </div>
 </div>

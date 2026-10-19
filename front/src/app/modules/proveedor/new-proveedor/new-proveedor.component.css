@@ -67,6 +67,11 @@ button {
   font-weight: bold;
 }
 
+.flex{
+  display: flex;
+  justify-content: space-between;
+}
+
 /* Responsivo para pantallas pequeñas */
 @media (max-width: 768px) {
   .client-container {

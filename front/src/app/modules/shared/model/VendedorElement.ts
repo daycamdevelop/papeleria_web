@@ -1,5 +1,5 @@
 export interface VendedorElement {
-	id: number;
+	id?: number;
 	nombre: string;
 	nit: string;
 	direccion: string;

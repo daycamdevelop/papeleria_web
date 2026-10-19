@@ -1,0 +1,92 @@
+<div class="flex">
+  <h2 mat-dialog-title>{{ estadoFormulario }} Usuario</h2>
+  
+  <button mat-icon-button color="warn" (click)="onCancel()">
+    <mat-icon aria-label="Close">close</mat-icon>
+  </button>
+</div>
+
+<mat-dialog-content>
+  <form [formGroup]="clientForm" class="client-container">
+    <!-- Fila 1: Nombre -->
+    <div class="form-row">
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Nombre</mat-label>
+        <input matInput placeholder="Ingrese el nombre" formControlName="nombres" required />
+        <mat-error *ngIf="clientForm.get('nombres')?.hasError('required')">
+          El nombre es obligatorio.
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Fila 1: Apellidos -->
+    <div class="form-row">
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Apellidos</mat-label>
+        <input matInput placeholder="Ingrese el nombre" formControlName="apellidos" required />
+        <mat-error *ngIf="clientForm.get('apellidos')?.hasError('required')">
+          El apellido es obligatorio.
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Fila 2: Tipo de Documento y Documento -->
+    <div class="form-row">
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Tipo de Documento</mat-label>
+        <mat-select formControlName="tipo_documento" required>
+          <mat-option *ngFor="let tipo of tiposIdentificacion" [value]="tipo">
+            {{ tipo }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="clientForm.get('tipo_documento')?.hasError('required')">
+          Seleccione un tipo de documento.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Documento</mat-label>
+        <input matInput placeholder="Ingrese el documento" formControlName="numero_documento" required />
+        <mat-error *ngIf="clientForm.get('numero_documento')?.hasError('required')">
+          El documento es obligatorio.
+        </mat-error>
+      </mat-form-field>
+
+      
+    </div>
+
+    <!-- Fila 3: Teléfono y Dirección -->
+    <div class="form-row">
+      <!-- Campo Teléfono -->
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Usuario</mat-label>
+        <input matInput placeholder="Ingrese el nombre de usuario" formControlName="usuarionombre" required />
+        <mat-error *ngIf="clientForm.get('usuarionombre')?.hasError('required')">
+          El usuario es obligatorio.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Contraseña</mat-label>
+        <input matInput placeholder="Ingrese el nombre de usuario" formControlName="pass" type="password" required />
+        <mat-error *ngIf="clientForm.get('pass')?.hasError('required')">
+          El usuario es obligatorio.
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Fila 7: Estado -->
+    <div class="form-row">
+      <mat-checkbox formControlName="estado">Activo</mat-checkbox>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-raised-button color="primary" (click)="onSave()" [disabled]="clientForm.invalid">
+    <mat-icon>save</mat-icon> {{ estadoFormulario }}
+  </button>
+  <button mat-raised-button color="warn" (click)="onCancel()">
+    <mat-icon>cancel</mat-icon> Cancelar
+  </button>
+</mat-dialog-actions>

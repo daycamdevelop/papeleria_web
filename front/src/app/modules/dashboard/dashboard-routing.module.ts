@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './pages/dashboard.component';
 import { ModalAyudaDialog } from './pages/modalAyuda/modal-ayuda.component';
-import { LoadingComponent } from '../shared/components/loading/loading.component';
 
 const routes: Routes = [
   {

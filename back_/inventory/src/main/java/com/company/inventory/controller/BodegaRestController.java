@@ -32,7 +32,7 @@ public class BodegaRestController {
 	}
 	
 	@GetMapping("/bodega/{id}")
-	public ResponseEntity<BodegaResponseRest> searchSupplierById(@PathVariable Long id){
+	public ResponseEntity<BodegaResponseRest> searchBodegaById(@PathVariable Long id){
 		ResponseEntity<BodegaResponseRest> response = bodegaService.searchById(id);
 		return response;
 	}
@@ -44,7 +44,7 @@ public class BodegaRestController {
 	}
 	
 	@GetMapping("/bodega")
-	public ResponseEntity<BodegaResponseRest> searchClient(){
+	public ResponseEntity<BodegaResponseRest> searchBodega(){
 		ResponseEntity<BodegaResponseRest> response = bodegaService.search();
 		return response;
 	}
@@ -56,8 +56,8 @@ public class BodegaRestController {
 	}
 	
 	/*@GetMapping("/bodega/{document}")
-	public ResponseEntity<ClientResponseRest> searchClientByDocument(@PathVariable String document){
-		ResponseEntity<ClientResponseRest> response =  clientService.searchByDocument(document);
+	public ResponseEntity<BodegaResponseRest> searchBodegaByDocument(@PathVariable String document){
+		ResponseEntity<BodegaResponseRest> response =  bodegaService.searchByDocument(document);
 		return response;
 	}
 */

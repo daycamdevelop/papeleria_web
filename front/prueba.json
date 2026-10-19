@@ -1,66 +1,70 @@
 {
-    "columns": [
+    "number": "990091950",
+    "prefix": "SETP",
+    "document_type_code": "01",
+    "operation_type_code": "10",
+    "resolution_number": 18760000001,
+    "date": "2026-10-05",
+    "time": "09:36:40",
+    "currency_type_code": "COP",
+    "customer": {
+        "identification_number": "52115458",
+        "name": "Ocasional",
+        "phone": "",
+        "address": "El cliente no tiene Direccion",
+        "email": "El cliente no tiene Email",
+        "merchant_registration": "No tiene",
+        "identification_type_code": "",
+        "language_code": "es",
+        "organization_type_code": "",
+        "country_code": "CO",
+        "municipality_code": "11001",
+        "regime_type_code": "",
+        "tax_code": "01",
+        "liability_type_code": "O-47"
+    },
+    "payment_forms": [
         {
-            "width": 80,
-            "text": "FECHA CREDITO",
-            "style": "subheader",
-            "alignment": "left",
-            "_margin": [
-                0,
-                0,
-                0,
-                5
-            ],
-            "_inlines": [],
-            "_minWidth": 40.205078125,
-            "_maxWidth": 74.150390625,
-            "_calcWidth": 80,
-            "positions": [
-                {
-                    "pageNumber": 1,
-                    "pageOrientation": "portrait",
-                    "pageInnerHeight": null,
-                    "pageInnerWidth": 210,
-                    "left": 10,
-                    "top": 335.3125,
-                    "verticalRatio": 0,
-                    "horizontalRatio": 0
-                }
-            ]
-        },
-        {
-            "width": 120,
-            "text": "",
-            "style": "subheader",
-            "alignment": "right",
-            "_margin": [
-                0,
-                0,
-                0,
-                5
-            ],
-            "_inlines": [],
-            "_minWidth": 0,
-            "_maxWidth": 0,
-            "_calcWidth": 120,
-            "positions": []
+            "payment_form_code": "1",
+            "payment_method_code": "10"
         }
     ],
-    "columnGap": 10,
-    "_margin": null,
-    "_gap": 10,
-    "_minWidth": "040%60%10",
-    "_maxWidth": "040%60%10",
-    "positions": [
+    "legal_monetary_totals": {
+        "line_extension_amount": 84.03,
+        "tax_exclusive_amount": 84.03,
+        "tax_inclusive_amount": 100,
+        "allowance_total_amount": 0,
+        "charge_total_amount": 0,
+        "payable_amount": 100
+    },
+    "tax_totals": [
         {
-            "pageNumber": 1,
-            "pageOrientation": "portrait",
-            "pageInnerHeight": null,
-            "pageInnerWidth": 210,
-            "left": 10,
-            "top": 335.3125,
-            "verticalRatio": 0,
-            "horizontalRatio": 0
+            "tax_code": "01",
+            "percent": 19,
+            "tax_amount": 15.97,
+            "taxable_amount": 84.03
+        }
+    ],
+    "send": true,
+    "invoice_lines": [
+        {
+            "base_quantity": 1,
+            "code": "1285",
+            "free_of_charge_indicator": false,
+            "tax_totals": [
+                {
+                    "tax_code": "01",
+                    "percent": 19,
+                    "tax_amount": 15.97,
+                    "taxable_amount": 84.03
+                }
+            ],
+            "unit_measure_code": "WSD",
+            "line_extension_amount": 84.03,
+            "description": "10260",
+            "price_amount": 84.03,
+            "invoiced_quantity": 1,
+            "item_identification_type_code": "999"
         }
     ]
 }

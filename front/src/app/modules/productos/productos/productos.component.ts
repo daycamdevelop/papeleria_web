@@ -12,6 +12,9 @@ import { LineaService } from '../../shared/services/linea.service';
 import { ProductosElement } from '../../shared/model/ProductosElement';
 import { BodegaElement } from '../../shared/model/BodegaElement';
 import { LineaElement } from '../../shared/model/LineaElement';
+import { BodegaComponent } from '../bodega/bodega.component';
+import { LineaComponent } from '../linea/linea.component';
+import { formatoFecha } from '../../shared/util/util';
 
 @Component({
   selector: 'app-productos',
@@ -48,7 +51,7 @@ export class ProductosComponent {
     costoventa2: 0,
     costoventa3: 0,
     iva: 0,
-    observacion: '',
+    observacion: '-',
     registro: '',
     registro2: ''
   };
@@ -84,7 +87,12 @@ export class ProductosComponent {
     })
   }
 
+  pendiente(){
+    this.openSnackBar("Pendiente de desarrollo", "Pendiente");
+  }
+
   insert() {
+    this.productoSeleccionado.fecharegistro = formatoFecha(new Date());
     this.productoService.saveProduct(this.productoSeleccionado).subscribe((result: any) => {
       this.openSnackBar("Producto Agregado", "Exitoso");
       this.getProductos();
@@ -100,7 +108,7 @@ export class ProductosComponent {
 
   delete() {
     const dialogRef = this.dialog.open(ConfirmComponent, {
-      data: { id: this.productoSeleccionado.id, module: "product" }
+      data: { id: this.productoSeleccionado.id, module: "producto" }
     });
     dialogRef.afterClosed().subscribe((result: any) => {
       if (result == 1) {
@@ -114,52 +122,52 @@ export class ProductosComponent {
 
   getProductos(): void {
     this.productoService.getProduct()
-      .subscribe((data: any) => {
-        const dataProducts: ProductosElement[] = [];
-        if (data.metadata[0].code == "200") {
-          this.listProductos = data.productoResponse.producto;
-          this.listProductos.forEach((element: ProductosElement) => {
-            dataProducts.push(element);
-          });
-          this.llenarTabla(dataProducts);
-          this.searchProduct();
-        }
-        this.loading = false;
-      }, (error: any) => {
-        console.log("error: ", error);
-      })
+    .subscribe((data: any) => {
+      const dataProducts: ProductosElement[] = [];
+      if (data.metadata[0].code == "200") {
+        this.listProductos = data.productoResponse.producto;
+        this.listProductos.forEach((element: ProductosElement) => {
+          dataProducts.push(element);
+        });
+        this.llenarTabla(dataProducts);
+        this.searchProduct();
+      }
+      this.loading = false;
+    }, (error: any) => {
+      console.log("error: ", error);
+    })
   }
 
   getBodegas(): void {
     this.bodegaService.getBodega()
-      .subscribe((data: any) => {
-        const dataProducts: BodegaElement[] = [];
-        if (data.metadata[0].code == "200") {
-          this.listBodegas = data.bodegaResponse.bodega;
-          this.listBodegas.forEach((element: BodegaElement) => {
-            this.bodegas.push({value: element.id, viewValue: element.nombre});
-          });
-        }
-        this.loading = false;
-      }, (error: any) => {
-        console.log("error: ", error);
-      })
+    .subscribe((data: any) => {
+      const dataProducts: BodegaElement[] = [];
+      if (data.metadata[0].code == "200") {
+        this.listBodegas = data.bodegaResponse.bodega;
+        this.listBodegas.forEach((element: BodegaElement) => {
+          this.bodegas.push({value: element.id, viewValue: element.nombre});
+        });
+      }
+      this.loading = false;
+    }, (error: any) => {
+      console.log("error: ", error);
+    })
   }
 
   getLineas(): void {
     this.lineaService.getLinea()
-      .subscribe((data: any) => {
-        const dataProducts: LineaElement[] = [];
-        if (data.metadata[0].code == "200") {
-          this.listLineas = data.lineaResponse.linea;
-          this.listLineas.forEach((element: LineaElement) => {
-            this.lineas.push({value: element.id, viewValue: element.nombre});
-          });
-        }
-        this.loading = false;
-      }, (error: any) => {
-        console.log("error: ", error);
-      })
+    .subscribe((data: any) => {
+      const dataProducts: LineaElement[] = [];
+      if (data.metadata[0].code == "200") {
+        this.listLineas = data.lineaResponse.linea;
+        this.listLineas.forEach((element: LineaElement) => {
+          this.lineas.push({value: element.id, viewValue: element.nombre});
+        });
+      }
+      this.loading = false;
+    }, (error: any) => {
+      console.log("error: ", error);
+    })
   }
 
   llenarTabla(dataClient:ProductosElement[]){
@@ -200,10 +208,28 @@ export class ProductosComponent {
       costoventa2: 0,
       costoventa3: 0,
       iva: 0,
-      observacion: '',
+      observacion: '-',
       registro: '',
       registro2: ''
     };
     this.searchProduct();
+  }
+  
+  bodega(): void {
+    const dialogRef = this.dialog.open(BodegaComponent, {
+      width: '100%',
+      height: '70%',
+      data: ''
+    });
+    dialogRef.afterClosed().subscribe((result: any) => { console.log(result)});
+  }
+  
+  linea(): void {
+    const dialogRef = this.dialog.open(LineaComponent, {
+      width: '100%',
+      height: '70%',
+      data: ''
+    });
+    dialogRef.afterClosed().subscribe((result: any) => { console.log(result)});
   }
 }

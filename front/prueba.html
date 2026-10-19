@@ -1,0 +1,28 @@
+<div class="form-row">
+      <!-- Campo Teléfono -->
+      <mat-form-field appearance="fill">
+        <mat-label>Teléfono</mat-label>
+        <input 
+          matInput 
+          type="tel" 
+          placeholder="Ingrese el teléfono" 
+          formControlName="telefono" 
+          required 
+          (keypress)="validateNumberInput($event)" />
+        <mat-error *ngIf="supplierForm.get('telefono')?.hasError('pattern')">
+          El teléfono debe ser numérico.
+        </mat-error>
+        <mat-error *ngIf="supplierForm.get('telefono')?.hasError('required')">
+          El teléfono es obligatorio.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Campo Dirección -->
+      <mat-form-field appearance="fill" >
+        <mat-label>Dirección</mat-label>
+        <textarea matInput placeholder="Ingrese la dirección" formControlName="address" required></textarea>
+        <mat-error *ngIf="supplierForm.get('name')?.hasError('required')">
+          La dirección es obligatorio.
+        </mat-error>
+      </mat-form-field>
+    </div>

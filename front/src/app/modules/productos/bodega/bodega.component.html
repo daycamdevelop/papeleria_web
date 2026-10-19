@@ -1,0 +1,160 @@
+<div class="flex">
+  <h2 mat-dialog-title>INSERTAR BODEGA</h2>
+
+  <h2 mat-dialog-title>TABLA BODEGA</h2>
+
+  <button mat-icon-button color="warn" (click)="onCancel()">
+    <mat-icon aria-label="Close">close</mat-icon>
+  </button>
+</div>
+
+<div class="flex-row p5">
+  <div class="w50 p5 h350 m10">
+    <form [formGroup]="clientForm" class="client-container flex-column">
+      
+      <div class="form-row w100">
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>NOMBRE</mat-label>
+          <input matInput placeholder="Ingrese el nombre" formControlName="name" [(ngModel)]="bodegaSeleccionada.nombre" required />
+          <mat-error *ngIf="clientForm.get('name')?.hasError('required')">
+            El nombre es obligatorio.
+          </mat-error>
+        </mat-form-field>
+        <div class="flex-row">
+          <div>
+              <img src="assets/images/Buscar.png" alt="verificador" class="icon" (click)="getBodegas()" />
+              <h3></h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row w100">
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>NOMBRE COMPLETO DE CONTACTO</mat-label>
+          <input matInput placeholder="Ingrese el nombre completo" formControlName="complete_name" [(ngModel)]="bodegaSeleccionada.nombre" required />
+          <mat-error *ngIf="clientForm.get('complete_name')?.hasError('required')">
+            El nombre completo es obligatorio.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      
+      <div class="form-row w100">
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>DIRECCION</mat-label>
+          <input matInput placeholder="Ingrese la direccion" formControlName="address" [(ngModel)]="bodegaSeleccionada.direccion" required />
+          <mat-error *ngIf="clientForm.get('address')?.hasError('required')">
+            La direccion es obligatoria.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row w100">
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>TELEFONO</mat-label>
+          <input matInput placeholder="Ingrese el telefono" formControlName="phone" [(ngModel)]="bodegaSeleccionada.telefono" required />
+          <mat-error *ngIf="clientForm.get('phone')?.hasError('required')">
+            El telefono es obligatorio.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row w100">
+
+        <mat-form-field class="w40">
+          <mat-label>ESTADO</mat-label>
+          <mat-select appearance="outline" formControlName="estado" [(ngModel)]="bodegaSeleccionada.estado">
+              <mat-option value="activo"> Activo </mat-option>
+              <mat-option value="inactivo"> Inactivo </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div class="flex-row w60">
+          <div class="flex-row">
+            <div>
+                <img src="assets/images/Limpiar.png" alt="verificador" class="icon" (click)="limpiarCampos()" />
+                <h3>LIMPIAR</h3>
+            </div>
+          </div>
+        
+          <div class="flex-row">
+            <div>
+                <img src="assets/images/Flecha.png" alt="verificador" class="icon" (click)="pendiente()" />
+                <h3>TRASPASOS</h3>
+            </div>
+          </div>
+
+          <div class="flex-row">
+            <div>
+                <img src="assets/images/Insertar.png" alt="verificador" class="icon" (click)="insertarBodega('Nuevo')" />
+                <h3>INSERTAR</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+  <div class="w50 p5 h350 m10">
+    <mat-card-content class="tabla-scroll-container border h350 tabla-scroll-container">
+      <table mat-table [dataSource]="dataSource" class="mat-cell">
+          <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef class="col-100"> ID </th>
+              <td mat-cell *matCellDef="let element" class="col-100" (click)="seleccionTabla(element)">
+                  {{ element.id}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="nombre">
+              <th mat-header-cell *matHeaderCellDef class="col-200"> NOMBRE </th>
+              <td mat-cell *matCellDef="let element" class="col-200" (click)="seleccionTabla(element)">
+                  {{ element.nombre}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="contacto">
+              <th mat-header-cell *matHeaderCellDef class="col-400"> CONTACTO </th>
+              <td mat-cell *matCellDef="let element" class="col-400" (click)="seleccionTabla(element)">
+                  {{ element.contacto}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="telefono">
+              <th mat-header-cell *matHeaderCellDef class="col-100"> TELEFONO </th>
+              <td mat-cell *matCellDef="let element" class="col-100" (click)="seleccionTabla(element)">
+                  {{ element.telefono}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="direccion">
+              <th mat-header-cell *matHeaderCellDef class="col-100"> DIRECCION </th>
+              <td mat-cell *matCellDef="let element" class="col-100" (click)="seleccionTabla(element)">
+                  {{ element.direccion}}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </mat-card-content>
+    <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
+
+    <div class="form-row">
+
+      <div class="w60">
+        <div>
+            <img src="assets/images/Precio.png" alt="verificador" class="icon" (click)="pendiente()" />
+            <h3>CAMBIAR CODIGO</h3>
+        </div>
+      </div>
+
+      <div class="w20">
+        <div>
+            <img src="assets/images/Modificar.png" alt="verificador" class="icon" (click)="insertarBodega('Antiguo')" />
+            <h3>MODIFICAR</h3>
+        </div>
+      </div>
+
+      <div class="w20">
+        <div>
+            <img src="assets/images/Borrar.png" alt="verificador" class="icon" (click)="eliminarBodega()" />
+            <h3>ELIMINAR</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

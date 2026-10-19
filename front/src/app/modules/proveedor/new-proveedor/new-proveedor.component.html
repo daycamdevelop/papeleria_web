@@ -1,37 +1,30 @@
-<h2 mat-dialog-title>{{ estadoFormulario }} Proveedor</h2>
+<div class="flex">
+  <h2 mat-dialog-title>{{ estadoFormulario }} Proveedor</h2>
+  
+  <button mat-icon-button color="warn" (click)="onCancel()">
+    <mat-icon aria-label="Close">close</mat-icon>
+  </button>
+</div>
 
 <mat-dialog-content>
   <form [formGroup]="supplierForm" class="supplier-container">
     <div class="form-row">
       <mat-form-field appearance="fill" class="form-field">
         <mat-label>Nombre</mat-label>
-        <input matInput placeholder="Ingrese el nombre" formControlName="name" required />
-        <mat-error *ngIf="supplierForm.get('name')?.hasError('required')">
+        <input matInput placeholder="Ingrese el nombre" formControlName="nombre" required />
+        <mat-error *ngIf="supplierForm.get('nombre')?.hasError('required')">
           El nombre es obligatorio.
         </mat-error>
       </mat-form-field>
     </div>
 
     <div class="form-row">
-      <!-- Campo Tipo de Documento -->
+      <!-- Campo nit -->
       <mat-form-field appearance="fill">
-        <mat-label>Tipo de Documento</mat-label>
-        <mat-select formControlName="t_document" required>
-          <mat-option *ngFor="let tipo of tiposIdentificacion" [value]="tipo">
-            {{ tipo }}
-          </mat-option>
-        </mat-select>
-        <mat-error *ngIf="supplierForm.get('name')?.hasError('required')">
-          Seleccione un tipo de documento.
-        </mat-error>
-      </mat-form-field>
-
-      <!-- Campo Documento -->
-      <mat-form-field appearance="fill">
-        <mat-label>Documento</mat-label>
-        <input matInput placeholder="Ingrese el documento" formControlName="document" required />
-        <mat-error *ngIf="supplierForm.get('name')?.hasError('required')">
-          El documento es obligatorio.
+        <mat-label>NIT</mat-label>
+        <input matInput placeholder="Ingrese el nit" formControlName="nit" required />
+        <mat-error *ngIf="supplierForm.get('nit')?.hasError('required')">
+          El nit es obligatorio.
         </mat-error>
       </mat-form-field>
     </div>
@@ -44,13 +37,13 @@
           matInput 
           type="tel" 
           placeholder="Ingrese el teléfono" 
-          formControlName="phone" 
+          formControlName="telefono" 
           required 
           (keypress)="validateNumberInput($event)" />
-        <mat-error *ngIf="supplierForm.get('phone')?.hasError('pattern')">
+        <mat-error *ngIf="supplierForm.get('telefono')?.hasError('pattern')">
           El teléfono debe ser numérico.
         </mat-error>
-        <mat-error *ngIf="supplierForm.get('phone')?.hasError('required')">
+        <mat-error *ngIf="supplierForm.get('telefono')?.hasError('required')">
           El teléfono es obligatorio.
         </mat-error>
       </mat-form-field>
@@ -58,8 +51,8 @@
       <!-- Campo Dirección -->
       <mat-form-field appearance="fill" >
         <mat-label>Dirección</mat-label>
-        <textarea matInput placeholder="Ingrese la dirección" formControlName="address" required></textarea>
-        <mat-error *ngIf="supplierForm.get('name')?.hasError('required')">
+        <textarea matInput placeholder="Ingrese la dirección" formControlName="direccion" required></textarea>
+        <mat-error *ngIf="supplierForm.get('direccion')?.hasError('required')">
           La dirección es obligatorio.
         </mat-error>
       </mat-form-field>
@@ -67,47 +60,43 @@
 
     <!-- Fila 4: Correo -->
     <div class="form-row">
-      <mat-form-field appearance="fill" class="form-field">
+
+      <mat-form-field appearance="fill">
+        <mat-label>Celular</mat-label>
+        <input 
+          matInput 
+          type="tel" 
+          placeholder="Ingrese el celular" 
+          formControlName="celular" 
+          required 
+          (keypress)="validateNumberInput($event)" />
+        <mat-error *ngIf="supplierForm.get('celular')?.hasError('pattern')">
+          El celular debe ser numérico.
+        </mat-error>
+        <mat-error *ngIf="supplierForm.get('celular')?.hasError('required')">
+          El celular es obligatorio.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
         <mat-label>Correo</mat-label>
         <input 
           matInput 
-          type="email" 
+          type="correo" 
           placeholder="Ingrese el correo electrónico" 
-          formControlName="email" 
+          formControlName="correo" 
           required />
         
         <!-- Mensaje de error cuando el campo está vacío -->
-        <mat-error *ngIf="supplierForm.get('email')?.hasError('required')">
+        <mat-error *ngIf="supplierForm.get('correo')?.hasError('required')">
           El correo es obligatorio.
         </mat-error>
       
         <!-- Mensaje de error cuando el correo no es válido -->
-        <mat-error *ngIf="supplierForm.get('email')?.hasError('email') && supplierForm.get('email')?.touched">
+        <mat-error *ngIf="supplierForm.get('correo')?.hasError('correo') && supplierForm.get('correo')?.touched">
           El formato del correo electrónico es incorrecto.
         </mat-error>
       </mat-form-field>           
-    </div>
-
-    <div class="form-row">
-      <!-- Campo Departamento -->
-      <mat-form-field appearance="fill">
-        <mat-label>Departamento</mat-label>
-        <mat-select formControlName="departamento" (selectionChange)="onDepartmentChange($event.value)" required>
-          <mat-option *ngFor="let departamento of departamentos" [value]="departamento.nombre">
-            {{ departamento.nombre }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <!-- Campo Ciudad -->
-      <mat-form-field appearance="fill">
-        <mat-label>Ciudad</mat-label>
-        <mat-select formControlName="ciudad" required>
-          <mat-option *ngFor="let ciudad of ciudadesFiltradas" [value]="ciudad">
-            {{ ciudad }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>   
     </div>
 
     <!-- Campo Estado (Check) -->

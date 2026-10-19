@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { ProveedorService } from '../../shared/services/proveedor.service';
 import { NewProveedorComponent } from '../new-proveedor/new-proveedor.component';
 import { ConfirmComponent } from '../../shared/components/confirm/confirm.component';
+import { ProveedorElement } from '../../shared/model/ProveedorElement';
 
 
 @Component({
@@ -32,7 +33,7 @@ export class ProveedorComponent implements OnInit{
     this.router.navigate(['/dashboard/home']);
   }
 
-  displayedColumns: string[] = ['id', 'name', 'document', 't_document', 'phone', 'address', 'email', 'estado', 'actions'];
+  displayedColumns: string[] = ['id', 'name', 'document', 'telefono', 'celular', 'direccion', 'correo', 'estado', 'actions'];
   dataSource = new MatTableDataSource<ProveedorElement>();
 
   @ViewChild(MatPaginator)
@@ -49,28 +50,23 @@ export class ProveedorComponent implements OnInit{
   }
 
   processProveedorResponse(resp: any){
-
     const listProveedor: ProveedorElement[] = [];
-
     if( resp.metadata[0].code == "200") {
-      let listProveedor = resp.proveedorResponse.proveedor;
-      listProveedor.forEach((element: ProveedorElement) => {
+      resp.proveedorResponse.proveedor.forEach((element: ProveedorElement) => {
         listProveedor.push(element);
       });
-      this.dataSource = new MatTableDataSource<ProveedorElement>(listProveedor);
+      this.dataSource = new MatTableDataSource<ProveedorElement>(listProveedor.sort((a,b)=>(a.id ? a.id : 0) - (b.id ? b.id : 0)));
       this.dataSource.paginator = this.paginator;      
     }
-
   }
 
   openProveedorDialog(){
     const dialogRef = this.dialog.open(NewProveedorComponent , {
       width: '100%', // Cambia el ancho del modal
-      height: '60%', // Opcional: establece la altura
+      height: '70%', // Opcional: establece la altura
     });
 
     dialogRef.afterClosed().subscribe((result:any) => {
-      
       if( result == 1){
         this.openSnackBar("Proveedor Agregado", "Exitoso");
         this.getProveedor();
@@ -86,11 +82,11 @@ export class ProveedorComponent implements OnInit{
     })
   }
 
-  edit(id:number, name: string, document: string, t_document: string, phone: string, address: string, email: string, estado: string, departamento: string, ciudad: string){
+  edit(id:number, nombre: string, nit: string, telefono: string, celular:string, direccion: string, correo: string, estado: string){
     const dialogRef = this.dialog.open(NewProveedorComponent , {
       width: '100%', // Cambia el ancho del modal
-      height: '60%', // Opcional: establece la altura
-      data: {id: id, name: name, document: document, t_document: t_document, phone: phone, address: address, email: email, estado: estado, departamento: departamento, ciudad: ciudad}
+      height: '70%', // Opcional: establece la altura
+      data: {id: id, name: nombre, nit: nit, telefono: telefono, celular: celular, direccion: direccion, correo: correo, estado: estado}
     });
 
     dialogRef.afterClosed().subscribe((result:any) => {
@@ -119,19 +115,4 @@ export class ProveedorComponent implements OnInit{
       }
     });
   }
-
-
-}
-
-export interface ProveedorElement {
-  id: number;
-  name: string;
-  document: string;
-  t_document: string;
-  phone: number;
-  address: string;
-  email: string;
-  estado: string;
-  departamento: string;
-  ciudad: string;
 }
