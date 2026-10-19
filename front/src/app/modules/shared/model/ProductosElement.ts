@@ -34,6 +34,18 @@ export interface ProductosTablaCompraElement {
     [key: string]: any;
 }
 
+export interface MasivoCompraElement {
+    CODIGO: string;
+    NOMBRE: string;
+    CANTIDAD: string;
+    COSTO_COMPRA: string;
+    COSTO_VENTA: string;
+    COSTO_VENTA_2: string;
+    COSTO_VENTA_3: string;
+    SERIAL: string;
+    [key: string]: any;
+}
+
 export interface ProductosTablaFacturaElement {
     codigo: string;
     producto: string;
@@ -46,5 +58,6 @@ export interface ProductosTablaFacturaElement {
     costocompra: number;
     serial: string;
     selected: boolean;
+    porcentaje: number;
     [key: string]: any;
 }

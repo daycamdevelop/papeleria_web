@@ -1,0 +1,32 @@
+package com.company.inventory.model;
+
+import java.io.Serializable;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.Data;
+
+@Data
+@Entity
+@Table(name="usuario")
+public class Usuario implements Serializable{
+
+	private static final long serialVersionUID = -4310027227752446841L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private String nombres;
+	private String apellidos;
+	private Integer tipo_documento;
+	private String numero_documento;
+	private String usuarionombre;
+	private String pass;
+	private String estado;
+	private Integer rol;
+	private String desvincular;
+	
+}

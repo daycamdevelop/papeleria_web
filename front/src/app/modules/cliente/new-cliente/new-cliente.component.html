@@ -1,4 +1,10 @@
-<h2 mat-dialog-title>{{ estadoFormulario }} Cliente</h2>
+<div class="flex">
+  <h2 mat-dialog-title>{{ estadoFormulario }} Cliente</h2>
+  
+  <button mat-icon-button color="warn" (click)="onCancel()">
+    <mat-icon aria-label="Close">close</mat-icon>
+  </button>
+</div>
 
 <mat-dialog-content>
   <form [formGroup]="clientForm" class="client-container">
@@ -22,7 +28,7 @@
             {{ tipo }}
           </mat-option>
         </mat-select>
-        <mat-error *ngIf="clientForm.get('name')?.hasError('required')">
+        <mat-error *ngIf="clientForm.get('t_document')?.hasError('required')">
           Seleccione un tipo de documento.
         </mat-error>
       </mat-form-field>
@@ -30,8 +36,16 @@
       <mat-form-field appearance="fill" class="form-field">
         <mat-label>Documento</mat-label>
         <input matInput placeholder="Ingrese el documento" formControlName="document" required />
-        <mat-error *ngIf="clientForm.get('name')?.hasError('required')">
+        <mat-error *ngIf="clientForm.get('document')?.hasError('required')">
           El documento es obligatorio.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="form-field" *ngIf="showDv">
+        <mat-label>Dv</mat-label>
+        <input matInput placeholder="Ingrese el digito de verificacion" formControlName="dv" required />
+        <mat-error *ngIf="clientForm.get('dv')?.hasError('required')">
+          El digito de verificacion es obligatorio.
         </mat-error>
       </mat-form-field>
     </div>
@@ -60,7 +74,7 @@
       <mat-form-field appearance="fill" >
         <mat-label>Dirección</mat-label>
         <textarea matInput placeholder="Ingrese la dirección" formControlName="address" required></textarea>
-        <mat-error *ngIf="clientForm.get('name')?.hasError('required')">
+        <mat-error *ngIf="clientForm.get('address')?.hasError('required')">
           La dirección es obligatorio.
         </mat-error>
       </mat-form-field>

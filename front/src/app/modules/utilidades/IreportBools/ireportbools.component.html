@@ -1,0 +1,199 @@
+<div class="p5">
+    <mat-card-header class="noPadding">
+        <h2>FORMATO</h2>
+    </mat-card-header>
+    <mat-card class="flex-column w100 border">
+        <mat-card class="flex-row">
+
+            <mat-card class="flex-column w40 noBorder">
+                <mat-checkbox [(ngModel)]="parametrosCampos['autoimpresion_30']">
+                    Habilitar Autoimpresion (30)
+                </mat-checkbox>
+
+                <mat-checkbox [(ngModel)]="parametrosCampos['agrupartirilla_19']">
+                    Habilitar Facturas agrupadas por lineas (19)
+                </mat-checkbox>
+
+                <mat-checkbox [(ngModel)]="parametrosCampos['facturarbodega_20']">
+                    Habilitar Facturas por Bodegas (20)
+                </mat-checkbox>
+
+                <mat-checkbox [(ngModel)]="parametrosCampos['pagocredito_17']">
+                    Habilitar Facturas Pago Credito (17)
+                </mat-checkbox>
+
+                <mat-checkbox [(ngModel)]="parametrosCampos['resolucionpos_25']">
+                    Habilitar Resolucion POS (25)
+                </mat-checkbox>
+
+                <mat-checkbox [(ngModel)]="parametrosCampos['pasamanos_33']">
+                    Habilitar pasamanos (33)
+                </mat-checkbox>
+
+                <mat-checkbox [(ngModel)]="parametrosCampos['verificacioncantidad_10']">
+                    Habilitar Facturar con cantidad en negativo (10)
+                </mat-checkbox>
+
+                <mat-checkbox [(ngModel)]="parametrosCampos['verificacionprecio_11']">
+                    Habilitar cambiar Precio de venta (11)
+                </mat-checkbox>
+
+                <mat-checkbox [(ngModel)]="parametrosCampos['guardarfactura_40']">
+                    Habilitar guardar Factura (40)
+                </mat-checkbox>
+
+                <mat-checkbox [(ngModel)]="parametrosCampos['recargarproductos_35']">
+                    Habilitar recargar Productor Facturar (35)
+                </mat-checkbox>
+
+                <mat-checkbox [(ngModel)]="parametrosCampos['limpiar_12']">
+                    Habilitar contraseña limpiar Factura (12)
+                </mat-checkbox>
+
+                <mat-checkbox [(ngModel)]="parametrosCampos['hpasscierre_23']">
+                    Habilitar contraseña Cierre (23)
+                </mat-checkbox>
+
+                <mat-checkbox [(ngModel)]="parametrosCampos['borrar_13']">
+                    Habilitar contraseña borrar Factura (13)
+                </mat-checkbox>
+
+                <mat-checkbox [(ngModel)]="parametrosCampos['hpassanular_51']">
+                    Habilitar contraseña anular (51)
+                </mat-checkbox>
+
+                <mat-checkbox [(ngModel)]="parametrosCampos['cache_48']">
+                    Habilitar cache (48)
+                </mat-checkbox>
+            </mat-card>
+
+            <mat-card class="flex-column w40 noBorder">
+                <mat-checkbox [(ngModel)]="parametrosCampos['cierrerango_37']">
+                    Habilitar cierre en Rango (37)
+                </mat-checkbox>
+
+                <mat-checkbox [(ngModel)]="parametrosCampos['verificadorprecios_38']">
+                    Habilitar Verificador de precios (38)
+                </mat-checkbox>
+
+                <mat-checkbox [(ngModel)]="parametrosCampos['coscomfact_34']">
+                    Habilitar Facturar ver costo compra (34)
+                </mat-checkbox>
+
+                <mat-checkbox [(ngModel)]="parametrosCampos['impvacio_41']">
+                    Habilitar imprimir linea vacia Facturar (41)
+                </mat-checkbox>
+
+                <mat-checkbox [(ngModel)]="parametrosCampos['remisiones_22']">
+                    Habilitar remisiones (22)
+                </mat-checkbox>
+
+                <mat-checkbox [(ngModel)]="parametrosCampos['caja_46']">
+                    Habilitar abrir caja (46)
+                </mat-checkbox>
+
+                <mat-checkbox [(ngModel)]="parametrosCampos['codbar_18']">
+                    Habilitar codigo de barras en tirilla de Facturar (18)
+                </mat-checkbox>
+
+                <mat-checkbox [(ngModel)]="parametrosCampos['medfac_45']">
+                    Habilitar Facturar Nequi Daviplata (45)
+                </mat-checkbox>
+
+                <mat-checkbox [(ngModel)]="parametrosCampos['VerificacionMasCant_16']">
+                    Habilitar cantidad masivo (16)
+                </mat-checkbox>
+
+                <mat-checkbox [(ngModel)]="parametrosCampos['VerificacionMasPrecVen_15']">
+                    Habilitar precio compra masivo (15)
+                </mat-checkbox>
+
+                <mat-checkbox [(ngModel)]="parametrosCampos['cotizacion_42']">
+                    Habilitar cotizacion (42)
+                </mat-checkbox>
+
+                <mat-checkbox [(ngModel)]="parametrosCampos['descuento_47']">
+                    Habilitar descuento (47)
+                </mat-checkbox>
+
+                <mat-checkbox [(ngModel)]="parametrosCampos['facturacionelectronica_50']">
+                    Habilitar Facturacion Electronica (50)
+                </mat-checkbox>
+
+                <mat-checkbox [(ngModel)]="parametrosCampos['factproduccion_101']">
+                    Habilitar produccion Facturacion Electronica (101)
+                </mat-checkbox>
+
+                <mat-checkbox [(ngModel)]="parametrosCampos['imprimirCelular_53']">
+                    Habilitar imprimir Factura desde Celular (53)
+                </mat-checkbox>
+            </mat-card>
+
+            <mat-card class="flex-column w20 noBorder">
+                <mat-card-header class="noPadding">
+                    <h2>CODIGO BARRAS</h2>
+                </mat-card-header>                
+                <mat-card-content class="border w80">
+                    <mat-radio-group aria-label="Select an option" class="flex-column" [(ngModel)]="parametrosCampos['codigobarras_201']">
+                        <mat-radio-button value="Grande">50x50mm</mat-radio-button>
+                        <mat-radio-button value="Mediano">50x25mm</mat-radio-button>
+                        <mat-radio-button value="Mediano2">32x25mm</mat-radio-button>
+                        <mat-radio-button value="Bajo">32x15mm</mat-radio-button>
+                    </mat-radio-group>
+                </mat-card-content>
+
+                <mat-card-header class="noPadding">
+                    <h2>TIPO DE IVA (31)</h2>
+                </mat-card-header>
+                <mat-card-content class="border w80">
+                    <mat-radio-group aria-label="Select an option" class="flex-column" [(ngModel)]="parametrosCampos['tipoiva_31']">
+                        <mat-radio-button value="IvaI">IVA INCLUIDO</mat-radio-button>
+                        <mat-radio-button value="IvaA">IVA AGREGADO</mat-radio-button>
+                        <mat-radio-button value="SIva">SIN IVA</mat-radio-button>
+                    </mat-radio-group>
+                </mat-card-content>
+
+                <mat-card-header class="noPadding">
+                    <h2>OPCION COSTO VENTA (39)</h2>
+                </mat-card-header>
+                <mat-card-content class="border w80">
+                    <mat-radio-group aria-label="Select an option" class="flex-column" [(ngModel)]="parametrosCampos['opcioncostoventa_39']">
+                        <mat-radio-button [value]="true">OPCION BOTONES</mat-radio-button>
+                        <mat-radio-button [value]="false">OPCION TEXTO</mat-radio-button>
+                    </mat-radio-group>
+                </mat-card-content>
+
+                <mat-card-header class="noPadding">
+                    <h2>TAMAÑO PANTALLA (52)</h2>
+                </mat-card-header>
+                <mat-card-content class="border w80">
+                    <mat-radio-group aria-label="Select an option" class="flex-column" [(ngModel)]="parametrosCampos['tmanopantalla_52']">
+                        <mat-radio-button value="Op1">1024x768</mat-radio-button>
+                        <mat-radio-button value="Op2">1256x710</mat-radio-button>
+                        <mat-radio-button value="Full">Pantalla Completa</mat-radio-button>
+                    </mat-radio-group>
+                </mat-card-content>
+
+                <mat-card-header class="noPadding">
+                    <h2>TAMAÑO TIRILLA (32)</h2>
+                </mat-card-header>
+                <mat-card-content class="border w80">
+                    <mat-radio-group aria-label="Select an option" class="flex-column" [(ngModel)]="parametrosCampos['tamanotirilla_32']">
+                        <mat-radio-button value="58">POS-58</mat-radio-button>
+                        <mat-radio-button value="80">POS-80</mat-radio-button>
+                        <mat-radio-button value="Carta">Media Carta</mat-radio-button>
+                    </mat-radio-group>
+                </mat-card-content>
+            </mat-card>
+
+        </mat-card>
+
+        <mat-card class="flex-column w100 noBorder">
+            <div class="w30">
+                <img src="assets/images/Restaurar.png" alt="verificador" class="icon" (click)="actualizarParametros()"/>
+                <h3>ACTUALIZAR</h3>
+            </div>
+        </mat-card>
+    </mat-card>
+</div>
+<app-loading *ngIf="loading"></app-loading>

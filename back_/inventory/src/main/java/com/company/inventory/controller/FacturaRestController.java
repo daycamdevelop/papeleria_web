@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import com.company.inventory.model.Factura;
 import com.company.inventory.response.FacturaResponseRest;
 import com.company.inventory.services.interfaces.IFacturaService;
@@ -62,4 +61,3 @@ public class FacturaRestController {
 	}
 */
 }
-

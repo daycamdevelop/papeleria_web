@@ -9,7 +9,7 @@ import { NewClienteComponent } from '../new-cliente/new-cliente.component';
 import { ConfirmComponent } from '../../shared/components/confirm/confirm.component';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { ClientElement } from '../../shared/model/CLienteElement';
+import { ClientElement } from '../../shared/model/ClienteElement';
 
 @Component({
   selector: 'app-cliente',
@@ -51,7 +51,7 @@ export class ClienteComponent implements OnInit {
   }
 
   getClient(): void {
-    this.clienteService.getClient().subscribe(
+    this.clienteService.getCliente().subscribe(
       (data: any) => {
         this.loading = false;
         this.processClientResponse(data);
@@ -74,7 +74,7 @@ export class ClienteComponent implements OnInit {
   }
 
   llenarTabla(dataClient:ClientElement[]){
-    this.dataSource = new MatTableDataSource<ClientElement>(dataClient);
+    this.dataSource = new MatTableDataSource<ClientElement>(dataClient.sort((a,b)=>(a.id ? a.id : 0) - (b.id ? b.id : 0)));
     this.dataSource.paginator = this.paginator;
   }
 
@@ -88,7 +88,7 @@ export class ClienteComponent implements OnInit {
   }
 
   searchByDocument(document: string): void {
-    this.clienteService.getClientByDocument(document).subscribe(
+    this.clienteService.getClienteByDocument(document).subscribe(
       (data: any) => {
         if (data.metadata[0].code === '00') {
           const client = data.clientResponse.client; // Asegúrate de que esto sea un arreglo
@@ -108,7 +108,7 @@ export class ClienteComponent implements OnInit {
   openClientDialog(): void {
     const dialogRef = this.dialog.open(NewClienteComponent, {
       width: '100%',
-      height: '60%'
+      height: '70%'
     });
 
     dialogRef.afterClosed().subscribe((result: any) => {
@@ -132,20 +132,21 @@ export class ClienteComponent implements OnInit {
     if(cliente){
       const dialogRef = this.dialog.open(NewClienteComponent, {
         width: '100%',
-        height: '60%',
+        height: '70%',
         data: { 
           id, 
           name: cliente.nombre, 
           t_document: cliente.t_documento, 
           document: cliente.nit,
+          dv: cliente.dv,
           phone: cliente.telefono,
           address: cliente.direccion, 
           email: cliente.correo, 
           estado: cliente.estado, 
           valor_credito: cliente.valor_credito, 
           fecha_credito: cliente.fecha_credito, 
-          departamento: cliente.ciudad, 
-          ciudad: cliente.ciudad
+          departamento: cliente.ciudaddane,
+          ciudad: cliente.ciudaddane
         }
       });
       dialogRef.afterClosed().subscribe((result: any) => {

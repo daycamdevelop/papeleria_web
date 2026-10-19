@@ -5,10 +5,12 @@ import { MaterialModule } from '../shared/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ComprasRoutingModule } from '../compras/compras-routing.module';
 import { LoadingComponent } from '../shared/components/loading/loading.component';
+import { MasivoComponent } from './masivo/masivo.component';
 
 @NgModule({
   declarations: [
-    ComprasComponent
+    ComprasComponent,
+    MasivoComponent
   ],
   imports: [
     CommonModule,

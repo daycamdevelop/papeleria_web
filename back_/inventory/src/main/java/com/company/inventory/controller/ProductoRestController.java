@@ -54,12 +54,5 @@ public class ProductoRestController {
 		ResponseEntity<ProductoResponseRest> response = productoService.update(producto, id);
 		return response;
 	}
-	
-	/*@GetMapping("/producto/{document}")
-	public ResponseEntity<ClientResponseRest> searchClientByDocument(@PathVariable String document){
-		ResponseEntity<ClientResponseRest> response =  clientService.searchByDocument(document);
-		return response;
-	}
-*/
 }
 

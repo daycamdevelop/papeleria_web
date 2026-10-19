@@ -18,15 +18,15 @@ import com.company.inventory.services.interfaces.IClienteService;
 public class ClienteServiceImpl implements IClienteService {
 
     @Autowired
-    private IClienteDao clientDao;
+    private IClienteDao clienteDao;
 
     @Override
     @Transactional(readOnly = true)
     public ResponseEntity<ClienteResponseRest> search() {
         ClienteResponseRest response = new ClienteResponseRest();
         try {
-            List<Cliente> client = (List<Cliente>) clientDao.findAll();
-            response.getClienteResponse().setCliente(client);
+            List<Cliente> cliente = (List<Cliente>) clienteDao.findAll();
+            response.getClienteResponse().setCliente(cliente);
             response.setMetadata(true, "200", "Consulta Correcta");
         } catch (Exception e) {
             response.setMetadata(true, "500", "Error en Consulta");
@@ -38,11 +38,11 @@ public class ClienteServiceImpl implements IClienteService {
 
     @Override
     @Transactional
-    public ResponseEntity<ClienteResponseRest> save(Cliente client) {
+    public ResponseEntity<ClienteResponseRest> save(Cliente cliente) {
         ClienteResponseRest response = new ClienteResponseRest();
         try {
-            Cliente clientSaved = clientDao.save(client);
-            response.getClienteResponse().setCliente(List.of(clientSaved));
+            Cliente clienteSaved = clienteDao.save(cliente);
+            response.getClienteResponse().setCliente(List.of(clienteSaved));
             response.setMetadata(true, "200", "Cliente guardado exitosamente");
         } catch (Exception e) {
             response.setMetadata(true, "500", "Error al guardar el cliente");
@@ -57,9 +57,9 @@ public class ClienteServiceImpl implements IClienteService {
     public ResponseEntity<ClienteResponseRest> searchById(Long id) {
         ClienteResponseRest response = new ClienteResponseRest();
         try {
-            Optional<Cliente> client = clientDao.findById(id);
-            if (client.isPresent()) {
-                response.getClienteResponse().setCliente(List.of(client.get()));
+            Optional<Cliente> cliente = clienteDao.findById(id);
+            if (cliente.isPresent()) {
+                response.getClienteResponse().setCliente(List.of(cliente.get()));
                 response.setMetadata(true, "200", "Cliente encontrado");
             } else {
                 response.setMetadata(false, "404", "Cliente no encontrado");
@@ -78,9 +78,9 @@ public class ClienteServiceImpl implements IClienteService {
     public ResponseEntity<ClienteResponseRest> searchByNit(String nit) {
         ClienteResponseRest response = new ClienteResponseRest();
         try {
-            List<Cliente> clients = clientDao.findByNitLike(nit);
-            if (!clients.isEmpty()) {
-                response.getClienteResponse().setCliente(clients);
+            List<Cliente> clientes = clienteDao.findByNitLike(nit);
+            if (!clientes.isEmpty()) {
+                response.getClienteResponse().setCliente(clientes);
                 response.setMetadata(true, "200", "Clientes encontrados");
             } else {
                 response.setMetadata(false, "404", "No se encontraron clientes");
@@ -99,7 +99,7 @@ public class ClienteServiceImpl implements IClienteService {
     public ResponseEntity<ClienteResponseRest> deleteById(Long id) {
         ClienteResponseRest response = new ClienteResponseRest();
         try {
-            clientDao.deleteById(id);
+            clienteDao.deleteById(id);
             response.setMetadata(true, "200", "Cliente eliminado");
         } catch (Exception e) {
             response.setMetadata(false, "500", "Error al eliminar el cliente");
@@ -111,25 +111,25 @@ public class ClienteServiceImpl implements IClienteService {
 
     @Override
     @Transactional
-    public ResponseEntity<ClienteResponseRest> update(Cliente client, Long id) {
+    public ResponseEntity<ClienteResponseRest> update(Cliente cliente, Long id) {
         ClienteResponseRest response = new ClienteResponseRest();
         try {
-            Optional<Cliente> clientSearch = clientDao.findById(id);
-            if (clientSearch.isPresent()) {
-                Cliente clientToUpdate = clientSearch.get();
-                clientToUpdate.setNombre(client.getNombre());
-                clientToUpdate.setNit(client.getNit());
-                clientToUpdate.setT_documento(client.getT_documento());
-                clientToUpdate.setTelefono(client.getTelefono());
-                clientToUpdate.setDireccion(client.getDireccion());
-                clientToUpdate.setCorreo(client.getCorreo());
-                clientToUpdate.setEstado(client.getEstado());
-                clientToUpdate.setValor_credito(client.getValor_credito());
-                clientToUpdate.setFecha_credito(client.getFecha_credito());
-                clientToUpdate.setCiudaddane(client.getCiudaddane());
-                clientToUpdate.setCiudad(client.getCiudad());
-                Cliente clientUpdated = clientDao.save(clientToUpdate);
-                response.getClienteResponse().setCliente(List.of(clientUpdated));
+            Optional<Cliente> clienteSearch = clienteDao.findById(id);
+            if (clienteSearch.isPresent()) {
+                Cliente clienteToUpdate = clienteSearch.get();
+                clienteToUpdate.setNombre(cliente.getNombre());
+                clienteToUpdate.setNit(cliente.getNit());
+                clienteToUpdate.setT_documento(cliente.getT_documento());
+                clienteToUpdate.setTelefono(cliente.getTelefono());
+                clienteToUpdate.setDireccion(cliente.getDireccion());
+                clienteToUpdate.setCorreo(cliente.getCorreo());
+                clienteToUpdate.setEstado(cliente.getEstado());
+                clienteToUpdate.setValor_credito(cliente.getValor_credito());
+                clienteToUpdate.setFecha_credito(cliente.getFecha_credito());
+                clienteToUpdate.setCiudaddane(cliente.getCiudaddane());
+                clienteToUpdate.setCiudad(cliente.getCiudad());
+                Cliente clienteUpdated = clienteDao.save(clienteToUpdate);
+                response.getClienteResponse().setCliente(List.of(clienteUpdated));
                 response.setMetadata(true, "200", "Cliente actualizado");
             } else {
                 response.setMetadata(false, "404", "Cliente no encontrado");

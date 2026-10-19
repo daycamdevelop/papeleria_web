@@ -1,4 +1,4 @@
-import { Component, inject, ViewChild } from '@angular/core';
+import { Component, HostListener, inject, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { MatSnackBar, MatSnackBarRef, SimpleSnackBar } from '@angular/material/snack-bar';
@@ -16,6 +16,7 @@ import { formatoFecha } from '../../shared/util/util';
 import { VendedorService } from '../../shared/services/vendedor.service';
 import { VendedorElement } from '../../shared/model/VendedorElement';
 import { PdfService } from '../../shared/services/pdf.service';
+import { SelectClienteComponent } from '../../cliente/select-cliente/select-cliente.component';
 
 @Component({
   selector: 'app-facturas',
@@ -51,9 +52,12 @@ export class FacturasComponent {
     descuento: 0,
     facturaproveedor: 0,
     costos: 1,
-    tirilla: "1",
+    tirilla: "3",
     formapago: "EFECTIVO",
     formapago1: "NINGUNO",
+    clienteId: 1,
+    clienteNombre: 'Ocasional',
+    clienteNit: 'X'
   };
   public codigoSeleccionado:string = "";
   public productoSeleccionado: ProductosElement = {
@@ -89,8 +93,26 @@ export class FacturasComponent {
     this.cargarEventos();
   }
 
+  @HostListener('window:keydown', ['$event'])
+  handleKeyDown(event: KeyboardEvent) {
+    if (event.key === 'ArrowUp') {
+      this.seleccion(true);
+    }
+    if (event.key === 'ArrowDown') {
+      this.seleccion(false);
+    }
+    if (event.key === 'Enter') {
+      this.seleccionTabla(this.codigoSeleccionado, true);
+    }
+  }
+  
   cargarEventos(){
-    
+    const myInput = document.getElementById("MyInput") as HTMLInputElement;
+    if (myInput) {
+      setTimeout(() => {
+        myInput.focus();
+      }, 300);
+    }
   }
 
   route(route:string): void {
@@ -114,7 +136,7 @@ export class FacturasComponent {
     let bodyI = {
       "numfactura": this.obtenerMayor(this.listFacturas, "numfactura") + 1,
       "fechafactura": formatoFecha(new Date()),
-      "cliente": "1",
+      "cliente": this.facturaSeleccionada.clienteId,
       "producto": 0,
       "catidadproductos": 0,
       "estado": "activo",
@@ -156,55 +178,6 @@ export class FacturasComponent {
           precio_unitario: element.costoventa
         };
         return this.facturaService.saveFactura(body);
-        return of({
-    "metadata": [
-        {
-            "date": "Thu Oct 16 15:24:27 GMT-05:00 2025",
-            "code": "200",
-            "description": "Respuesta exitosa",
-            "type": "Respuesta OK"
-        }
-    ],
-    "facturaResponse": {
-        "factura": [
-            {
-                "id": 181,
-                "numfactura": 1,
-                "fechafactura": "2025/07/18 18:58",
-                "cliente": 1,
-                "producto": 7902,
-                "catidadproductos": "1",
-                "estado": "activo",
-                "precio": 9000,
-                "credito": 9000,
-                "precio_unitario": 9000,
-                "fecha_anulacion": null,
-                "usuario": 1,
-                "vendedor": "mostrador",
-                "porcentaje": 0,
-                "origen": "Cliente",
-                "formapago": "EFECTIVO",
-                "dinerorecibido": 9000,
-                "cambio": 0,
-                "costoventa2": 0,
-                "costoventa3": 0,
-                "codigocredito": null,
-                "imprimir": true,
-                "subtotal": 9000,
-                "ivavalor": 0,
-                "fechaimpresion": "2025/07/18 18:58",
-                "bodega": 1,
-                "notacredito": null,
-                "fechacredito": "",
-                "formapago1": "NINGUNO",
-                "dinerorecibido1": 0,
-                "registro": null,
-                "registro2": null,
-                "caja": "Caja 1"
-            }
-        ]
-    }
-});
       });
 
     if (peticiones.length === 0) {
@@ -212,33 +185,89 @@ export class FacturasComponent {
     }
 
     forkJoin(peticiones).subscribe({
-      next: (resultados) => {
+      next: () => {
         this.openSnackBar("Factura Realizada", "Exitoso");
+        this.getFacturas();
+        this.facturaService.getFacturaPDF(bodyI.numfactura).subscribe((data:any)=>{
+          if (data.metadata[0].code == "200") {
+            data.facturaPDFResponse.facturaPDF[0].tirilla = this.facturaSeleccionada.tirilla;
+            this.pdfService.generarPDF({
+              type: "Factura",
+              body: data.facturaPDFResponse.facturaPDF
+            });
+          }
+        })
+        
         this.borrarProducto();
-        this.getFacturas();        
-        this.pdfService.generarPDF({
-          type: "Factura",
-          products: resultados,
-          body: bodyI
-        });
       },
       error: (err) => console.error('Error en alguna llamada:', err)
     });
   }
 
-  seleccionTabla(producto:ProductosElement){
-    this.productoSeleccionado = producto;
+  seleccionTabla(producto:string, directSelect:boolean){
+    let found = false;
+    for (const p of this.listProductos) {
+      if(p.codigo == producto){
+        this.productoSeleccionado = p;
+        found = true;
+        break;
+      }
+    }
     const searchInput = document.querySelectorAll<HTMLInputElement>('#producto-codigo');
-    searchInput?.forEach(element => {
-      let child = element?.firstChild as Element | null;
-      let valorCodigo = child?.innerHTML.replaceAll(" ", ""); 
-      if(valorCodigo == this.productoSeleccionado.codigo){
-        if(element.classList.contains('selectedVenta')){
-          //element.classList.remove('selectedVenta');
-          element.classList.add('selected');
-        } else if(element.classList.contains('selected')){
+    if(found){
+      searchInput?.forEach(element => {
+        let child = element?.firstChild as Element | null;
+        let valorCodigo = child?.innerHTML.replaceAll(" ", ""); 
+        if(valorCodigo == this.productoSeleccionado.codigo){
+          if(element.classList.contains('selectedVenta')){
+            if(directSelect){
+              for (const p of this.listProductosTabla) {
+                if(p.codigo == this.productoSeleccionado.codigo){
+                  p.cantidad += 1;
+                  this.codigoSeleccionado = "";
+                  this.listProductosTabla = this.listProductosTabla.filter(lp=>lp.selected);
+                  break;
+                }
+              }
+            } else {
+              element.classList.add('selected');
+            }
+          } else if(element.classList.contains('selected') || directSelect){
+            element.classList.remove('selected');
+            element.classList.add('selectedVenta');
+            this.listProductosTabla.map(lp=>{
+              if(lp.codigo == this.productoSeleccionado.codigo || lp.selected){
+                lp.selected = true;
+              } else {
+                lp.selected = false;
+              }
+            })
+            this.listProductosTabla = this.listProductosTabla.filter(lp=>lp.selected);
+            this.codigoSeleccionado = "";
+          } else {
+            element.classList.add('selected');
+          }
+        } else {
+          if(element.classList.contains('selected')){
+            element.classList.remove('selected');
+          }
+        }
+      });
+    } else {
+      found = false;
+      searchInput?.forEach(element => {
+        if(element.classList.contains('selected')){
+          found = true;
           element.classList.remove('selected');
-          element.classList.add('selectedVenta');
+          element.classList.add('selectedVenta')
+          let child = element?.firstChild as Element | null;
+          let valorCodigo = child?.innerHTML.replaceAll(" ", ""); 
+          for (const p of this.listProductos) {
+            if(p.codigo == valorCodigo){
+              this.productoSeleccionado = p;
+              break;
+            }
+          }
           this.listProductosTabla.map(lp=>{
             if(lp.codigo == this.productoSeleccionado.codigo || lp.selected){
               lp.selected = true;
@@ -248,16 +277,43 @@ export class FacturasComponent {
           })
           this.listProductosTabla = this.listProductosTabla.filter(lp=>lp.selected);
           this.codigoSeleccionado = "";
-        } else {
-          element.classList.add('selected');
         }
-      } else {
-        if(element.classList.contains('selected')){
-          element.classList.remove('selected');
+      });/*
+      if(!found){
+        this.codigoSeleccionado = "";
+        this.openSnackBar("Producto no encontrado", "ERROR");
+      }*/
+    }
+    this.llenarTabla(this.listProductosTabla);
+  }
+
+  seleccion(up:boolean){
+    const searchInput:any = document.querySelectorAll<HTMLInputElement>('#producto-codigo');
+    if(searchInput.length > 0){
+      let found = false;
+      for (let i = 0; i < searchInput.length; i++) {
+        if(searchInput[i].classList.contains('selected')){
+          found = true;
+          if(up){
+            if(i > 0){
+              searchInput[i-1].classList.add('selected');
+              searchInput[i-1].scrollIntoView({ behavior: 'smooth', block: 'center' });
+              searchInput[i].classList.remove('selected');
+            }
+          } else {
+            if(searchInput.length-1 > i){
+              searchInput[i+1].classList.add('selected');
+              searchInput[i+1].scrollIntoView({ behavior: 'smooth', block: 'center' });
+              searchInput[i].classList.remove('selected');
+            }
+          }
+          break;
         }
       }
-    });
-    this.llenarTabla(this.listProductosTabla);
+      if(!found){
+        searchInput[0].classList.add('selected');
+      }
+    }
   }
 
   getProductos(): void {
@@ -266,7 +322,6 @@ export class FacturasComponent {
         if (data.metadata[0].code == "200") {
           this.listProductos = data.productoResponse.producto;
         }
-        this.loading = false;
       }, (error: any) => {
         console.log("error: ", error);
       })
@@ -293,7 +348,6 @@ export class FacturasComponent {
             this.bodegas.push({value: element.id, viewValue: element.nombre});
           });
         }
-        this.loading = false;
       }, (error: any) => {
         console.log("error: ", error);
       })
@@ -308,7 +362,6 @@ export class FacturasComponent {
             this.vendedores.push({value: element.id, viewValue: element.nombre});
           });
         }
-        this.loading = false;
       }, (error: any) => {
         console.log("error: ", error);
       })
@@ -320,7 +373,7 @@ export class FacturasComponent {
       const numB = b ? 1 : 0;
       return numA - numB;
     });
-    this.calcularValores();
+    this.calcularValores(false);
     this.dataSource = new MatTableDataSource<ProductosTablaFacturaElement>(dataClient);
     this.dataSource.paginator = this.paginator;
   }
@@ -328,11 +381,13 @@ export class FacturasComponent {
   editarValor(element: ProductosTablaFacturaElement, atributo: keyof ProductosTablaFacturaElement): void {
     if(element.selected){
       let dataElement:any = element[atributo];
-      console.log("Valor "+dataElement)
       const dialogRef = this.dialog.open(EditValueComponent, {
         width: '350px',
         height: '250px',
-        data: dataElement
+        data: {
+          valor: dataElement,
+          tipo: atributo == 'cantidad' ? 1 : 2
+        },
       });
 
       dialogRef.afterClosed().subscribe((result: any) => {
@@ -347,6 +402,22 @@ export class FacturasComponent {
     }
   }
 
+  seleccionarCliente(){
+      const dialogRef = this.dialog.open(SelectClienteComponent, {
+        width: '80%',
+        height: '50%',
+        data: 'Facturar'
+      });
+
+      dialogRef.afterClosed().subscribe((result: any) => {
+        if(result){
+          this.facturaSeleccionada.clienteId = result.id;
+          this.facturaSeleccionada.clienteNombre = result.nombre;
+          this.facturaSeleccionada.clienteNit = result.nit;
+        }
+      });
+  }
+
   pendiente(){
     this.openSnackBar("Pendiente de desarrollo", "Pendiente");
   }
@@ -357,8 +428,7 @@ export class FacturasComponent {
     this.listProductosTabla = this.listProductosTabla.filter(lp=>lp.selected);
     this.listProductos.forEach((element: ProductosElement) => {
       if(
-        (element.codigo.includes(inputValue) ||
-        element.nombre.includes(inputValue)) && 
+        (element.codigo.includes(inputValue) || element.nombre.includes(inputValue)) && 
         !this.listProductosTabla.find(lp=>lp.codigo == element.codigo)
       ){
         this.listProductosTabla.push({
@@ -375,7 +445,8 @@ export class FacturasComponent {
           iva: element.iva,
           costocompra: element.costo,
           serial: element.serial,
-          selected: false
+          selected: false,
+          porcentaje: 0
         });
       }
     });
@@ -384,37 +455,49 @@ export class FacturasComponent {
 
   borrarProducto(){
     this.facturaSeleccionada = {
-    bodega: 1,
-    vendedor: 1,
-    dinerorecibido: 0,
-    dinerorecibido1: 0,
-    cambio: 0,
-    iva: 0,
-    subtotal: 0,
-    totalapagar: 0,
-    descuento: 0,
-    facturaproveedor: 0,
-    costos: 1,
-    tirilla: "1",
-    formapago: "EFECTIVO",
-    formapago1: "NINGUNO",
-  };
+      bodega: 1,
+      vendedor: 1,
+      dinerorecibido: 0,
+      dinerorecibido1: 0,
+      cambio: 0,
+      iva: 0,
+      subtotal: 0,
+      totalapagar: 0,
+      descuento: 0,
+      facturaproveedor: 0,
+      costos: 1,
+      tirilla: "1",
+      formapago: "EFECTIVO",
+      formapago1: "NINGUNO",
+      clienteId: 1,
+      clienteNombre: 'Ocasional',
+      clienteNit: 'X'
+    };
     this.listProductosTabla = [];
     this.llenarTabla(this.listProductosTabla);
+    this.codigoSeleccionado = "";
   }
 
-  calcularValores(){
+  calcularValores(calcularcambio:boolean){
     let total = 0;
+    let totalIva = 0;
     this.listProductosTabla.forEach((element: ProductosTablaFacturaElement) => {
       if(element.selected){
-        element.costoventatotal = element.costoventa * element.cantidad;
-        total += element.costoventatotal
+        element.costoventatotal = Number.parseInt(element.costoventa+"") * Number.parseInt(element.cantidad+"");
+        total += element.costoventatotal;
+        totalIva += element.costoventatotal * (element.iva/100);
       }
     });
     total = this.ajustarValor(total * (1 - (this.facturaSeleccionada.descuento / 100)));
-    this.facturaSeleccionada.dinerorecibido = total;
-    this.facturaSeleccionada.iva = this.ajustarValor(total * 0.19);
-    this.facturaSeleccionada.subtotal = this.ajustarValor(this.facturaSeleccionada.dinerorecibido - this.facturaSeleccionada.iva);
+    if(calcularcambio){
+      this.facturaSeleccionada.cambio = (parseInt(this.facturaSeleccionada.dinerorecibido+"") + parseInt(this.facturaSeleccionada.dinerorecibido1+"")) - total;
+    } else {
+      this.facturaSeleccionada.dinerorecibido = total;
+      this.facturaSeleccionada.dinerorecibido1 = 0;
+      this.facturaSeleccionada.cambio = 0;
+    }
+    this.facturaSeleccionada.iva = this.ajustarValor(totalIva);
+    this.facturaSeleccionada.subtotal = this.ajustarValor(total - this.facturaSeleccionada.iva);
     this.facturaSeleccionada.totalapagar = total;
   }
 
@@ -423,6 +506,7 @@ export class FacturasComponent {
       if(element.codigo == this.productoSeleccionado.codigo){
         this.listProductosTabla.splice(i, 1);
         this.llenarTabla(this.listProductosTabla);
+        this.codigoSeleccionado = "";
         return;
       }
     });
@@ -441,5 +525,14 @@ export class FacturasComponent {
   ajustarValor(numero:number){
     let valor = numero.toFixed(2); // "123.46"
     return parseFloat(valor)
+  }
+
+  base(){
+    
+  }
+
+  navigateTo(route: string): void {
+    // Aseguramos que las rutas comiencen con 'dashboard'
+    this.router.navigate([`/dashboard/facturas/${route}`]);
   }
 }

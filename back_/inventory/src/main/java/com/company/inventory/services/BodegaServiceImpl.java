@@ -18,7 +18,6 @@ public class BodegaServiceImpl implements IBodegaService {
 	@Autowired
 	private IBodegaDao bodegaDao;
 	
-	
 	@Override
 	@Transactional(readOnly = true)
 	public ResponseEntity<BodegaResponseRest> search() {

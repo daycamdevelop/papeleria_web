@@ -5,10 +5,14 @@ import { MaterialModule } from '../shared/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductosRoutingModule } from '../productos/productos-routing.module';
 import { LoadingComponent } from '../shared/components/loading/loading.component';
+import { BodegaComponent } from './bodega/bodega.component';
+import { LineaComponent } from './linea/linea.component';
 
 @NgModule({
   declarations: [
-    ProductosComponent
+    ProductosComponent,
+    BodegaComponent,
+    LineaComponent
   ],
   imports: [
     CommonModule,
